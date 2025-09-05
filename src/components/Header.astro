@@ -1,0 +1,58 @@
+---
+
+---
+
+<header>
+  <nav>
+    <div class="logo">
+      <a href="/">Transcribr</a>
+    </div>
+    <div class="nav-links">
+      <a href="#features">Features</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#login">Log In</a>
+      <a href="#signup" class="button">Sign Up</a>
+    </div>
+  </nav>
+</header>
+
+<style>
+  header {
+    padding: 1rem 2rem;
+    background-color: var(--background);
+    border-bottom: 1px solid var(--border-color);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    backdrop-filter: blur(10px);
+  }
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 80rem;
+    margin: 0 auto;
+  }
+  .logo a {
+    color: var(--text-primary);
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1.5rem;
+  }
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+  }
+  .nav-links a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-weight: 500;
+  }
+  .nav-links a.button {
+    background-color: var(--accent);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+  }
+</style>

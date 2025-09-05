@@ -1,0 +1,54 @@
+---
+
+---
+
+<footer>
+  <div class="footer-content">
+    <p>
+      &copy; <span id="current-year">---</span> Transcribr. All rights reserved.
+    </p>
+    <div class="footer-links">
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms of Service</a>
+      <a href="#">Contact Us</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  (() => {
+    let currentYearElem = document.querySelector("#current-year");
+    if (!currentYearElem) return;
+    currentYearElem.textContent = `${new Date().getFullYear()}`;
+  })();
+</script>
+
+<style>
+  footer {
+    padding: 3rem 2rem;
+    background-color: #f9fafb;
+    text-align: center;
+    border-top: 1px solid var(--border-color);
+  }
+  .footer-content {
+    max-width: 80rem;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  p {
+    margin: 0;
+    color: var(--text-secondary);
+  }
+  .footer-links {
+    display: flex;
+    gap: 1.5rem;
+  }
+  .footer-links a {
+    color: var(--text-secondary);
+    text-decoration: none;
+  }
+</style>
