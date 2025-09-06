@@ -1,0 +1,287 @@
+---
+// FAQ section
+---
+
+<style>
+  .faq-icon.expanded {
+    animation: rotateAnimation 300ms ease-in forwards 1;
+  }
+
+  @keyframes rotateAnimation {
+    0% {
+      transform: rotate(0deg); /* Starting rotation */
+    }
+    100% {
+      transform: rotate(180deg); /* Ending rotation (one full turn) */
+    }
+  }
+</style>
+
+<section class="py-24 bg-muted/30">
+  <div class="container mx-auto px-4 lg:px-6">
+    <div class="max-w-4xl mx-auto">
+      <!-- Section Header -->
+      <div class="text-center mb-16" data-animate>
+        <h2 class="text-3xl md:text-4xl font-bold text-foreground mb-4">
+          Frequently asked questions
+        </h2>
+        <p class="text-xl text-muted-foreground">
+          Everything you need to know about Transcribr and our transcription
+          services.
+        </p>
+      </div>
+
+      <!-- FAQ Items -->
+      <div class="space-y-4">
+        <!-- FAQ 1 -->
+        <div class="bg-white border border-border rounded-xl p-6" data-animate>
+          <button
+            class="faq-button w-full flex items-center justify-between text-left"
+          >
+            <h3 class="text-lg font-semibold text-foreground">
+              How accurate is Transcribr's AI transcription?
+            </h3>
+            <svg
+              class="faq-icon w-5 h-5 text-muted-foreground transform transition-transform"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path d="M6 9l6 6 6-6"></path>
+            </svg>
+          </button>
+          <div class="faq-content hidden mt-4 text-muted-foreground">
+            <p>
+              Transcribr achieves industry-leading accuracy of 95%+ on clear
+              audio recordings. Our AI is trained on diverse datasets and
+              continuously improved based on user feedback. Accuracy may vary
+              depending on audio quality, background noise, accents, and
+              technical terminology.
+            </p>
+          </div>
+        </div>
+
+        <!-- FAQ 2 -->
+        <div class="bg-white border border-border rounded-xl p-6" data-animate>
+          <button
+            class="faq-button w-full flex items-center justify-between text-left"
+          >
+            <h3 class="text-lg font-semibold text-foreground">
+              What file formats and sizes are supported?
+            </h3>
+            <svg
+              class="faq-icon w-5 h-5 text-muted-foreground transform transition-transform"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path d="M6 9l6 6 6-6"></path>
+            </svg>
+          </button>
+          <div class="faq-content hidden mt-4 text-muted-foreground">
+            <p>
+              We support MP3 and MP4 audio files up to 100MB in size and 1 hour
+              in duration. You can also provide direct URLs to audio files
+              hosted online. We're continuously working to expand format support
+              based on user needs.
+            </p>
+          </div>
+        </div>
+
+        <!-- FAQ 3 -->
+        <div class="bg-white border border-border rounded-xl p-6" data-animate>
+          <button
+            class="faq-button w-full flex items-center justify-between text-left"
+          >
+            <h3 class="text-lg font-semibold text-foreground">
+              What's the difference between Standard and Premium transcriptions?
+            </h3>
+            <svg
+              class="faq-icon w-5 h-5 text-muted-foreground transform transition-transform"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path d="M6 9l6 6 6-6"></path>
+            </svg>
+          </button>
+          <div class="faq-content hidden mt-4 text-muted-foreground">
+            <p>
+              Standard transcriptions provide time-stamped text sections with
+              synchronized audio playback. Premium transcriptions add speaker
+              identification, allowing you to see who said what throughout the
+              conversation. Quick transcriptions provide plain text without
+              timestamps or speakers.
+            </p>
+          </div>
+        </div>
+
+        <!-- FAQ 4 -->
+        <div class="bg-white border border-border rounded-xl p-6" data-animate>
+          <button
+            class="faq-button w-full flex items-center justify-between text-left"
+          >
+            <h3 class="text-lg font-semibold text-foreground">
+              How does the free tier work?
+            </h3>
+            <svg
+              class="faq-icon w-5 h-5 text-muted-foreground transform transition-transform"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path d="M6 9l6 6 6-6"></path>
+            </svg>
+          </button>
+          <div class="faq-content hidden mt-4 text-muted-foreground">
+            <p>
+              The free tier allows 3 standard transcriptions per day with a
+              total limit of 30 minutes of audio daily. Credits reset every day
+              at midnight UTC. This provides basic transcription functionality
+              to help you evaluate our service before upgrading.
+            </p>
+          </div>
+        </div>
+
+        <!-- FAQ 5 -->
+        <div class="bg-white border border-border rounded-xl p-6" data-animate>
+          <button
+            class="faq-button w-full flex items-center justify-between text-left"
+          >
+            <h3 class="text-lg font-semibold text-foreground">
+              Is my data secure and private?
+            </h3>
+            <svg
+              class="faq-icon w-5 h-5 text-muted-foreground transform transition-transform"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path d="M6 9l6 6 6-6"></path>
+            </svg>
+          </button>
+          <div class="faq-content hidden mt-4 text-muted-foreground">
+            <p>
+              Yes, we take privacy seriously. All audio files and transcripts
+              are encrypted both in transit and at rest. We don't share your
+              data with third parties, and you maintain full ownership of your
+              content. You can delete your data at any time from your account
+              settings.
+            </p>
+          </div>
+        </div>
+
+        <!-- FAQ 6 -->
+        <div class="bg-white border border-border rounded-xl p-6" data-animate>
+          <button
+            class="faq-button w-full flex items-center justify-between text-left"
+          >
+            <h3 class="text-lg font-semibold text-foreground">
+              What languages are supported?
+            </h3>
+            <svg
+              class="faq-icon w-5 h-5 text-muted-foreground transform transition-transform"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path d="M6 9l6 6 6-6"></path>
+            </svg>
+          </button>
+          <div class="faq-content hidden mt-4 text-muted-foreground">
+            <p>
+              Transcribr supports over 50 languages including English, Spanish,
+              French, German, Italian, Portuguese, Dutch, Russian, Chinese,
+              Japanese, Korean, Arabic, and many more. Language detection is
+              automatic, or you can manually specify the language for better
+              accuracy.
+            </p>
+          </div>
+        </div>
+
+        <!-- FAQ 7 -->
+        <div class="bg-white border border-border rounded-xl p-6" data-animate>
+          <button
+            class="faq-button w-full flex items-center justify-between text-left"
+          >
+            <h3 class="text-lg font-semibold text-foreground">
+              Can I cancel my subscription anytime?
+            </h3>
+            <svg
+              class="faq-icon w-5 h-5 text-muted-foreground transform transition-transform"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path d="M6 9l6 6 6-6"></path>
+            </svg>
+          </button>
+          <div class="faq-content hidden mt-4 text-muted-foreground">
+            <p>
+              Absolutely! You can cancel your Premium subscription at any time
+              from your account settings. You'll continue to have access to
+              Premium features until the end of your current billing period,
+              then your account will automatically revert to the free tier.
+            </p>
+          </div>
+        </div>
+
+        <!-- FAQ 8 -->
+        <div class="bg-white border border-border rounded-xl p-6" data-animate>
+          <button
+            class="faq-button w-full flex items-center justify-between text-left"
+          >
+            <h3 class="text-lg font-semibold text-foreground">
+              How long does transcription take?
+            </h3>
+            <svg
+              class="faq-icon w-5 h-5 text-muted-foreground transform transition-transform"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path d="M6 9l6 6 6-6"></path>
+            </svg>
+          </button>
+          <div class="faq-content hidden mt-4 text-muted-foreground">
+            <p>
+              Transcription processing is typically completed in 25-50% of the
+              original audio length. For example, a 10-minute audio file usually
+              takes 2-5 minutes to process. Processing time may vary based on
+              audio complexity, length, and current system load.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  (() => {
+    const faqBtns = document.querySelectorAll(".faq-button");
+    faqBtns.forEach((btn) => {
+      btn.addEventListener("click", (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+
+        const content = btn.nextElementSibling;
+        const icon = btn.querySelector(".faq-icon");
+
+        if (!content) return;
+        content.classList.toggle("hidden");
+
+        if (!icon) return;
+        icon.classList.toggle("expanded");
+      });
+    });
+  })();
+</script>

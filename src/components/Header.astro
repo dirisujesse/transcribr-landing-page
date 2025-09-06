@@ -1,58 +1,32 @@
 ---
-
+import Logo from './Logo.astro';
 ---
 
-<header>
-  <nav>
-    <div class="logo">
-      <a href="/">Transcribr</a>
-    </div>
-    <div class="nav-links">
-      <a href="#features">Features</a>
-      <a href="#pricing">Pricing</a>
-      <a href="#login">Log In</a>
-      <a href="#signup" class="button">Sign Up</a>
-    </div>
-  </nav>
-</header>
+<header class="fixed top-0 w-full bg-white/80 backdrop-blur-md border-b border-border z-50">
+  <div class="container mx-auto px-4 lg:px-6">
+    <div class="flex items-center justify-between h-16">
+      <Logo />
+      
+      <nav class="hidden md:flex items-center space-x-8">
+        <a href="#features" class="text-sm font-medium text-foreground/80 hover:text-foreground transition-colors">
+          Features
+        </a>
+        <a href="#pricing" class="text-sm font-medium text-foreground/80 hover:text-foreground transition-colors">
+          Pricing
+        </a>
+        <a href="#about" class="text-sm font-medium text-foreground/80 hover:text-foreground transition-colors">
+          About
+        </a>
+      </nav>
 
-<style>
-  header {
-    padding: 1rem 2rem;
-    background-color: var(--background);
-    border-bottom: 1px solid var(--border-color);
-    position: sticky;
-    top: 0;
-    z-index: 10;
-    backdrop-filter: blur(10px);
-  }
-  nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    max-width: 80rem;
-    margin: 0 auto;
-  }
-  .logo a {
-    color: var(--text-primary);
-    text-decoration: none;
-    font-weight: 700;
-    font-size: 1.5rem;
-  }
-  .nav-links {
-    display: flex;
-    align-items: center;
-    gap: 1.5rem;
-  }
-  .nav-links a {
-    color: var(--text-secondary);
-    text-decoration: none;
-    font-weight: 500;
-  }
-  .nav-links a.button {
-    background-color: var(--accent);
-    color: white;
-    padding: 0.5rem 1rem;
-    border-radius: 8px;
-  }
-</style>
+      <div class="flex items-center space-x-4">
+        <button class="hidden md:inline-flex text-sm font-medium text-foreground/80 hover:text-foreground transition-colors">
+          Sign In
+        </button>
+        <button class="inline-flex items-center justify-center rounded-lg bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90 transition-colors">
+          Get Started
+        </button>
+      </div>
+    </div>
+  </div>
+</header>

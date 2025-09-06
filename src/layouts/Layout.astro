@@ -1,83 +1,63 @@
 ---
+import "../styles/global.css";
+
 export interface Props {
   title: string;
+  description?: string;
 }
 
-const { title } = Astro.props;
+const {
+  title,
+  description = "Transform your audio into accurate transcripts with AI-powered precision. Professional transcription made simple.",
+} = Astro.props;
 ---
 
 <!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta
-      name="description"
-      content="Transcribr - Fast & Accurate Audio Transcription"
-    />
-    <meta name="viewport" content="width=device-width" />
+    <meta name="description" content={description} />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://transcribr.app" />
+    <meta property="og:image" content="/og-image.jpg" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content="/og-image.jpg" />
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" defer async></script>
     <title>{title}</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap"
-      rel="stylesheet"
-    />
   </head>
   <body>
     <slot />
+
+    <script>
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: "0px 0px -50px 0px",
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("animate-fade-up");
+          }
+        });
+      }, observerOptions);
+
+      document.addEventListener("DOMContentLoaded", () => {
+        const elements = document.querySelectorAll("[data-animate]");
+        elements.forEach((el) => observer.observe(el));
+      });
+    </script>
   </body>
 </html>
-<style is:global>
-  :root {
-    --accent: #007aff; /* A clean, modern blue */
-    --accent-light: #ebf5ff;
-    --text-primary: #1d2939; /* Dark gray for text */
-    --text-secondary: #475467;
-    --background: #ffffff;
-    --border-color: #eaecf0;
-  }
-  html {
-    font-family: "Inter", sans-serif;
-    background: var(--background);
-    color: var(--text-primary);
-  }
-  body {
-    margin: 0;
-  }
-
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    font-weight: 700;
-  }
-
-  p {
-    color: var(--text-secondary);
-    line-height: 1.6;
-  }
-
-  section {
-    padding: 5rem 2rem;
-    text-align: center;
-  }
-
-  .button-primary {
-    background-color: var(--accent);
-    color: white;
-    padding: 0.75rem 1.5rem;
-    text-decoration: none;
-    border-radius: 8px;
-    font-weight: 500;
-    display: inline-block;
-    transition: background-color 0.2s ease;
-  }
-
-  .button-primary:hover {
-    background-color: #0056b3;
-  }
-</style>

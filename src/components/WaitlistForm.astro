@@ -1,0 +1,131 @@
+---
+// Waitlist form component
+---
+
+<div class="w-full max-w-md mx-auto">
+  <form id="waitlist-form" class="flex flex-col sm:flex-row gap-3">
+    <input
+      type="email"
+      placeholder="Enter your email"
+      required
+      id="email"
+      class="flex-1 px-4 py-3 rounded-lg border border-border bg-white text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+    />
+    <button
+      type="submit"
+      id="submit-button"
+      class="px-6 py-3 bg-primary text-primary-foreground rounded-lg font-medium hover:bg-primary/90 transition-all duration-200 whitespace-nowrap"
+    >
+      Join Waitlist
+    </button>
+  </form>
+
+  <div class="mt-4 text-center">
+    <div
+      class="inline-flex items-center space-x-2 bg-primary/10 text-primary px-4 py-2 rounded-full text-sm font-medium"
+    >
+      <svg
+        width="16"
+        height="16"
+        viewBox="0 0 24 24"
+        fill="currentColor"
+        class="w-4 h-4"
+      >
+        <path
+          d="M12 2L13.09 8.26L22 9L13.09 9.74L12 16L10.91 9.74L2 9L10.91 8.26L12 2Z"
+        ></path>
+      </svg>
+      <span>Get 1 month free when we launch!</span>
+    </div>
+  </div>
+
+  <!-- Success message (hidden by default) -->
+  <div
+    id="success-message"
+    class="hidden mt-4 p-4 bg-green-50 border border-green-200 rounded-lg"
+  >
+    <div class="flex items-center space-x-2 text-green-800">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M9 16.17L4.83 12L3.41 13.41L9 19L21 7L19.59 5.59Z"></path>
+      </svg>
+      <span class="font-medium"
+        >Thanks for joining! You'll get 1 month free when we launch.</span
+      >
+    </div>
+  </div>
+</div>
+
+<script>
+  function showErrorAlert(message: string) {
+    Swal.fire({
+      title: message,
+      position: "top-right",
+      timer: 5000,
+      timerProgressBar: true,
+      toast: true,
+    });
+  }
+
+  async function joinWaitlist(
+    email: string,
+    form: HTMLFormElement,
+    successMessage: HTMLElement | null
+  ) {
+    try {
+      const waitlistUrl =
+        "https://us-central1-transcribr-770dc.cloudfunctions.net/joinWaitlist";
+      const response = await fetch(waitlistUrl, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email }),
+      });
+
+      if (!response.ok) {
+        const data = await response.json();
+        showErrorAlert(`Request failed ${data.message ?? "Unknown error"}`);
+        return;
+      }
+
+      form.reset();
+      form.style.display = "none";
+      successMessage?.classList.remove("hidden");
+
+      setTimeout(() => {
+        form.style.display = "visible";
+        successMessage?.classList.add("hidden");
+      }, 5000);
+
+      return;
+    } catch (error) {
+      showErrorAlert(
+        "Your request failed for unknown reasons please try again"
+      );
+    }
+  }
+
+  ((_) => {
+    const form = document.getElementById("waitlist-form");
+    const successMessage = document.getElementById("success-message");
+    const submitButton = document.getElementById(
+      "submit-button"
+    ) as HTMLButtonElement;
+
+    form?.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+
+      const emailElement = document.querySelector("#email");
+      const email = emailElement.value;
+
+      submitButton.disabled = true;
+      submitButton.textContent = "Submitting...";
+      submitButton.classList.add("disabled:opacity-50");
+      await joinWaitlist(email, form, successMessage);
+      submitButton.disabled = false;
+      submitButton.classList.remove("disabled:opacity-50");
+      submitButton.textContent = "Join Waitlist";
+    });
+  })();
+</script>
