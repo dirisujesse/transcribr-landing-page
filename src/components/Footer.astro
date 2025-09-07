@@ -1,4 +1,6 @@
 ---
+import Logo from "./Logo.astro";
+
 const year = new Date().getFullYear();
 ---
 
@@ -11,21 +13,7 @@ const year = new Date().getFullYear();
         <!-- Company Info -->
         <div class="lg:col-span-1">
           <div class="mb-6">
-            <div class="flex items-center space-x-2">
-              <div
-                class="flex items-center justify-center w-8 h-8 rounded-lg bg-primary"
-              >
-                <div class="flex space-x-1">
-                  <div class="w-0.5 h-3 bg-white/70 rounded-full"></div>
-                  <div class="w-0.5 h-4 bg-white/90 rounded-full"></div>
-                  <div class="w-0.5 h-3 bg-white/80 rounded-full"></div>
-                  <div class="w-0.5 h-5 bg-white rounded-full"></div>
-                </div>
-              </div>
-              <span class="text-xl font-semibold text-background"
-                >transcribr</span
-              >
-            </div>
+            <Logo textClass="text-xl font-semibold text-background" />
           </div>
           <p class="text-background/70 mb-6">
             AI-powered transcription with synchronized playback and
