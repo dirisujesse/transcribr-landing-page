@@ -1,4 +1,6 @@
 ---
+import Footer from "../components/Footer.astro";
+import Header from "../components/Header.astro";
 import "../styles/global.css";
 
 export interface Props {
@@ -34,11 +36,14 @@ const {
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content="/og-image.jpg" />
 
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" defer async></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" defer async
+    ></script>
     <title>{title}</title>
   </head>
   <body>
-    <slot />
+    <Header />
+      <slot />
+    <Footer />
 
     <script>
       const observerOptions = {
