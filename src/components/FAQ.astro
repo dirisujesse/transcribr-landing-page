@@ -53,7 +53,7 @@
           </button>
           <div class="faq-content hidden mt-4 text-muted-foreground">
             <p>
-              Transcribr achieves industry-leading accuracy of 95%+ on clear
+              Transcribr achieves industry-leading accuracy of 98%+ on
               audio recordings. Our AI is trained on diverse datasets and
               continuously improved based on user feedback. Accuracy may vary
               depending on audio quality, background noise, accents, and
@@ -113,8 +113,7 @@
               Standard transcriptions provide time-stamped text sections with
               synchronized audio playback. Premium transcriptions add speaker
               identification, allowing you to see who said what throughout the
-              conversation. Quick transcriptions provide plain text without
-              timestamps or speakers.
+              conversation.
             </p>
           </div>
         </div>
@@ -268,13 +267,27 @@
 <script>
   (() => {
     const faqBtns = document.querySelectorAll(".faq-button");
-    faqBtns.forEach((btn) => {
+    const icons = document.querySelectorAll(".faq-icon");
+    for (let i = 0; i < faqBtns.length; i++) {
+      const btn = faqBtns[i];
+      const icon = icons[i];
+      const content = btn.nextElementSibling;
+
       btn.addEventListener("click", (e) => {
         e.preventDefault();
         e.stopPropagation();
 
-        const content = btn.nextElementSibling;
-        const icon = btn.querySelector(".faq-icon");
+        const expandedIcon = document.querySelector(".faq-icon.expanded");
+        if (expandedIcon && expandedIcon !== icon) {
+          expandedIcon.classList.remove("expanded");
+        }
+
+        const expandedContent = document.querySelector(
+          ".faq-content:not(.hidden)"
+        );
+        if (expandedContent && expandedContent !== content) {
+          expandedContent.classList.add("hidden");
+        }
 
         if (!content) return;
         content.classList.toggle("hidden");
@@ -282,6 +295,6 @@
         if (!icon) return;
         icon.classList.toggle("expanded");
       });
-    });
+    }
   })();
 </script>
