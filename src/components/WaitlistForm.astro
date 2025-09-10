@@ -105,7 +105,8 @@
     }
   }
 
-  ((_) => {
+  (() => {
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     const form = document.getElementById("waitlist-form");
     const successMessage = document.getElementById("success-message");
     const submitButton = document.getElementById(
@@ -118,6 +119,11 @@
 
       const emailElement = document.querySelector("#email");
       const email = emailElement.value;
+
+      if (!emailRegex.test(email)) {
+        showErrorAlert("Please enter a valid email address");
+        return;
+      }
 
       submitButton.disabled = true;
       submitButton.textContent = "Submitting...";
