@@ -1,12 +1,1 @@
-<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect width="32" height="32" rx="6" fill="#4f46e5"/>
-  <g transform="translate(16, 16)">
-    <g transform="translate(-6, 0)">
-      <rect x="-1" y="-4" width="1" height="8" rx="0.5" fill="white" opacity="0.7"/>
-      <rect x="1" y="-6" width="1" height="12" rx="0.5" fill="white" opacity="0.9"/>
-      <rect x="3" y="-5" width="1" height="10" rx="0.5" fill="white"/>
-      <rect x="5" y="-7" width="1" height="14" rx="0.5" fill="white" opacity="0.8"/>
-      <rect x="7" y="-3" width="1" height="6" rx="0.5" fill="white" opacity="0.6"/>
-    </g>
-  </g>
-</svg>
+<svg width="32" height="32" xmlns="http://www.w3.org/2000/svg" fill="none"><rect width="32" height="32" rx="6" fill="#4338CA"/><g fill="#FFF"><path d="M17.766 29.669c-1.484 0-2.78-.327-3.887-.982a7.293 7.293 0 01-2.604-2.716c-.603-1.133-.905-2.39-.905-3.774V7.216H2.672V3.254h19.886v3.962H14.86v15.547c0 .805.277 1.497.83 2.075.554.58 1.258.868 2.114.868h1.811v3.963h-1.85z"/><path d="M18.965 29.669V15.895c0-1.71.478-3.044 1.434-4 .981-.981 2.327-1.472 4.038-1.472h4.641v3.698H25.23c-.603 0-1.081.177-1.434.529-.327.352-.49.83-.49 1.434v13.585h-4.34z"/></g></svg>
