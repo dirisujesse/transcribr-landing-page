@@ -1,5 +1,6 @@
 ---
 // Pricing section with updated subscription model
+let appUrl = "http://app.transcribr.org/";
 ---
 
 <section id="pricing" class="py-24 bg-gradient-to-br from-muted/50 to-white">
@@ -11,84 +12,151 @@
           Simple, transparent pricing
         </h2>
         <p class="text-xl text-muted-foreground">
-          Start free, upgrade when you need more. No hidden fees, cancel anytime.
+          Start free, upgrade when you need more. No hidden fees, cancel
+          anytime.
         </p>
       </div>
 
       <!-- Pricing Cards -->
       <div class="grid md:grid-cols-2 gap-8 max-w-2xl mx-auto">
         <!-- Free Plan -->
-        <div class="bg-white rounded-2xl border-2 border-border p-8 hover:border-primary/20 hover:shadow-lg transition-all duration-300" data-animate>
+        <div
+          class="bg-white rounded-2xl border-2 border-border p-8 hover:border-primary/20 hover:shadow-lg transition-all duration-300"
+          data-animate
+        >
           <div class="text-center mb-8">
             <h3 class="text-2xl font-bold text-foreground mb-2">Free</h3>
             <div class="text-4xl font-bold text-foreground mb-2">
               $0
-              <span class="text-lg font-normal text-muted-foreground">/month</span>
+              <span class="text-lg font-normal text-muted-foreground"
+                >/month</span
+              >
             </div>
             <p class="text-muted-foreground">Perfect for getting started</p>
           </div>
 
           <div class="space-y-4 mb-8">
             <div class="flex items-center space-x-3">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" class="text-primary">
-                <path d="M9 16.17L4.83 12L3.41 13.41L9 19L21 7L19.59 5.59Z"/>
-              </svg>
-              <span class="text-foreground">3 standard transcriptions daily</span>
-            </div>
-            <div class="flex items-center space-x-3">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" class="text-primary">
-                <path d="M9 16.17L4.83 12L3.41 13.41L9 19L21 7L19.59 5.59Z"/>
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                class="text-primary"
+              >
+                <path d="M9 16.17L4.83 12L3.41 13.41L9 19L21 7L19.59 5.59Z"
+                ></path>
               </svg>
               <span class="text-foreground">Up to 30 minutes total daily</span>
             </div>
             <div class="flex items-center space-x-3">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" class="text-primary">
-                <path d="M9 16.17L4.83 12L3.41 13.41L9 19L21 7L19.59 5.59Z"/>
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                class="text-primary"
+              >
+                <path d="M9 16.17L4.83 12L3.41 13.41L9 19L21 7L19.59 5.59Z"
+                ></path>
               </svg>
               <span class="text-foreground">Accurate text transcription</span>
             </div>
             <div class="flex items-center space-x-3">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" class="text-primary">
-                <path d="M9 16.17L4.83 12L3.41 13.41L9 19L21 7L19.59 5.59Z"/>
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                class="text-primary"
+              >
+                <path d="M9 16.17L4.83 12L3.41 13.41L9 19L21 7L19.59 5.59Z"
+                ></path>
               </svg>
               <span class="text-foreground">Mobile & web apps</span>
             </div>
             <div class="flex items-center space-x-3">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" class="text-primary">
-                <path d="M9 16.17L4.83 12L3.41 13.41L9 19L21 7L19.59 5.59Z"/>
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                class="text-primary"
+              >
+                <path d="M9 16.17L4.83 12L3.41 13.41L9 19L21 7L19.59 5.59Z"
+                ></path>
+              </svg>
+              <span class="text-foreground"
+                >Export Transcripts as SRT, VTT, PDF, CSV &amp; TXT</span
+              >
+            </div>
+            <div class="flex items-center space-x-3">
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                class="text-primary"
+              >
+                <path d="M9 16.17L4.83 12L3.41 13.41L9 19L21 7L19.59 5.59Z"
+                ></path>
               </svg>
               <span class="text-foreground">Synchronized audio playback</span>
             </div>
             <div class="flex items-center space-x-3">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" class="text-primary">
-                <path d="M9 16.17L4.83 12L3.41 13.41L9 19L21 7L19.59 5.59Z"/>
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                class="text-primary"
+              >
+                <path d="M9 16.17L4.83 12L3.41 13.41L9 19L21 7L19.59 5.59Z"
+                ></path>
               </svg>
               <span class="text-foreground">Inline transcript edit</span>
             </div>
             <div class="flex items-center space-x-3">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" class="text-muted-foreground">
-                <path d="M18 6L6 18M6 6L18 18"/>
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                class="text-muted-foreground"
+              >
+                <path d="M18 6L6 18M6 6L18 18"></path>
               </svg>
-              <span class="text-muted-foreground">No speaker identification</span>
+              <span class="text-muted-foreground"
+                >No speaker identification</span
+              >
             </div>
           </div>
 
-          <button class="w-full bg-muted text-foreground py-3 rounded-lg font-medium hover:bg-muted/80 transition-colors">
-            Get Started Free
-          </button>
+          <a href={appUrl} target="_blank" rel="noopener noreferrer">
+            <button
+              class="w-full bg-muted text-foreground py-3 rounded-lg font-medium hover:bg-muted/80 transition-colors cursor-pointer"
+            >
+              Get Started Free
+            </button>
+          </a>
         </div>
 
         <!-- Premium Plan -->
-        <div class="bg-primary text-primary-foreground rounded-2xl border-2 border-primary p-8 shadow-xl relative overflow-hidden" data-animate>
+        <div
+          class="bg-primary text-primary-foreground rounded-2xl border-2 border-primary p-8 shadow-xl relative overflow-hidden"
+          data-animate
+        >
           <!-- Popular badge -->
-          <div class="absolute top-0 right-0 bg-white text-primary text-xs font-bold py-2 px-4 rounded-bl-lg">
+          <div
+            class="absolute top-0 right-0 bg-white text-primary text-xs font-bold py-2 px-4 rounded-bl-lg"
+          >
             MOST POPULAR
           </div>
 
           <div class="text-center mb-8">
             <h3 class="text-2xl font-bold mb-2">Premium</h3>
             <div class="text-4xl font-bold mb-2">
-              $15
+              $10
               <span class="text-lg font-normal opacity-80">/month</span>
             </div>
             <p class="opacity-80">For professionals & teams</p>
@@ -96,80 +164,107 @@
 
           <div class="space-y-4 mb-8">
             <div class="flex items-center space-x-3">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" class="text-white">
-                <path d="M9 16.17L4.83 12L3.41 13.41L9 19L21 7L19.59 5.59Z"/>
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                class="text-white"
+              >
+                <path d="M9 16.17L4.83 12L3.41 13.41L9 19L21 7L19.59 5.59Z"
+                ></path>
               </svg>
-              <span>3,000 minutes monthly</span>
+              <span>Everything in the free plan</span>
             </div>
-            <div class="flex items-center space-x-3">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" class="text-white">
-                <path d="M9 16.17L4.83 12L3.41 13.41L9 19L21 7L19.59 5.59Z"/>
-              </svg>
-              <span>2,000 min standard + 1,000 min premium</span>
-            </div>
-            <div class="flex items-center space-x-3">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" class="text-white">
-                <path d="M9 16.17L4.83 12L3.41 13.41L9 19L21 7L19.59 5.59Z"/>
-              </svg>
-              <span>Speaker identification</span>
-            </div>
-            <div class="flex items-center space-x-3">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" class="text-white">
-                <path d="M9 16.17L4.83 12L3.41 13.41L9 19L21 7L19.59 5.59Z"/>
-              </svg>
-              <span>Synchronized audio playback</span>
-            </div>
-            <div class="flex items-center space-x-3">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" class="text-white">
-                <path d="M9 16.17L4.83 12L3.41 13.41L9 19L21 7L19.59 5.59Z"/>
-              </svg>
-              <span>Time-stamped sections</span>
-            </div>
-            <div class="flex items-center space-x-3">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" class="text-white">
-                <path d="M9 16.17L4.83 12L3.41 13.41L9 19L21 7L19.59 5.59Z"/>
-              </svg>
-              <span>Mobile & web apps</span>
-            </div>
-            <div class="flex items-center space-x-3">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" class="text-white">
-                <path d="M9 16.17L4.83 12L3.41 13.41L9 19L21 7L19.59 5.59Z"/>
-              </svg>
-              <span>Priority support</span>
-            </div>
-          </div>
 
-          <button class="w-full bg-white text-primary py-3 rounded-lg font-medium hover:bg-white/90 transition-colors">
-            Start Premium Trial
-          </button>
-        </div>
-      </div>
+            <div class="space-y-4 mb-8">
+              <div class="flex items-center space-x-3">
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  class="text-white"
+                >
+                  <path d="M9 16.17L4.83 12L3.41 13.41L9 19L21 7L19.59 5.59Z"
+                  ></path>
+                </svg>
+                <span>Unlimited minutes monthly</span>
+              </div>
+              <div class="flex items-center space-x-3">
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  class="text-white"
+                >
+                  <path d="M9 16.17L4.83 12L3.41 13.41L9 19L21 7L19.59 5.59Z"
+                  ></path>
+                </svg>
+                <span>Speaker identification</span>
+              </div>
+              <div class="flex items-center space-x-3">
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  class="text-white"
+                >
+                  <path d="M9 16.17L4.83 12L3.41 13.41L9 19L21 7L19.59 5.59Z"
+                  ></path>
+                </svg>
+                <span>Synchronized audio playback</span>
+              </div>
+              <div class="flex items-center space-x-3">
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  class="text-white"
+                >
+                  <path d="M9 16.17L4.83 12L3.41 13.41L9 19L21 7L19.59 5.59Z"
+                  ></path>
+                </svg>
+                <span>Time-stamped sections</span>
+              </div>
+              <div class="flex items-center space-x-3">
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  class="text-white"
+                >
+                  <path d="M9 16.17L4.83 12L3.41 13.41L9 19L21 7L19.59 5.59Z"
+                  ></path>
+                </svg>
+                <span>Mobile & web apps</span>
+              </div>
+              <div class="flex items-center space-x-3">
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  class="text-white"
+                >
+                  <path d="M9 16.17L4.83 12L3.41 13.41L9 19L21 7L19.59 5.59Z"
+                  ></path>
+                </svg>
+                <span>Priority support</span>
+              </div>
+            </div>
 
-      <!-- Bottom Text -->
-      <div class="text-center mt-12" data-animate>
-        <div class="space-y-4">
-          <p class="text-muted-foreground">
-            All plans include secure cloud storage, multi-language support, and data encryption.
-          </p>
-          <div class="flex flex-wrap justify-center gap-6 text-sm text-muted-foreground">
-            <div class="flex items-center space-x-2">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" class="text-primary">
-                <path d="M9 16.17L4.83 12L3.41 13.41L9 19L21 7L19.59 5.59Z"/>
-              </svg>
-              <span>Cancel anytime</span>
-            </div>
-            <div class="flex items-center space-x-2">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" class="text-primary">
-                <path d="M9 16.17L4.83 12L3.41 13.41L9 19L21 7L19.59 5.59Z"/>
-              </svg>
-              <span>30-day free trial</span>
-            </div>
-            <div class="flex items-center space-x-2">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" class="text-primary">
-                <path d="M9 16.17L4.83 12L3.41 13.41L9 19L21 7L19.59 5.59Z"/>
-              </svg>
-              <span>Money-back guarantee</span>
-            </div>
+            <a href={appUrl} target="_blank" rel="noopener noreferrer">
+              <button
+                class="w-full bg-white text-primary py-3 rounded-lg font-medium hover:bg-white/90 transition-colors cursor-pointer"
+              >
+                Start Premium Trial
+              </button>
+            </a>
           </div>
         </div>
       </div>
