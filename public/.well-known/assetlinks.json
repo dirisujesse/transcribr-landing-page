@@ -1,14 +1,29 @@
 [
   {
-    "relation": [
-      "delegate_permission/common.handle_all_urls"
-    ],
+    "relation": ["delegate_permission/common.handle_all_urls"],
     "target": {
       "namespace": "android_app",
       "package_name": "org.transcribr.app",
       "sha256_cert_fingerprints": [
-        ""
+        "E2:B6:68:D4:7D:CE:EC:53:5A:D3:D7:DD:37:32:E1:1F:1D:A5:BE:4D:09:42:1E:C2:4D:2A:9D:E8:A8:F9:3E:60"
       ]
+    }
+  },
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "",
+      "sha256_cert_fingerprints": [
+        "E2:B6:68:D4:7D:CE:EC:53:5A:D3:D7:DD:37:32:E1:1F:1D:A5:BE:4D:09:42:1E:C2:4D:2A:9D:E8:A8:F9:3E:60"
+      ]
+    }
+  },
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "web",
+      "site": "https://transcribr.org"
     }
   }
 ]
