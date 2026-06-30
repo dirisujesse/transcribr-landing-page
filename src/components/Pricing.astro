@@ -9,16 +9,15 @@ let appUrl = "http://app.transcribr.org/";
       <!-- Section Header -->
       <div class="text-center mb-16" data-animate>
         <h2 class="text-3xl md:text-4xl font-bold text-foreground mb-4">
-          Simple, transparent pricing
+          Pricing that scales with you
         </h2>
         <p class="text-xl text-muted-foreground">
-          Start free, upgrade when you need more. No hidden fees, cancel
-          anytime.
+          Experience the magic for free. Upgrade for limitless possibilities. Zero hidden fees.
         </p>
       </div>
 
       <!-- Pricing Cards -->
-      <div class="grid md:grid-cols-2 gap-8 max-w-2xl mx-auto">
+      <div class="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
         <!-- Free Plan -->
         <div
           class="bg-white rounded-2xl border-2 border-border p-8 hover:border-primary/20 hover:shadow-lg transition-all duration-300"
@@ -32,7 +31,7 @@ let appUrl = "http://app.transcribr.org/";
                 >/month</span
               >
             </div>
-            <p class="text-muted-foreground">Perfect for getting started</p>
+            <p class="text-muted-foreground">Perfect to test the waters</p>
           </div>
 
           <div class="space-y-4 mb-8">
@@ -47,7 +46,7 @@ let appUrl = "http://app.transcribr.org/";
                 <path d="M9 16.17L4.83 12L3.41 13.41L9 19L21 7L19.59 5.59Z"
                 ></path>
               </svg>
-              <span class="text-foreground">Up to 30 minutes total daily</span>
+              <span class="text-foreground">Try it out: 7-day free trial</span>
             </div>
             <div class="flex items-center space-x-3">
               <svg
@@ -60,7 +59,7 @@ let appUrl = "http://app.transcribr.org/";
                 <path d="M9 16.17L4.83 12L3.41 13.41L9 19L21 7L19.59 5.59Z"
                 ></path>
               </svg>
-              <span class="text-foreground">Accurate text transcription</span>
+              <span class="text-foreground">Blazing-fast AI transcription</span>
             </div>
             <div class="flex items-center space-x-3">
               <svg
@@ -141,6 +140,99 @@ let appUrl = "http://app.transcribr.org/";
           </a>
         </div>
 
+        <!-- Weekly Plan -->
+        <div
+          class="bg-white rounded-2xl border-2 border-border p-8 hover:border-primary/20 hover:shadow-lg transition-all duration-300"
+          data-animate
+        >
+          <div class="text-center mb-8">
+            <h3 class="text-2xl font-bold text-foreground mb-2">Weekly</h3>
+            <div class="text-4xl font-bold text-foreground mb-2">
+              $3
+              <span class="text-lg font-normal text-muted-foreground"
+                >/week</span
+              >
+            </div>
+            <p class="text-muted-foreground">Ideal for short-term projects</p>
+          </div>
+
+          <div class="space-y-4 mb-8">
+            <div class="flex items-center space-x-3">
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                class="text-primary"
+              >
+                <path d="M9 16.17L4.83 12L3.41 13.41L9 19L21 7L19.59 5.59Z"
+                ></path>
+              </svg>
+              <span class="text-foreground">Unlimited minutes for 7 days</span>
+            </div>
+            <div class="flex items-center space-x-3">
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                class="text-primary"
+              >
+                <path d="M9 16.17L4.83 12L3.41 13.41L9 19L21 7L19.59 5.59Z"
+                ></path>
+              </svg>
+              <span class="text-foreground">Speaker identification</span>
+            </div>
+            <div class="flex items-center space-x-3">
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                class="text-primary"
+              >
+                <path d="M9 16.17L4.83 12L3.41 13.41L9 19L21 7L19.59 5.59Z"
+                ></path>
+              </svg>
+              <span class="text-foreground">Synchronized audio playback</span>
+            </div>
+            <div class="flex items-center space-x-3">
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                class="text-primary"
+              >
+                <path d="M9 16.17L4.83 12L3.41 13.41L9 19L21 7L19.59 5.59Z"
+                ></path>
+              </svg>
+              <span class="text-foreground">Time-stamped sections</span>
+            </div>
+            <div class="flex items-center space-x-3">
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                class="text-primary"
+              >
+                <path d="M9 16.17L4.83 12L3.41 13.41L9 19L21 7L19.59 5.59Z"
+                ></path>
+              </svg>
+              <span class="text-foreground">Mobile & web apps</span>
+            </div>
+          </div>
+
+          <a href={appUrl} target="_blank" rel="noopener noreferrer">
+            <button
+              class="w-full bg-primary/10 text-primary py-3 rounded-lg font-medium hover:bg-primary/20 transition-colors cursor-pointer"
+            >
+              Get Started
+            </button>
+          </a>
+        </div>
+
         <!-- Premium Plan -->
         <div
           class="bg-primary text-primary-foreground rounded-2xl border-2 border-primary p-8 shadow-xl relative overflow-hidden"
@@ -159,7 +251,7 @@ let appUrl = "http://app.transcribr.org/";
               $10
               <span class="text-lg font-normal opacity-80">/month</span>
             </div>
-            <p class="opacity-80">For professionals & teams</p>
+            <p class="opacity-80">For power users & teams</p>
           </div>
 
           <div class="space-y-4 mb-8">
@@ -174,7 +266,7 @@ let appUrl = "http://app.transcribr.org/";
                 <path d="M9 16.17L4.83 12L3.41 13.41L9 19L21 7L19.59 5.59Z"
                 ></path>
               </svg>
-              <span>Everything in the free plan</span>
+              <span>All Free features, plus:</span>
             </div>
 
             <div class="space-y-4 mb-8">
@@ -189,7 +281,7 @@ let appUrl = "http://app.transcribr.org/";
                   <path d="M9 16.17L4.83 12L3.41 13.41L9 19L21 7L19.59 5.59Z"
                   ></path>
                 </svg>
-                <span>Unlimited minutes monthly</span>
+                <span>Unlimited transcription minutes</span>
               </div>
               <div class="flex items-center space-x-3">
                 <svg
@@ -254,7 +346,7 @@ let appUrl = "http://app.transcribr.org/";
                   <path d="M9 16.17L4.83 12L3.41 13.41L9 19L21 7L19.59 5.59Z"
                   ></path>
                 </svg>
-                <span>Priority support</span>
+                <span>24/7 Priority support</span>
               </div>
             </div>
 
@@ -268,6 +360,23 @@ let appUrl = "http://app.transcribr.org/";
           </div>
         </div>
       </div>
+
+      <!-- Human Transcription Add-on -->
+      <div class="mt-16 max-w-3xl mx-auto bg-muted/30 rounded-2xl p-8 border border-border text-center" data-animate>
+        <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-primary">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+            <circle cx="9" cy="7" r="4"></circle>
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+          </svg>
+        </div>
+        <h3 class="text-2xl font-bold text-foreground mb-3">Need 100% Accuracy? Human-Led Transcription (Coming Soon)</h3>
+        <p class="text-muted-foreground mb-6 max-w-2xl mx-auto">
+          When every single word matters, our upcoming manual transcription service delivers guaranteed perfection by professional human transcribers. Flexible, <strong class="text-foreground">pay-per-request</strong> pricing—no subscription required.
+        </p>
+      </div>
+
     </div>
   </div>
 </section>
