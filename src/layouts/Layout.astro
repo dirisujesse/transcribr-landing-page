@@ -12,6 +12,8 @@ const {
   title,
   description = "Transcribr provides fast, accurate, and affordable audio and video transcription services. Our platform offers advanced AI transcription with manual human-led transcription coming soon, perfect for professionals, journalists, and students.",
 } = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 ---
 
 <!doctype html>
@@ -35,6 +37,7 @@ const {
       }
     </style>
     <meta name="generator" content={Astro.generator} />
+    <link rel="canonical" href={canonicalURL} />
 
     <!-- Open Graph -->
     <meta property="og:title" content={title} />
@@ -58,9 +61,24 @@ const {
     <meta name="twitter:domain" content="transcribr.org" />
     <meta name="twitter:url" content="https://transcribr.org" />
 
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" defer async
-    ></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" defer async></script>
     <title>{title}</title>
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "Transcribr",
+      "operatingSystem": "Web, iOS, Android",
+      "applicationCategory": "BusinessApplication",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "description": description,
+      "url": "https://transcribr.org"
+    })} />
   </head>
   <body>
     <a

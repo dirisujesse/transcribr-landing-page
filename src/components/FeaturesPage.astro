@@ -8,59 +8,90 @@ import CTABand from "./CTABand.astro";
 
 const features = [
   {
-    id: "ai-tiers",
-    eyebrow: "AI transcription",
+    id: "tiers",
+    eyebrow: "Transcription",
     title: "Speed or accuracy — you choose",
     description:
-      "Pick Quick for drafts, Standard for everyday meetings, or Premium when every word counts. Balance processing time against accuracy for each recording.",
+      "Pick Quick for drafts, Standard for everyday meetings, or Premium when every word and speaker label matters. Upload MP3, MP4, YouTube links, or other audio/video sources.",
     points: [
       "Quick, Standard, and Premium modes",
-      "Clear estimates for time and accuracy",
-      "Works with audio files and URLs",
+      "Works with audio files, video, and YouTube URLs",
+      "Clear accuracy and time estimates per tier",
     ],
     visual: "tiers" as const,
     reverse: false,
   },
   {
     id: "processing",
-    eyebrow: "Pipeline",
+    eyebrow: "Processing pipeline",
     title: "See every step as it happens",
     description:
-      "From language detection to speaker ID and audio sync, Transcribr shows progress so you always know where your transcript stands.",
+      "From fetching your media to language detection, speech-to-text, speaker identification, and finalising — Transcribr shows live progress so you never wonder what's happening.",
     points: [
-      "Live progress checklist",
-      "Retry or re-upload if something fails",
-      "Track jobs from your dashboard",
+      "Live step-by-step progress checklist",
+      "Detect errors early and retry if needed",
+      "Track all jobs from your dashboard",
     ],
     visual: "processing" as const,
     reverse: true,
+  },
+  {
+    id: "summarisation",
+    eyebrow: "Summarisation & insights",
+    title: "Turn raw transcripts into actionable notes",
+    description:
+      "Every completed transcript comes with a quick summary plus an executive summary that breaks down key topics with explanations, decisions and findings, and actionable takeaways — ideal for meetings, interviews, and court notes.",
+    points: [
+      "Quick summary for instant context",
+      "Executive summary: overview, key topics, decisions, takeaways",
+      "Identifies participants and follow-up items",
+      "Save or share the summary as a PDF",
+    ],
+    visual: "speakers" as const,
+    reverse: false,
   },
   {
     id: "playback",
     eyebrow: "Synced playback",
     title: "Never lose your place again",
     description:
-      "Read along while audio plays. Jump to any timestamped section, scrub with ±10s controls, and share clips without hunting through the file.",
+      "Read along while audio plays. Current section highlights automatically. Jump to any timestamped block, scrub with ±10s controls, and adjust playback speed.",
     points: [
       "Section timestamps on every block",
-      "Large play control built for mobile",
-      "Speed control when you need to skim",
+      "Large play control with ±10s skip",
+      "Current section highlights as audio plays",
+      "Works with audio, video, and YouTube sources",
     ],
     visual: "playback" as const,
-    reverse: false,
+    reverse: true,
   },
   {
     id: "speakers",
-    eyebrow: "Speakers",
-    title: "Know who said what",
+    eyebrow: "Speakers & inline editing",
+    title: "Know who said what — and fix it fast",
     description:
-      "Automatic speaker labels keep multi-person meetings readable. Rename Speaker 1 and Speaker 2 to real names so exports stay clear for your team.",
+      "Automatic speaker labels keep multi-person meetings readable. Rename Speaker 1 and Speaker 2 to real names, edit text directly in-place, and bulk-update across all sections with one tap.",
     points: [
-      "Automatic speaker detection",
-      "Rename labels in one tap",
-      "Optional speaker names on export",
+      "Automatic speaker detection with label assignment",
+      "Rename speakers in one tap with modal",
+      "Edit transcript text inline without leaving the view",
+      "Bulk-update a speaker name across all sections",
     ],
     visual: "speakers" as const,
+    reverse: false,
+  },
+  {
+    id: "regeneration",
+    eyebrow: "Regeneration",
+    title: "Don't settle — regenerate",
+    description:
+      "Not happy with the result? Free users get one free regeneration. Pro users can regenerate unlimited times for the best possible transcript. No need to re-upload — just tap Regenerate.",
+    points: [
+      "Free users: one regeneration per transcript",
+      "Pro users: unlimited regenerations",
+      "No re-upload needed — regenerates from stored audio",
+    ],
+    visual: "tiers" as const,
     reverse: true,
   },
   {
@@ -68,11 +99,12 @@ const features = [
     eyebrow: "Export",
     title: "Ship transcripts in any format",
     description:
-      "Download PDF, TXT, SRT, VTT, or CSV. Toggle plain text, speakers, and timestamps so the file matches your workflow — captions, notes, or archives.",
+      "Download PDF, TXT, SRT, VTT, or CSV. Toggle plain text, speakers, and timestamps. SRT and VTT formats are built for subtitling — drop them straight into your video editor or media player.",
     points: [
-      "PDF, TXT, SRT, VTT, CSV",
-      "Include speakers & timestamps",
-      "Free formats on every plan",
+      "PDF, TXT, SRT, VTT, CSV — five formats",
+      "Free formats available on every plan",
+      "SRT / VTT for video subtitling workflows",
+      "Include speakers and timestamps as needed",
     ],
     visual: "export" as const,
     reverse: false,
@@ -80,13 +112,14 @@ const features = [
   {
     id: "workspace",
     eyebrow: "Workspace",
-    title: "Your transcripts, organized",
+    title: "Your transcripts, organised",
     description:
-      "A clean dashboard for everything you’ve transcribed — status chips for Transcribed, Processing, and Failed, plus Pro tools when you’re ready to scale.",
+      "A clean dashboard for everything you've transcribed — status chips for Transcribed, Processing, and Failed. Create new transcripts in one tap. Pro tools are ready when you need them.",
     points: [
-      "Status at a glance",
+      "Status at a glance: Transcribed, Processing, Failed",
       "Create new transcripts in one tap",
-      "Web and mobile, same account",
+      "Web and mobile, same account and workflow",
+      "Pro banner with Unlock Pro CTA",
     ],
     visual: "dashboard" as const,
     reverse: true,
@@ -94,7 +127,6 @@ const features = [
 ];
 ---
 
-<!-- Page hero -->
 <section class="relative overflow-hidden bg-gradient-to-b from-primary-soft/50 to-white pt-28 pb-16 md:pt-32 md:pb-20">
   <div class="container-page">
     <div class="mx-auto max-w-3xl text-center" data-animate>
@@ -105,14 +137,14 @@ const features = [
         Built for speed. Designed for accuracy.
       </h1>
       <p class="mx-auto mt-5 max-w-2xl text-lg text-muted-foreground md:text-xl">
-        Everything you need to turn hours of audio into searchable, editable,
-        and exportable text — without leaving your phone or browser.
+        Transcription with summarisation, insights, synced playback, inline
+        editing, unlimited regeneration, and subtitle-ready exports — on web and
+        mobile.
       </p>
     </div>
   </div>
 </section>
 
-<!-- Feature rows -->
 {
   features.map((feature, i) => (
     <section
@@ -198,7 +230,6 @@ const features = [
   ))
 }
 
-<!-- Cross-platform strip -->
 <section class="section bg-white">
   <div class="container-page">
     <div
