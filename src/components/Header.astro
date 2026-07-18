@@ -1,32 +1,152 @@
 ---
-import Logo from './Logo.astro';
+import Logo from "./Logo.astro";
+
+const pathname = Astro.url.pathname.replace(/\/$/, "") || "/";
+
+const nav = [
+  { href: "/features", label: "Features" },
+  { href: "/#pricing", label: "Pricing" },
+  { href: "/about", label: "About" },
+  { href: "/faq", label: "FAQ" },
+];
+
+function isActive(href: string) {
+  if (href.startsWith("/#")) return false;
+  const path = href.replace(/\/$/, "") || "/";
+  return pathname === path;
+}
 ---
 
-<header class="fixed top-0 w-full bg-white/80 backdrop-blur-md border-b border-border z-50">
+<header
+  class="fixed top-0 z-50 w-full border-b border-border/80 bg-white/80 backdrop-blur-md"
+>
   <div class="container mx-auto px-4 lg:px-6">
-    <div class="flex items-center justify-between h-16">
+    <div class="flex h-16 items-center justify-between">
       <Logo />
-      
-      <nav class="hidden md:flex items-center space-x-8">
-        <a href="#features" class="text-sm font-medium text-foreground/80 hover:text-foreground transition-colors">
-          Features
-        </a>
-        <a href="#pricing" class="text-sm font-medium text-foreground/80 hover:text-foreground transition-colors">
-          Pricing
-        </a>
-        <a href="#about" class="text-sm font-medium text-foreground/80 hover:text-foreground transition-colors">
-          About
-        </a>
+
+      <nav class="hidden items-center gap-8 md:flex" aria-label="Main">
+        {
+          nav.map((item) => (
+            <a
+              href={item.href}
+              class={isActive(item.href) ? "nav-link-active" : "nav-link"}
+            >
+              {item.label}
+            </a>
+          ))
+        }
       </nav>
 
-      <div class="flex items-center space-x-4">
-        <a href="https://app.transcribr.org/auth/login" class="hidden md:inline-flex text-sm font-medium text-foreground/80 hover:text-foreground transition-colors">
+      <div class="flex items-center gap-2 sm:gap-3">
+        <a
+          href="https://app.transcribr.org/auth/login"
+          class="btn-ghost hidden sm:inline-flex"
+        >
           Sign In
         </a>
-        <a href="https://app.transcribr.org/auth/signup" class="inline-flex items-center justify-center rounded-lg bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90 transition-colors">
+        <a
+          href="https://app.transcribr.org/auth/signup"
+          class="btn-primary"
+        >
           Get Started
         </a>
+
+        <button
+          type="button"
+          class="inline-flex h-10 w-10 items-center justify-center rounded-full text-foreground hover:bg-surface md:hidden"
+          aria-label="Open menu"
+          aria-expanded="false"
+          aria-controls="mobile-nav"
+          data-menu-toggle
+        >
+          <svg
+            width="22"
+            height="22"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            data-menu-icon-open
+          >
+            <line x1="4" y1="7" x2="20" y2="7"></line>
+            <line x1="4" y1="12" x2="20" y2="12"></line>
+            <line x1="4" y1="17" x2="20" y2="17"></line>
+          </svg>
+          <svg
+            width="22"
+            height="22"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            class="hidden"
+            data-menu-icon-close
+          >
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+            <line x1="6" y1="18" x2="18" y2="6"></line>
+          </svg>
+        </button>
       </div>
     </div>
   </div>
+
+  <div
+    id="mobile-nav"
+    class="hidden border-t border-border bg-white md:hidden"
+    data-mobile-nav
+  >
+    <nav class="container mx-auto flex flex-col gap-1 px-4 py-4" aria-label="Mobile">
+      {
+        nav.map((item) => (
+          <a
+            href={item.href}
+            class:list={[
+              "rounded-xl px-4 py-3 text-sm font-medium transition-colors",
+              isActive(item.href)
+                ? "bg-primary-soft text-primary"
+                : "text-foreground/80 hover:bg-surface hover:text-foreground",
+            ]}
+            data-menu-link
+          >
+            {item.label}
+          </a>
+        ))
+      }
+      <a
+        href="https://app.transcribr.org/auth/login"
+        class="rounded-xl px-4 py-3 text-sm font-medium text-foreground/80 hover:bg-surface hover:text-foreground sm:hidden"
+        data-menu-link
+      >
+        Sign In
+      </a>
+    </nav>
+  </div>
 </header>
+
+<script>
+  const toggle = document.querySelector("[data-menu-toggle]");
+  const panel = document.querySelector("[data-mobile-nav]");
+  const iconOpen = document.querySelector("[data-menu-icon-open]");
+  const iconClose = document.querySelector("[data-menu-icon-close]");
+  const links = document.querySelectorAll("[data-menu-link]");
+
+  function setOpen(open: boolean) {
+    if (!toggle || !panel || !iconOpen || !iconClose) return;
+    panel.classList.toggle("hidden", !open);
+    iconOpen.classList.toggle("hidden", open);
+    iconClose.classList.toggle("hidden", !open);
+    toggle.setAttribute("aria-expanded", String(open));
+    toggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+  }
+
+  toggle?.addEventListener("click", () => {
+    const open = toggle.getAttribute("aria-expanded") === "true";
+    setOpen(!open);
+  });
+
+  links.forEach((link) => {
+    link.addEventListener("click", () => setOpen(false));
+  });
+</script>

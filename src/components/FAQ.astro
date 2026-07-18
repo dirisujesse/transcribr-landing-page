@@ -1,300 +1,230 @@
 ---
-// FAQ section
+interface FAQItem {
+  question: string;
+  answer: string;
+}
+
+interface FAQGroup {
+  title: string;
+  items: FAQItem[];
+}
+
+interface Props {
+  /** Show page-style hero header */
+  page?: boolean;
+  groups?: FAQGroup[];
+}
+
+const defaultGroups: FAQGroup[] = [
+  {
+    title: "Getting started",
+    items: [
+      {
+        question: "What file formats and sizes are supported?",
+        answer:
+          "We support MP3, MP4, WAV, and M4A audio files up to 100MB and about 1 hour in duration. You can also paste a direct URL to an audio file hosted online. We’re continuously expanding format support based on user needs.",
+      },
+      {
+        question: "How long does transcription take?",
+        answer:
+          "Processing is typically a fraction of the original length — often in the range of a few minutes for a short meeting. Quick, Standard, and Premium tiers trade speed for accuracy. Exact times depend on audio length, complexity, and current load.",
+      },
+      {
+        question: "What languages are supported?",
+        answer:
+          "Transcribr supports a wide set of languages including English, Spanish, French, German, Italian, Portuguese, Dutch, Russian, Chinese, Japanese, Korean, Arabic, and many more. Language detection is automatic, or you can specify a language for better accuracy.",
+      },
+    ],
+  },
+  {
+    title: "Transcription",
+    items: [
+      {
+        question: "How accurate is Transcribr’s AI transcription?",
+        answer:
+          "We aim for industry-leading accuracy on clear audio — often 95–99% depending on tier and conditions. Results vary with audio quality, background noise, accents, and technical terminology. Premium modes prioritize accuracy; Quick is built for speed.",
+      },
+      {
+        question: "What’s the difference between Quick, Standard, and Premium?",
+        answer:
+          "Quick prioritizes turnaround for drafts and rough notes. Standard balances speed and accuracy for most meetings. Premium adds higher accuracy and stronger speaker identification when every word and speaker label matters.",
+      },
+      {
+        question: "Can I edit transcripts and rename speakers?",
+        answer:
+          "Yes. Transcripts are fully editable. Tap any section to adjust text, and rename default speaker labels (Speaker 1, Speaker 2, etc.) to real names so exports stay clear for your team.",
+      },
+    ],
+  },
+  {
+    title: "Plans & billing",
+    items: [
+      {
+        question: "How does the free tier work?",
+        answer:
+          "Free lets you try Transcribr with limited daily usage so you can evaluate the product. Upgrade to Weekly or Premium for unlimited minutes, speaker identification, and the full feature set. See the pricing section for current limits and prices.",
+      },
+      {
+        question: "Can I cancel my subscription anytime?",
+        answer:
+          "Yes. Cancel Premium or Weekly anytime from your account settings. You’ll keep access until the end of the current billing period, then your account reverts to the free tier.",
+      },
+    ],
+  },
+  {
+    title: "Privacy & export",
+    items: [
+      {
+        question: "Is my data secure and private?",
+        answer:
+          "Yes. Audio and transcripts are encrypted in transit and at rest. We don’t sell your content. You own your files and can delete data from your account when you no longer need it. See our Privacy Policy for full details.",
+      },
+      {
+        question: "What export formats are available?",
+        answer:
+          "Export to PDF, TXT, SRT, VTT, and CSV. You can choose plain text only, or include speakers and timestamps depending on your workflow — notes, captions, or archives.",
+      },
+    ],
+  },
+];
+
+const { page = false, groups = defaultGroups } = Astro.props;
 ---
 
-<style>
-  .faq-icon.expanded {
-    animation: rotateAnimation 300ms ease-in forwards 1;
-  }
-
-  @keyframes rotateAnimation {
-    0% {
-      transform: rotate(0deg); /* Starting rotation */
-    }
-    100% {
-      transform: rotate(180deg); /* Ending rotation (one full turn) */
-    }
-  }
-</style>
-
-<section class="py-24 bg-muted/30">
-  <div class="container mx-auto px-4 lg:px-6">
-    <div class="max-w-4xl mx-auto">
-      <!-- Section Header -->
-      <div class="text-center mb-16" data-animate>
-        <h2 class="text-3xl md:text-4xl font-bold text-foreground mb-4">
-          Frequently asked questions
-        </h2>
-        <p class="text-xl text-muted-foreground">
-          Everything you need to know about Transcribr and our transcription
-          services.
-        </p>
-      </div>
-
-      <!-- FAQ Items -->
-      <div class="space-y-4">
-        <!-- FAQ 1 -->
-        <div class="bg-white border border-border rounded-xl p-6" data-animate>
-          <button
-            class="faq-button w-full flex items-center justify-between text-left"
-          >
-            <h3 class="text-lg font-semibold text-foreground">
-              How accurate is Transcribr's AI transcription?
-            </h3>
-            <svg
-              class="faq-icon w-5 h-5 text-muted-foreground transform transition-transform"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-            >
-              <path d="M6 9l6 6 6-6"></path>
-            </svg>
-          </button>
-          <div class="faq-content hidden mt-4 text-muted-foreground">
-            <p>
-              Transcribr achieves industry-leading accuracy of 98%+ on audio
-              recordings. Our AI is trained on diverse datasets and continuously
-              improved based on user feedback. Accuracy may vary depending on
-              audio quality, background noise, accents, and technical
-              terminology.
-            </p>
-          </div>
-        </div>
-
-        <!-- FAQ 2 -->
-        <div class="bg-white border border-border rounded-xl p-6" data-animate>
-          <button
-            class="faq-button w-full flex items-center justify-between text-left"
-          >
-            <h3 class="text-lg font-semibold text-foreground">
-              What file formats and sizes are supported?
-            </h3>
-            <svg
-              class="faq-icon w-5 h-5 text-muted-foreground transform transition-transform"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-            >
-              <path d="M6 9l6 6 6-6"></path>
-            </svg>
-          </button>
-          <div class="faq-content hidden mt-4 text-muted-foreground">
-            <p>
-              We support MP3 and MP4 audio files up to 100MB in size and 1 hour
-              in duration. You can also provide direct URLs to audio files
-              hosted online. We're continuously working to expand format support
-              based on user needs.
-            </p>
-          </div>
-        </div>
-
-        <!-- FAQ 3 -->
-        <div class="bg-white border border-border rounded-xl p-6" data-animate>
-          <button
-            class="faq-button w-full flex items-center justify-between text-left"
-          >
-            <h3 class="text-lg font-semibold text-foreground">
-              What's the difference between Standard and Premium transcriptions?
-            </h3>
-            <svg
-              class="faq-icon w-5 h-5 text-muted-foreground transform transition-transform"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-            >
-              <path d="M6 9l6 6 6-6"></path>
-            </svg>
-          </button>
-          <div class="faq-content hidden mt-4 text-muted-foreground">
-            <p>
-              Standard transcriptions provide time-stamped text sections with
-              synchronized audio playback. Premium transcriptions add speaker
-              identification, allowing you to see who said what throughout the
-              conversation.
-            </p>
-          </div>
-        </div>
-
-        <!-- FAQ 4 -->
-        <div class="bg-white border border-border rounded-xl p-6" data-animate>
-          <button
-            class="faq-button w-full flex items-center justify-between text-left"
-          >
-            <h3 class="text-lg font-semibold text-foreground">
-              How does the free tier work?
-            </h3>
-            <svg
-              class="faq-icon w-5 h-5 text-muted-foreground transform transition-transform"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-            >
-              <path d="M6 9l6 6 6-6"></path>
-            </svg>
-          </button>
-          <div class="faq-content hidden mt-4 text-muted-foreground">
-            <p>
-              The free tier allows 3 standard transcriptions per day with a
-              total limit of 30 minutes of audio daily. Credits reset every day
-              at midnight UTC. This provides basic transcription functionality
-              to help you evaluate our service before upgrading.
-            </p>
-          </div>
-        </div>
-
-        <!-- FAQ 5 -->
-        <div class="bg-white border border-border rounded-xl p-6" data-animate>
-          <button
-            class="faq-button w-full flex items-center justify-between text-left"
-          >
-            <h3 class="text-lg font-semibold text-foreground">
-              Is my data secure and private?
-            </h3>
-            <svg
-              class="faq-icon w-5 h-5 text-muted-foreground transform transition-transform"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-            >
-              <path d="M6 9l6 6 6-6"></path>
-            </svg>
-          </button>
-          <div class="faq-content hidden mt-4 text-muted-foreground">
-            <p>
-              Yes, we take privacy seriously. All audio files and transcripts
-              are encrypted both in transit and at rest. We don't share your
-              data with third parties, and you maintain full ownership of your
-              content. You can delete your data at any time from your account
-              settings.
-            </p>
-          </div>
-        </div>
-
-        <!-- FAQ 6 -->
-        <div class="bg-white border border-border rounded-xl p-6" data-animate>
-          <button
-            class="faq-button w-full flex items-center justify-between text-left"
-          >
-            <h3 class="text-lg font-semibold text-foreground">
-              What languages are supported?
-            </h3>
-            <svg
-              class="faq-icon w-5 h-5 text-muted-foreground transform transition-transform"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-            >
-              <path d="M6 9l6 6 6-6"></path>
-            </svg>
-          </button>
-          <div class="faq-content hidden mt-4 text-muted-foreground">
-            <p>
-              Transcribr supports over 50 languages including English, Spanish,
-              French, German, Italian, Portuguese, Dutch, Russian, Chinese,
-              Japanese, Korean, Arabic, and many more. Language detection is
-              automatic, or you can manually specify the language for better
-              accuracy.
-            </p>
-          </div>
-        </div>
-
-        <!-- FAQ 7 -->
-        <div class="bg-white border border-border rounded-xl p-6" data-animate>
-          <button
-            class="faq-button w-full flex items-center justify-between text-left"
-          >
-            <h3 class="text-lg font-semibold text-foreground">
-              Can I cancel my subscription anytime?
-            </h3>
-            <svg
-              class="faq-icon w-5 h-5 text-muted-foreground transform transition-transform"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-            >
-              <path d="M6 9l6 6 6-6"></path>
-            </svg>
-          </button>
-          <div class="faq-content hidden mt-4 text-muted-foreground">
-            <p>
-              Absolutely! You can cancel your Premium subscription at any time
-              from your account settings. You'll continue to have access to
-              Premium features until the end of your current billing period,
-              then your account will automatically revert to the free tier.
-            </p>
-          </div>
-        </div>
-
-        <!-- FAQ 8 -->
-        <div class="bg-white border border-border rounded-xl p-6" data-animate>
-          <button
-            class="faq-button w-full flex items-center justify-between text-left"
-          >
-            <h3 class="text-lg font-semibold text-foreground">
-              How long does transcription take?
-            </h3>
-            <svg
-              class="faq-icon w-5 h-5 text-muted-foreground transform transition-transform"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-            >
-              <path d="M6 9l6 6 6-6"></path>
-            </svg>
-          </button>
-          <div class="faq-content hidden mt-4 text-muted-foreground">
-            <p>
-              Transcription processing is typically completed in 25-50% of the
-              original audio length. For example, a 10-minute audio file usually
-              takes 2-5 minutes to process. Processing time may vary based on
-              audio complexity, length, and current system load.
-            </p>
-          </div>
+{
+  page && (
+    <section class="relative overflow-hidden bg-gradient-to-b from-primary-soft/50 to-white pt-28 pb-12 md:pt-32 md:pb-16">
+      <div class="container-page">
+        <div class="mx-auto max-w-3xl text-center" data-animate>
+          <p class="mb-3 text-sm font-semibold uppercase tracking-wider text-primary">
+            FAQ
+          </p>
+          <h1 class="text-4xl font-bold tracking-tight text-foreground md:text-5xl">
+            Frequently asked questions
+          </h1>
+          <p class="mx-auto mt-5 max-w-2xl text-lg text-muted-foreground md:text-xl">
+            Everything you need to know about Transcribr, plans, and how
+            transcription works.
+          </p>
         </div>
       </div>
+    </section>
+  )
+}
+
+<section class:list={[page ? "section bg-white pt-4 md:pt-8" : "section-muted"]}>
+  <div class="container-page">
+    {
+      !page && (
+        <div class="mx-auto mb-14 max-w-2xl text-center" data-animate>
+          <h2 class="text-3xl font-bold tracking-tight text-foreground md:text-4xl">
+            Frequently asked questions
+          </h2>
+          <p class="mt-4 text-lg text-muted-foreground">
+            Everything you need to know about Transcribr.
+          </p>
+        </div>
+      )
+    }
+
+    <div class="mx-auto max-w-3xl space-y-10">
+      {
+        groups.map((group) => (
+          <div data-animate>
+            <h2 class="mb-4 text-sm font-semibold uppercase tracking-wider text-primary">
+              {group.title}
+            </h2>
+            <div class="space-y-3">
+              {group.items.map((item) => (
+                <div class="overflow-hidden rounded-2xl border border-border bg-white shadow-sm">
+                  <button
+                    type="button"
+                    class="faq-button flex w-full items-center justify-between gap-4 px-5 py-4 text-left md:px-6 md:py-5"
+                    aria-expanded="false"
+                  >
+                    <span class="text-base font-semibold text-foreground md:text-lg">
+                      {item.question}
+                    </span>
+                    <span class="faq-icon flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-surface text-muted-foreground transition-transform duration-200">
+                      <svg
+                        width="18"
+                        height="18"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        aria-hidden="true"
+                      >
+                        <path d="M6 9l6 6 6-6" />
+                      </svg>
+                    </span>
+                  </button>
+                  <div class="faq-content hidden border-t border-border px-5 pb-5 pt-3 text-[15px] leading-relaxed text-muted-foreground md:px-6">
+                    <p>{item.answer}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        ))
+      }
     </div>
+
+    {
+      page && (
+        <div
+          class="mx-auto mt-14 max-w-xl rounded-2xl border border-border bg-surface px-6 py-8 text-center"
+          data-animate
+        >
+          <h2 class="text-xl font-bold text-foreground">Still have questions?</h2>
+          <p class="mt-2 text-muted-foreground">
+            We’re happy to help with product questions, billing, or feedback.
+          </p>
+          <div class="mt-6 flex flex-wrap items-center justify-center gap-3">
+            <a href="/support" class="btn-secondary">
+              Contact support
+            </a>
+            <a href="https://app.transcribr.org/auth/signup" class="btn-primary">
+              Get started
+            </a>
+          </div>
+        </div>
+      )
+    }
   </div>
 </section>
 
 <script>
   (() => {
-    const faqBtns = document.querySelectorAll(".faq-button");
-    const icons = document.querySelectorAll(".faq-icon");
-    for (let i = 0; i < faqBtns.length; i++) {
-      const btn = faqBtns[i];
-      const icon = icons[i];
-      const content = btn.nextElementSibling;
+    const buttons = document.querySelectorAll(".faq-button");
 
-      btn.addEventListener("click", (e) => {
-        e.preventDefault();
-        e.stopPropagation();
+    buttons.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const button = btn as HTMLButtonElement;
+        const item = button.closest(".overflow-hidden");
+        const content = item?.querySelector(".faq-content");
+        const icon = button.querySelector(".faq-icon");
+        if (!content || !icon) return;
 
-        const expandedIcon = document.querySelector(".faq-icon.expanded");
-        if (expandedIcon && expandedIcon !== icon) {
-          expandedIcon.classList.remove("expanded");
+        const isOpen = !content.classList.contains("hidden");
+
+        // Close others in the same page
+        document.querySelectorAll(".faq-content").forEach((el) => {
+          el.classList.add("hidden");
+        });
+        document.querySelectorAll(".faq-icon").forEach((el) => {
+          el.classList.remove("rotate-180");
+        });
+        document.querySelectorAll(".faq-button").forEach((el) => {
+          el.setAttribute("aria-expanded", "false");
+        });
+
+        if (!isOpen) {
+          content.classList.remove("hidden");
+          icon.classList.add("rotate-180");
+          button.setAttribute("aria-expanded", "true");
         }
-
-        const expandedContent = document.querySelector(
-          ".faq-content:not(.hidden)",
-        );
-        if (expandedContent && expandedContent !== content) {
-          expandedContent.classList.add("hidden");
-        }
-
-        if (!content) return;
-        content.classList.toggle("hidden");
-
-        if (!icon) return;
-        icon.classList.toggle("expanded");
       });
-    }
+    });
   })();
 </script>

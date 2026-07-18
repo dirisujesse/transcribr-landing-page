@@ -2,35 +2,75 @@
 import Layout from "../layouts/Layout.astro";
 ---
 
-<Layout title="Transcribr - Privacy Policy">
-  <div class="max-w-4xl mx-auto bg-white rounded-xl p-8 md:p-12 mt-10">
-    <header class="mb-8 text-center">
-      <h1 class="text-4xl font-extrabold text-gray-800 mb-2">
-        Help &amp; Support
-      </h1>
-    </header>
-
-    <section class="h-dvh">
-      <h2 class="text-2xl font-bold text-gray-800 mb-4">Contact Us</h2>
-      <p class="text-gray-700">
-        If you have any questions, feature request or feedback, you can contact
-        us:
-      </p>
-      <ul class="list-disc list-inside space-y-2 text-gray-700 ml-4 mt-4">
-        <li>
-          By email: <a
-            href="mailto:support@transcribr.org"
-            class="text-blue-600 hover:underline">support@transcribr.org</a
+<Layout
+  title="Help & Support — Transcribr"
+  description="Contact Transcribr support for product questions, feedback, and feature requests."
+>
+  <main>
+    <section
+      class="bg-gradient-to-b from-primary-soft/50 to-white pt-28 pb-12 md:pt-32"
+    >
+      <div class="container-page">
+        <div class="mx-auto max-w-2xl text-center">
+          <p
+            class="mb-3 text-sm font-semibold uppercase tracking-wider text-primary"
           >
-        </li>
-        <li>
-          For feedback or feature requests: <a
-            href="https://form.intentforms.com/forms/h4refrqak46gyq9"
-            class="text-blue-600 hover:underline"
-            >https://form.intentforms.com/forms/h4refrqak46gyq9</a
+            Support
+          </p>
+          <h1
+            class="text-4xl font-bold tracking-tight text-foreground md:text-5xl"
           >
-        </li>
-      </ul>
+            Help &amp; Support
+          </h1>
+          <p class="mt-4 text-lg text-muted-foreground">
+            Questions, feedback, or feature ideas — we’re here to help.
+          </p>
+        </div>
+      </div>
     </section>
-  </div>
+
+    <section class="section bg-white">
+      <div class="container-page">
+        <div
+          class="mx-auto max-w-xl rounded-2xl border border-border bg-white p-8 shadow-sm md:p-10"
+        >
+          <h2 class="text-xl font-bold text-foreground">Contact us</h2>
+          <p class="mt-2 text-muted-foreground">
+            If you have questions, a feature request, or feedback, reach out:
+          </p>
+          <ul class="mt-6 space-y-4">
+            <li>
+              <p class="text-sm font-medium text-foreground">Email</p>
+              <a
+                href="mailto:support@transcribr.org"
+                class="text-primary hover:underline"
+              >
+                support@transcribr.org
+              </a>
+            </li>
+            <li>
+              <p class="text-sm font-medium text-foreground">
+                Feedback &amp; feature requests
+              </p>
+              <a
+                href="https://form.intentforms.com/forms/h4refrqak46gyq9"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-primary hover:underline break-all"
+              >
+                Open feedback form
+              </a>
+            </li>
+          </ul>
+          <div class="mt-8 flex flex-wrap gap-3 border-t border-border pt-6">
+            <a href="/faq" class="btn-secondary">Browse FAQ</a>
+            <a
+              href="https://app.transcribr.org/auth/signup"
+              class="btn-primary">Get started</a
+            >
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
 </Layout>

@@ -1,0 +1,290 @@
+---
+import PhoneFrame from "./PhoneFrame.astro";
+
+export type DashboardVariant = "list" | "empty" | "pro";
+
+interface Props {
+  /** list = transcripts + pro banner; empty = empty workspace; pro = no unlock banner */
+  variant?: DashboardVariant;
+  class?: string;
+  userName?: string;
+}
+
+const {
+  variant = "list",
+  class: className = "",
+  userName = "Oluwafemi",
+} = Astro.props;
+
+const showProBanner = variant === "list" || variant === "empty";
+const showEmpty = variant === "empty";
+const planBadge = variant === "pro" ? "Pro" : variant === "list" ? "Pro Trial" : null;
+
+const transcripts = [
+  {
+    title: "Court Recordings",
+    meta: "Sun, Sep 14 · 6:56 PM · 56 secs",
+    preview:
+      "Welcome to our quarterly planning session. Today we'll be discussing the roadmap for Q1 and identify…",
+    status: "transcribed" as const,
+    tier: "Quick",
+  },
+  {
+    title: "Team Daily Standup",
+    meta: "Sun, Sep 14 · 6:56 PM · 03:49 min",
+    preview: "",
+    status: "processing" as const,
+    tier: "Standard",
+  },
+  {
+    title: "Customer Feedback Session",
+    meta: "Sun, Sep 14 · 6:56 PM · 03:49 min",
+    preview: "",
+    status: "failed" as const,
+    tier: "Premium",
+  },
+];
+
+const statusConfig = {
+  transcribed: {
+    label: "Transcribed",
+    chip: "chip-success",
+    dot: "bg-success",
+  },
+  processing: {
+    label: "Processing",
+    chip: "chip-processing",
+    dot: "bg-primary",
+  },
+  failed: {
+    label: "Failed",
+    chip: "chip-failed",
+    dot: "bg-danger",
+  },
+};
+---
+
+<PhoneFrame class={className} statusBarTheme="light">
+  <div class="relative">
+  <!-- App header (pulls under status bar) -->
+  <div class="-mt-11 bg-primary px-4 pb-5 pt-11 text-white">
+    <div class="flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <span class="text-[17px] font-semibold tracking-tight">Transcribr</span>
+        {
+          planBadge && (
+            <span class="inline-flex items-center gap-0.5 rounded-full bg-white/15 px-2 py-0.5 text-[10px] font-semibold text-white/95 ring-1 ring-white/20">
+              <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M12 2l2.4 7.4H22l-6 4.6 2.3 7-6.3-4.6L5.7 21l2.3-7-6-4.6h7.6L12 2z" />
+              </svg>
+              {planBadge}
+            </span>
+          )
+        }
+      </div>
+      <button
+        type="button"
+        class="flex h-8 w-8 items-center justify-center rounded-full bg-white/15 text-white"
+        aria-hidden="true"
+        tabindex="-1"
+      >
+        <svg
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2.2"
+          stroke-linecap="round"
+        >
+          <circle cx="11" cy="11" r="7"></circle>
+          <path d="M20 20l-3-3"></path>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Body -->
+  <div class="flex min-h-[420px] flex-col bg-white px-4 pb-20 pt-4">
+    <div class="mb-4">
+      <h2 class="text-[20px] font-semibold leading-tight text-foreground">
+        Good morning, {userName}
+      </h2>
+      <p class="mt-0.5 text-[13px] text-muted-foreground">
+        Ready to transcribe some audio?
+      </p>
+    </div>
+
+    {
+      showProBanner && (
+        <div class="relative mb-4 overflow-hidden rounded-2xl border border-primary/20 bg-primary-soft/60 p-3.5">
+          <div class="pr-14">
+            <p class="text-[13px] font-semibold text-foreground">Unlock Pro</p>
+            <p class="mt-0.5 text-[11px] leading-snug text-muted-foreground">
+              Upgrade to Pro for premium features that save time and boost accuracy.
+            </p>
+            <span class="mt-2.5 inline-flex items-center gap-1 rounded-full bg-success px-2.5 py-1 text-[11px] font-semibold text-white">
+              <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M12 2l2.4 7.4H22l-6 4.6 2.3 7-6.3-4.6L5.7 21l2.3-7-6-4.6h7.6L12 2z" />
+              </svg>
+              Try Pro
+            </span>
+          </div>
+          <!-- Decorative mark -->
+          <div
+            class="pointer-events-none absolute -right-1 bottom-0 top-0 flex w-16 items-center justify-center opacity-40"
+            aria-hidden="true"
+          >
+            <svg width="48" height="48" viewBox="0 0 48 48" fill="none" class="text-primary">
+              <circle cx="24" cy="24" r="18" stroke="currentColor" stroke-width="1.5" opacity="0.5" />
+              <path
+                d="M18 28v-6a6 6 0 0112 0v6"
+                stroke="currentColor"
+                stroke-width="1.75"
+                stroke-linecap="round"
+              />
+              <rect x="16" y="28" width="16" height="10" rx="2" stroke="currentColor" stroke-width="1.75" />
+              <circle cx="24" cy="33" r="1.5" fill="currentColor" />
+            </svg>
+          </div>
+          <span
+            class="absolute right-2.5 top-2.5 text-muted-foreground/60"
+            aria-hidden="true"
+          >
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M18 6L6 18M6 6l12 12" />
+            </svg>
+          </span>
+        </div>
+      )
+    }
+
+    <!-- Create CTA -->
+    <div
+      class="mb-5 flex items-center gap-2 rounded-2xl border border-border bg-white px-3.5 py-3 shadow-sm"
+    >
+      <span
+        class="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-primary text-white"
+        aria-hidden="true"
+      >
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+          <path d="M12 5v14M5 12h14"></path>
+        </svg>
+      </span>
+      <span class="text-[13px] font-medium text-foreground">Create New Transcript</span>
+    </div>
+
+    {
+      showEmpty ? (
+        <div class="flex flex-1 flex-col items-center justify-center px-4 pb-8 pt-6 text-center">
+          <div class="mb-3 flex h-14 w-14 items-center justify-center rounded-full bg-surface text-muted-foreground/50">
+            <svg
+              width="28"
+              height="28"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              aria-hidden="true"
+            >
+              <path d="M12 2a3 3 0 00-3 3v6a3 3 0 006 0V5a3 3 0 00-3-3z" />
+              <path d="M19 10v1a7 7 0 01-14 0v-1" />
+              <path d="M12 18v3M8 21h8" />
+            </svg>
+          </div>
+          <p class="text-[13px] font-medium text-foreground">
+            Your transcription workspace is empty.
+          </p>
+          <p class="mt-1 text-[12px] text-muted-foreground">
+            Create your first transcript to begin.
+          </p>
+        </div>
+      ) : (
+        <div class="space-y-4">
+          <p class="text-[12px] font-medium text-muted-foreground">
+            Sunday, September 14
+          </p>
+          <ul class="space-y-3">
+            {transcripts.map((item) => {
+              const status = statusConfig[item.status];
+              return (
+                <li class="rounded-2xl border border-border bg-white p-3 shadow-sm">
+                  <div class="flex items-start justify-between gap-2">
+                    <div class="min-w-0">
+                      <p class="truncate text-[13px] font-semibold text-foreground">
+                        {item.title}
+                      </p>
+                      <p class="mt-0.5 flex items-center gap-1 text-[10px] text-muted-foreground">
+                        <svg
+                          width="10"
+                          height="10"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="2"
+                          aria-hidden="true"
+                        >
+                          <rect x="3" y="5" width="18" height="16" rx="2" />
+                          <path d="M3 10h18M8 3v4M16 3v4" />
+                        </svg>
+                        {item.meta}
+                      </p>
+                    </div>
+                  </div>
+                  <div class="mt-2 flex flex-wrap items-center gap-1.5">
+                    <span class={status.chip}>
+                      <span class:list={["h-1.5 w-1.5 rounded-full", status.dot]} />
+                      {status.label}
+                    </span>
+                    <span class="chip-neutral">{item.tier}</span>
+                  </div>
+                  {item.preview && (
+                    <p class="mt-2 line-clamp-2 text-[11px] leading-relaxed text-muted-foreground">
+                      {item.preview}
+                    </p>
+                  )}
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+      )
+    }
+  </div>
+
+  <!-- Bottom tab bar -->
+  <div
+    class="absolute inset-x-0 bottom-0 border-t border-border/80 bg-white/95 px-6 pb-3 pt-2 backdrop-blur-sm"
+  >
+    <div class="mx-auto flex max-w-[220px] items-center justify-between">
+      <span
+        class="flex h-9 w-9 items-center justify-center rounded-full text-muted-foreground"
+        aria-hidden="true"
+      >
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
+          <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" />
+          <path d="M14 2v6h6M8 13h8M8 17h5" />
+        </svg>
+      </span>
+      <span
+        class="flex h-11 w-11 -translate-y-1 items-center justify-center rounded-full bg-primary text-white shadow-lg shadow-primary/30"
+        aria-hidden="true"
+      >
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+          <path d="M12 5v14M5 12h14" />
+        </svg>
+      </span>
+      <span
+        class="flex h-9 w-9 items-center justify-center rounded-full text-muted-foreground"
+        aria-hidden="true"
+      >
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
+          <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" />
+          <circle cx="12" cy="7" r="4" />
+        </svg>
+      </span>
+    </div>
+  </div>
+  </div>
+</PhoneFrame>

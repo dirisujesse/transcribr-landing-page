@@ -1,0 +1,65 @@
+---
+const highlights = [
+  {
+    title: "Speaker identification",
+    description: "Auto-label who said what, then rename speakers in one tap.",
+  },
+  {
+    title: "Synced playback",
+    description: "Click any line to jump to that exact moment in the audio.",
+  },
+  {
+    title: "Flexible export",
+    description: "PDF, TXT, SRT, VTT, and CSV — with optional speakers & timestamps.",
+  },
+  {
+    title: "Quick to Premium tiers",
+    description: "Balance speed and accuracy for every recording.",
+  },
+];
+---
+
+<section class="section-muted" id="features-teaser">
+  <div class="container-page">
+    <div
+      class="mx-auto flex max-w-6xl flex-col items-start justify-between gap-8 md:flex-row md:items-end"
+      data-animate
+    >
+      <div class="max-w-xl">
+        <p class="mb-3 text-sm font-semibold uppercase tracking-wider text-primary">
+          Features
+        </p>
+        <h2 class="text-3xl font-bold tracking-tight text-foreground md:text-4xl">
+          Everything you need after the recording ends
+        </h2>
+        <p class="mt-4 text-lg text-muted-foreground">
+          Searchable, editable transcripts with the tools professionals actually
+          use — on web and mobile.
+        </p>
+      </div>
+      <a href="/features" class="btn-primary shrink-0">
+        Explore all features
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+          <path d="M5 12h14M13 6l6 6-6 6"></path>
+        </svg>
+      </a>
+    </div>
+
+    <div class="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      {
+        highlights.map((item) => (
+          <div
+            class="rounded-2xl border border-border bg-white p-5 shadow-sm"
+            data-animate
+          >
+            <div class="mb-3 h-1 w-8 rounded-full bg-primary" />
+            <h3 class="font-semibold text-foreground">{item.title}</h3>
+            <p class="mt-2 text-sm leading-relaxed text-muted-foreground">
+              {item.description}
+            </p>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

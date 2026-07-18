@@ -1,0 +1,227 @@
+---
+import MockDashboard from "./mocks/MockDashboard.astro";
+import MockTiers from "./mocks/MockTiers.astro";
+import MockPlayback from "./mocks/MockPlayback.astro";
+import MockExport from "./mocks/MockExport.astro";
+import MockProcessing from "./mocks/MockProcessing.astro";
+import CTABand from "./CTABand.astro";
+
+const features = [
+  {
+    id: "ai-tiers",
+    eyebrow: "AI transcription",
+    title: "Speed or accuracy — you choose",
+    description:
+      "Pick Quick for drafts, Standard for everyday meetings, or Premium when every word counts. Balance processing time against accuracy for each recording.",
+    points: [
+      "Quick, Standard, and Premium modes",
+      "Clear estimates for time and accuracy",
+      "Works with audio files and URLs",
+    ],
+    visual: "tiers" as const,
+    reverse: false,
+  },
+  {
+    id: "processing",
+    eyebrow: "Pipeline",
+    title: "See every step as it happens",
+    description:
+      "From language detection to speaker ID and audio sync, Transcribr shows progress so you always know where your transcript stands.",
+    points: [
+      "Live progress checklist",
+      "Retry or re-upload if something fails",
+      "Track jobs from your dashboard",
+    ],
+    visual: "processing" as const,
+    reverse: true,
+  },
+  {
+    id: "playback",
+    eyebrow: "Synced playback",
+    title: "Never lose your place again",
+    description:
+      "Read along while audio plays. Jump to any timestamped section, scrub with ±10s controls, and share clips without hunting through the file.",
+    points: [
+      "Section timestamps on every block",
+      "Large play control built for mobile",
+      "Speed control when you need to skim",
+    ],
+    visual: "playback" as const,
+    reverse: false,
+  },
+  {
+    id: "speakers",
+    eyebrow: "Speakers",
+    title: "Know who said what",
+    description:
+      "Automatic speaker labels keep multi-person meetings readable. Rename Speaker 1 and Speaker 2 to real names so exports stay clear for your team.",
+    points: [
+      "Automatic speaker detection",
+      "Rename labels in one tap",
+      "Optional speaker names on export",
+    ],
+    visual: "speakers" as const,
+    reverse: true,
+  },
+  {
+    id: "export",
+    eyebrow: "Export",
+    title: "Ship transcripts in any format",
+    description:
+      "Download PDF, TXT, SRT, VTT, or CSV. Toggle plain text, speakers, and timestamps so the file matches your workflow — captions, notes, or archives.",
+    points: [
+      "PDF, TXT, SRT, VTT, CSV",
+      "Include speakers & timestamps",
+      "Free formats on every plan",
+    ],
+    visual: "export" as const,
+    reverse: false,
+  },
+  {
+    id: "workspace",
+    eyebrow: "Workspace",
+    title: "Your transcripts, organized",
+    description:
+      "A clean dashboard for everything you’ve transcribed — status chips for Transcribed, Processing, and Failed, plus Pro tools when you’re ready to scale.",
+    points: [
+      "Status at a glance",
+      "Create new transcripts in one tap",
+      "Web and mobile, same account",
+    ],
+    visual: "dashboard" as const,
+    reverse: true,
+  },
+];
+---
+
+<!-- Page hero -->
+<section class="relative overflow-hidden bg-gradient-to-b from-primary-soft/50 to-white pt-28 pb-16 md:pt-32 md:pb-20">
+  <div class="container-page">
+    <div class="mx-auto max-w-3xl text-center" data-animate>
+      <p class="mb-3 text-sm font-semibold uppercase tracking-wider text-primary">
+        Features
+      </p>
+      <h1 class="text-4xl font-bold tracking-tight text-foreground md:text-5xl">
+        Built for speed. Designed for accuracy.
+      </h1>
+      <p class="mx-auto mt-5 max-w-2xl text-lg text-muted-foreground md:text-xl">
+        Everything you need to turn hours of audio into searchable, editable,
+        and exportable text — without leaving your phone or browser.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- Feature rows -->
+{
+  features.map((feature, i) => (
+    <section
+      id={feature.id}
+      class:list={[i % 2 === 0 ? "section bg-white" : "section-muted"]}
+    >
+      <div class="container-page">
+        <div
+          class:list={[
+            "mx-auto grid max-w-6xl items-center gap-12 lg:grid-cols-2 lg:gap-16",
+            feature.reverse && "lg:[&>*:first-child]:order-2",
+          ]}
+        >
+          <div data-animate>
+            <p class="mb-3 text-sm font-semibold uppercase tracking-wider text-primary">
+              {feature.eyebrow}
+            </p>
+            <h2 class="text-3xl font-bold tracking-tight text-foreground md:text-4xl">
+              {feature.title}
+            </h2>
+            <p class="mt-4 text-lg leading-relaxed text-muted-foreground">
+              {feature.description}
+            </p>
+            <ul class="mt-6 space-y-3">
+              {feature.points.map((point) => (
+                <li class="flex items-start gap-3 text-[15px] text-foreground">
+                  <span class="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-primary-soft text-primary">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                      <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
+                    </svg>
+                  </span>
+                  {point}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div class="flex justify-center" data-animate>
+            {feature.visual === "tiers" && <MockTiers />}
+            {feature.visual === "processing" && <MockProcessing />}
+            {feature.visual === "playback" && <MockPlayback />}
+            {feature.visual === "export" && <MockExport />}
+            {feature.visual === "dashboard" && (
+              <MockDashboard variant="list" />
+            )}
+            {feature.visual === "speakers" && (
+              <div class="w-full max-w-sm rounded-2xl border border-border bg-white p-5 shadow-lg shadow-black/5">
+                <p class="mb-1 text-xs font-medium text-muted-foreground">
+                  00:00 – 01:15
+                </p>
+                <div class="mb-2 flex items-center justify-between">
+                  <span class="text-sm font-semibold text-primary">Jesse Makanaki ▾</span>
+                  <span class="chip-processing">Renamed</span>
+                </div>
+                <p class="text-sm leading-relaxed text-foreground">
+                  Good morning, everyone. Thanks for joining the stand-up. I've been reviewing the design sprint progress…
+                </p>
+                <div class="my-4 border-t border-border" />
+                <p class="mb-1 text-xs font-medium text-muted-foreground">
+                  01:16 – 03:45
+                </p>
+                <div class="mb-2 flex items-center justify-between">
+                  <span class="text-sm font-semibold text-primary">Speaker 2 ▾</span>
+                </div>
+                <p class="text-sm leading-relaxed text-foreground">
+                  I'm currently focused on the backend tasks related to the API integration…
+                </p>
+                <div class="mt-5 rounded-xl border border-border bg-surface p-4">
+                  <p class="text-xs font-semibold text-foreground">Rename Speaker 1</p>
+                  <div class="mt-2 rounded-lg border border-border bg-white px-3 py-2 text-sm text-muted-foreground">
+                    Enter new name
+                  </div>
+                  <div class="mt-3 rounded-full bg-primary py-2.5 text-center text-sm font-semibold text-white">
+                    Rename Speaker
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+    </section>
+  ))
+}
+
+<!-- Cross-platform strip -->
+<section class="section bg-white">
+  <div class="container-page">
+    <div
+      class="mx-auto max-w-3xl rounded-2xl border border-border bg-surface px-6 py-10 text-center md:px-12"
+      data-animate
+    >
+      <h2 class="text-2xl font-bold text-foreground md:text-3xl">
+        Same workflow on web, iOS, and beyond
+      </h2>
+      <p class="mx-auto mt-3 max-w-xl text-muted-foreground">
+        Start a transcript on your phone, finish editing on the web. Your
+        workspace stays in sync so nothing gets stuck on one device.
+      </p>
+      <div class="mt-6 flex flex-wrap items-center justify-center gap-3">
+        <span class="chip-neutral">Web app</span>
+        <span class="chip-neutral">iOS</span>
+        <span class="chip-neutral">Android coming soon</span>
+      </div>
+      <a href="/#pricing" class="btn-primary mt-8">
+        View pricing
+      </a>
+    </div>
+  </div>
+</section>
+
+<CTABand />

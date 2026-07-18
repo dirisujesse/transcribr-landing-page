@@ -1,0 +1,180 @@
+---
+import CTABand from "./CTABand.astro";
+
+const principles = [
+  {
+    title: "Speed without sacrifice",
+    description:
+      "Get usable transcripts in minutes, with tiers that let you trade a little time for higher accuracy when it matters.",
+  },
+  {
+    title: "Clarity for real conversations",
+    description:
+      "Speaker labels, timestamps, and synced playback turn messy meetings into something you can actually work with.",
+  },
+  {
+    title: "Fits your workflow",
+    description:
+      "Export to the formats you already use — notes, captions, archives — on web and mobile from the same account.",
+  },
+];
+
+const audiences = [
+  {
+    title: "Journalists & researchers",
+    description: "Interviews and field recordings, searchable and citable.",
+  },
+  {
+    title: "Product & ops teams",
+    description: "Standups, customer calls, and planning sessions — captured.",
+  },
+  {
+    title: "Students & creators",
+    description: "Lectures, podcasts, and content drafts without the rewatch.",
+  },
+  {
+    title: "Legal & professional",
+    description: "Court notes and formal audio when structure and export matter.",
+  },
+];
+---
+
+<section
+  class="relative overflow-hidden bg-gradient-to-b from-primary-soft/50 to-white pt-28 pb-16 md:pt-32 md:pb-20"
+>
+  <div class="container-page">
+    <div class="mx-auto max-w-3xl text-center" data-animate>
+      <p class="mb-3 text-sm font-semibold uppercase tracking-wider text-primary">
+        About
+      </p>
+      <h1 class="text-4xl font-bold tracking-tight text-foreground md:text-5xl">
+        Transcription that keeps up with how you work
+      </h1>
+      <p class="mx-auto mt-5 max-w-2xl text-lg text-muted-foreground md:text-xl">
+        Transcribr turns audio and video into accurate, editable text — so
+        professionals spend less time typing and more time on the work that
+        matters.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="section bg-white">
+  <div class="container-page">
+    <div class="mx-auto grid max-w-6xl items-center gap-12 lg:grid-cols-2 lg:gap-16">
+      <div data-animate>
+        <p class="mb-3 text-sm font-semibold uppercase tracking-wider text-primary">
+          Our mission
+        </p>
+        <h2 class="text-3xl font-bold tracking-tight text-foreground md:text-4xl">
+          Make every recording useful the moment it ends
+        </h2>
+        <p class="mt-4 text-lg leading-relaxed text-muted-foreground">
+          Meetings, interviews, court notes, and content all start as audio.
+          Most tools stop at a wall of text. We built Transcribr for what comes
+          next: speakers, playback, edits, and exports that fit real jobs — not
+          demos.
+        </p>
+        <p class="mt-4 text-lg leading-relaxed text-muted-foreground">
+          Whether you’re on a phone between sessions or at a desk finishing a
+          draft, the same workspace follows you.
+        </p>
+      </div>
+
+      <div
+        class="rounded-2xl border border-border bg-surface p-8 md:p-10"
+        data-animate
+      >
+        <div class="mb-6 flex h-12 w-12 items-center justify-center rounded-2xl bg-primary text-white">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M12 2a3 3 0 00-3 3v6a3 3 0 006 0V5a3 3 0 00-3-3z" />
+            <path d="M19 10v1a7 7 0 01-14 0v-1M12 18v3" />
+          </svg>
+        </div>
+        <blockquote class="text-xl font-semibold leading-snug text-foreground md:text-2xl">
+          “Transform your audio files into accurate, searchable transcripts in
+          seconds.”
+        </blockquote>
+        <p class="mt-4 text-sm text-muted-foreground">
+          Built for meetings, interviews, and content creation — with the polish
+          professionals expect.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section-muted">
+  <div class="container-page">
+    <div class="mx-auto mb-12 max-w-2xl text-center" data-animate>
+      <p class="mb-3 text-sm font-semibold uppercase tracking-wider text-primary">
+        Principles
+      </p>
+      <h2 class="text-3xl font-bold tracking-tight text-foreground md:text-4xl">
+        What we optimize for
+      </h2>
+    </div>
+
+    <div class="mx-auto grid max-w-5xl gap-6 md:grid-cols-3">
+      {
+        principles.map((item) => (
+          <div
+            class="rounded-2xl border border-border bg-white p-6 shadow-sm"
+            data-animate
+          >
+            <div class="mb-4 h-1 w-8 rounded-full bg-primary" />
+            <h3 class="text-lg font-semibold text-foreground">{item.title}</h3>
+            <p class="mt-2 text-sm leading-relaxed text-muted-foreground">
+              {item.description}
+            </p>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<section class="section bg-white">
+  <div class="container-page">
+    <div class="mx-auto mb-12 max-w-2xl text-center" data-animate>
+      <p class="mb-3 text-sm font-semibold uppercase tracking-wider text-primary">
+        Who it’s for
+      </p>
+      <h2 class="text-3xl font-bold tracking-tight text-foreground md:text-4xl">
+        Designed for people who live in recordings
+      </h2>
+    </div>
+
+    <div class="mx-auto grid max-w-5xl gap-4 sm:grid-cols-2">
+      {
+        audiences.map((item) => (
+          <div
+            class="flex gap-4 rounded-2xl border border-border bg-surface/80 p-5"
+            data-animate
+          >
+            <span class="mt-1 flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-primary-soft text-primary">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
+              </svg>
+            </span>
+            <div>
+              <h3 class="font-semibold text-foreground">{item.title}</h3>
+              <p class="mt-1 text-sm text-muted-foreground">{item.description}</p>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+
+    <div class="mt-14 text-center" data-animate>
+      <a href="/features" class="btn-secondary mr-3">
+        Explore features
+      </a>
+      <a href="/#pricing" class="btn-primary">
+        View pricing
+      </a>
+    </div>
+  </div>
+</section>
+
+<CTABand />

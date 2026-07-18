@@ -22,6 +22,12 @@ const {
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" sizes="any" href="/favicon.ico" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&display=swap"
+      rel="stylesheet"
+    />
     <meta name="generator" content={Astro.generator} />
 
     <!-- Open Graph -->
@@ -29,16 +35,17 @@ const {
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://transcribr.org" />
-    <meta property="og:image" content="/og-image.png" />
+    <meta property="og:image" content="https://transcribr.org/og-image.png" />
     <meta property="og:image:alt" content={title} />
     <meta property="og:site_name" content="Transcribr" />
     <meta property="og:locale" content="en_US" />
+    <meta name="theme-color" content="#5B4FE8" />
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content="/og-image.png"  />
+    <meta name="twitter:image" content="https://transcribr.org/og-image.png" />
     <meta name="twitter:image:alt" content={title} />
     <meta name="twitter:site" content="@transcribr" />
     <meta name="twitter:creator" content="@transcribr" />
@@ -50,8 +57,16 @@ const {
     <title>{title}</title>
   </head>
   <body>
+    <a
+      href="#main-content"
+      class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[100] focus:rounded-full focus:bg-primary focus:px-4 focus:py-2 focus:text-sm focus:font-medium focus:text-primary-foreground"
+    >
+      Skip to content
+    </a>
     <Header />
-    <slot />
+    <div id="main-content">
+      <slot />
+    </div>
     <Footer />
 
     <script>

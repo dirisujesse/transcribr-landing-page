@@ -1,174 +1,57 @@
 ---
 import AppStoreButtons from "./AppStoreButtons.astro";
+import MockDashboard from "./mocks/MockDashboard.astro";
 ---
 
 <section
-  class="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-primary/5 via-white to-primary/10 pt-16"
+  class="relative overflow-hidden bg-gradient-to-br from-primary-soft/40 via-white to-surface pt-24 pb-16 md:pt-28 md:pb-24"
 >
   <div class="container mx-auto px-4 lg:px-6">
-    <div class="max-w-4xl mx-auto text-center">
-      <!-- Hero Content -->
-      <div class="space-y-8 mb-12" data-animate>
-        <div class="space-y-4">
-          <h1
-            class="text-4xl md:text-6xl lg:text-7xl font-bold text-foreground leading-tight"
-          >
-            Turn Your Audio Into
-            <span class="text-primary">Perfect Text</span>
-          </h1>
-          <p
-            class="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto leading-relaxed"
-          >
-            Say goodbye to manual typing. Get lightning-fast AI transcription
-            today, with accurate human review coming soon. Edit, sync, and
-            export in seconds.
-          </p>
+    <div
+      class="mx-auto grid max-w-6xl items-center gap-12 lg:grid-cols-2 lg:gap-16"
+    >
+      <!-- Copy -->
+      <div class="text-center lg:text-left" data-animate>
+        <div
+          class="mb-6 inline-flex items-center gap-2 rounded-full border border-primary/15 bg-white px-3 py-1 text-xs font-medium text-primary shadow-sm"
+        >
+          <span class="h-1.5 w-1.5 rounded-full bg-success"></span>
+          AI transcription for web & mobile
         </div>
 
-        <!-- <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-          <WaitlistForm />
-        </div> -->
+        <h1
+          class="text-4xl font-bold leading-[1.1] tracking-tight text-foreground md:text-5xl lg:text-6xl"
+        >
+          Turn your audio into
+          <span class="text-primary"> perfect text</span>
+        </h1>
 
-        <div class="flex flex-col items-center space-y-4">
-          <p class="text-sm text-muted-foreground">
-            Available on all platforms
-          </p>
-          <AppStoreButtons />
+        <p
+          class="mx-auto mt-5 max-w-xl text-lg leading-relaxed text-muted-foreground md:text-xl lg:mx-0"
+        >
+          Lightning-fast AI transcripts with speaker labels, synced playback,
+          and exports — so you can edit and share in seconds.
+        </p>
+
+        <div class="mt-8 flex flex-col items-center gap-4 lg:items-start">
+          <AppStoreButtons align="start" />
         </div>
       </div>
 
-      <!-- Hero Illustration -->
-      <div class="relative" data-animate>
+      <!-- Dashboard mock -->
+      <div class="relative flex justify-center lg:justify-end" data-animate>
         <div
-          class="bg-white rounded-2xl shadow-2xl border border-border p-8 max-w-2xl mx-auto"
+          class="pointer-events-none absolute -right-8 top-1/4 h-64 w-64 rounded-full bg-primary/15 blur-3xl"
+          aria-hidden="true"
         >
-          <!-- Mock transcript interface -->
-          <div class="space-y-4">
-            <div class="flex items-center justify-between">
-              <div class="flex items-center space-x-3">
-                <div
-                  class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center"
-                >
-                  <div class="flex space-x-1">
-                    <div
-                      class="w-0.5 h-3 bg-white/70 rounded-full animate-pulse"
-                    >
-                    </div>
-                    <div
-                      class="w-0.5 h-4 bg-white/90 rounded-full animate-pulse"
-                      style="animation-delay: 0.1s"
-                    >
-                    </div>
-                    <div
-                      class="w-0.5 h-3 bg-white/80 rounded-full animate-pulse"
-                      style="animation-delay: 0.2s"
-                    >
-                    </div>
-                    <div
-                      class="w-0.5 h-5 bg-white rounded-full animate-pulse"
-                      style="animation-delay: 0.3s"
-                    >
-                    </div>
-                  </div>
-                </div>
-                <div>
-                  <h3 class="font-medium text-foreground">
-                    Client Meeting Notes
-                  </h3>
-                  <p class="text-sm text-muted-foreground">3:42 duration</p>
-                </div>
-              </div>
-              <div
-                class="bg-primary/10 text-primary px-3 py-1 rounded-full text-xs font-medium"
-              >
-                Premium
-              </div>
-            </div>
-
-            <div class="space-y-3">
-              <div class="bg-accent p-4 rounded-lg border-l-4 border-primary">
-                <div class="flex justify-between items-start mb-2">
-                  <span class="text-xs font-medium text-primary"
-                    >Speaker 1 • 00:12</span
-                  >
-                </div>
-                <p class="text-sm text-foreground">
-                  Welcome everyone to our quarterly planning session. Today
-                  we'll be discussing our roadmap and key priorities.
-                </p>
-              </div>
-
-              <div class="bg-secondary p-4 rounded-lg">
-                <div class="flex justify-between items-start mb-2">
-                  <span class="text-xs font-medium text-muted-foreground"
-                    >Speaker 2 • 00:28</span
-                  >
-                </div>
-                <p class="text-sm text-foreground">
-                  Thank you for organizing this. I've prepared the performance
-                  metrics from last quarter that show a 15% increase in
-                  engagement.
-                </p>
-              </div>
-
-              <div class="bg-accent/50 p-4 rounded-lg">
-                <div class="flex justify-between items-start mb-2">
-                  <span class="text-xs font-medium text-muted-foreground"
-                    >Speaker 1 • 00:45</span
-                  >
-                </div>
-                <p class="text-sm text-foreground opacity-50">
-                  That's excellent progress. Let's dive into the challenges we
-                  identified...
-                </p>
-              </div>
-            </div>
-
-            <!-- Mock audio player -->
-            <div class="bg-muted p-4 rounded-lg">
-              <div class="flex items-center space-x-4">
-                <button
-                  class="w-10 h-10 bg-primary rounded-full flex items-center justify-center text-primary-foreground"
-                >
-                  <svg
-                    width="16"
-                    height="16"
-                    viewBox="0 0 24 24"
-                    fill="currentColor"
-                  >
-                    <path d="M8 5v14l11-7z"></path>
-                  </svg>
-                </button>
-                <div class="flex-1">
-                  <div class="h-2 bg-secondary rounded-full overflow-hidden">
-                    <div
-                      class="h-full bg-primary rounded-full"
-                      style="width: 35%"
-                    >
-                    </div>
-                  </div>
-                  <div
-                    class="flex justify-between text-xs text-muted-foreground mt-1"
-                  >
-                    <span>1:18</span>
-                    <span>3:42</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
+        <div
+          class="pointer-events-none absolute -left-4 bottom-8 h-40 w-40 rounded-full bg-primary/10 blur-2xl"
+          aria-hidden="true"
+        >
+        </div>
+        <MockDashboard variant="list" class="relative z-10" />
       </div>
     </div>
-  </div>
-
-  <!-- Decorative elements -->
-  <div
-    class="absolute top-20 left-10 w-20 h-20 bg-primary/10 rounded-full blur-xl"
-  >
-  </div>
-  <div
-    class="absolute bottom-20 right-10 w-32 h-32 bg-primary/5 rounded-full blur-2xl"
-  >
   </div>
 </section>

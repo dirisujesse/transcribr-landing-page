@@ -1,0 +1,117 @@
+---
+interface Props {
+  /** Extra classes on the outer device shell */
+  class?: string;
+  /** Show iOS-style status bar (default true) */
+  statusBar?: boolean;
+  /** Status bar text color: light on purple headers */
+  statusBarTheme?: "dark" | "light";
+  /** Optional time label */
+  time?: string;
+}
+
+const {
+  class: className = "",
+  statusBar = true,
+  statusBarTheme = "dark",
+  time = "9:41",
+} = Astro.props;
+
+const isLight = statusBarTheme === "light";
+---
+
+<div
+  class:list={[
+    "relative mx-auto w-[min(100%,280px)] overflow-hidden rounded-[2rem] border border-black/10 bg-white shadow-[0_25px_50px_-12px_rgba(15,23,42,0.25)] ring-1 ring-black/5 sm:w-[300px]",
+    className,
+  ]}
+  role="img"
+  aria-label="Transcribr app preview"
+>
+  <!-- Subtle device bezel -->
+  <div class="pointer-events-none absolute inset-0 rounded-[2rem] ring-1 ring-inset ring-black/5">
+  </div>
+
+  {
+    statusBar && (
+      <div
+        class:list={[
+          "relative z-10 flex h-11 items-end justify-between px-5 pb-1.5 text-[12px] font-semibold leading-none",
+          isLight ? "text-white" : "text-foreground",
+        ]}
+      >
+        <span class="min-w-[2.5rem]">{time}</span>
+        <div class="flex items-center gap-1">
+          <!-- Signal -->
+          <svg
+            width="16"
+            height="11"
+            viewBox="0 0 16 11"
+            fill="currentColor"
+            aria-hidden="true"
+            class="opacity-90"
+          >
+            <rect x="0" y="7" width="3" height="4" rx="0.5" />
+            <rect x="4.5" y="5" width="3" height="6" rx="0.5" />
+            <rect x="9" y="2.5" width="3" height="8.5" rx="0.5" />
+            <rect x="13.5" y="0" width="2.5" height="11" rx="0.5" opacity="0.35" />
+          </svg>
+          <!-- WiFi -->
+          <svg
+            width="15"
+            height="11"
+            viewBox="0 0 15 11"
+            fill="currentColor"
+            aria-hidden="true"
+            class="opacity-90"
+          >
+            <path d="M7.5 10.2a1.1 1.1 0 100-2.2 1.1 1.1 0 000 2.2z" />
+            <path
+              d="M4.1 7.1a4.8 4.8 0 016.8 0l-.9.9a3.5 3.5 0 00-5 0l-.9-.9z"
+              opacity="0.85"
+            />
+            <path
+              d="M1.6 4.6a8.3 8.3 0 0111.8 0l-.9.9a7 7 0 00-10 0l-.9-.9z"
+              opacity="0.55"
+            />
+          </svg>
+          <!-- Battery -->
+          <svg
+            width="24"
+            height="11"
+            viewBox="0 0 24 11"
+            fill="none"
+            aria-hidden="true"
+          >
+            <rect
+              x="0.5"
+              y="0.5"
+              width="20"
+              height="10"
+              rx="2.5"
+              stroke="currentColor"
+              opacity="0.4"
+            />
+            <rect
+              x="2"
+              y="2"
+              width="15"
+              height="7"
+              rx="1.2"
+              fill="currentColor"
+            />
+            <path
+              d="M22 3.5v4a1.5 1.5 0 000-4z"
+              fill="currentColor"
+              opacity="0.45"
+            />
+          </svg>
+        </div>
+      </div>
+    )
+  }
+
+  <div class="relative">
+    <slot />
+  </div>
+</div>

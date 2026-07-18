@@ -1,0 +1,31 @@
+---
+import AppStoreButtons from "./AppStoreButtons.astro";
+---
+
+<section class="section relative overflow-hidden bg-primary">
+  <div
+    class="pointer-events-none absolute -left-20 top-0 h-64 w-64 rounded-full bg-white/10 blur-3xl"
+    aria-hidden="true"
+  >
+  </div>
+  <div
+    class="pointer-events-none absolute -right-16 bottom-0 h-72 w-72 rounded-full bg-white/10 blur-3xl"
+    aria-hidden="true"
+  >
+  </div>
+
+  <div class="container-page relative z-10">
+    <div class="mx-auto max-w-2xl text-center" data-animate>
+      <h2 class="text-3xl font-bold tracking-tight text-white md:text-4xl">
+        Ready to stop typing every word?
+      </h2>
+      <p class="mt-4 text-lg text-white/80">
+        Start free on web or mobile. Upgrade when you need unlimited minutes and
+        premium accuracy.
+      </p>
+      <div class="mt-8 flex justify-center">
+        <AppStoreButtons theme="on-primary" />
+      </div>
+    </div>
+  </div>
+</section>
