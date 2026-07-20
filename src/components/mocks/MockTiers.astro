@@ -1,4 +1,6 @@
 ---
+import { m } from "../../paraglide/messages.js";
+
 /** Compact Quick / Standard / Premium tier cards — marketing fragment */
 interface Props {
   class?: string;
@@ -8,23 +10,23 @@ const { class: className = "" } = Astro.props;
 
 const tiers = [
   {
-    name: "Quick",
-    time: "~2 min",
-    accuracy: "Basic",
+    name: m.mock_tiers_quick(),
+    time: m.mock_tiers_quick_time(),
+    accuracy: m.mock_tiers_quick_accuracy(),
     features: ["Basic transcription", "Standard timestamps"],
     highlight: false,
   },
   {
-    name: "Standard",
-    time: "~5 min",
-    accuracy: "95–98%",
+    name: m.mock_tiers_standard(),
+    time: m.mock_tiers_standard_time(),
+    accuracy: m.mock_tiers_standard_accuracy(),
     features: ["Enhanced accuracy", "Speaker detection"],
     highlight: true,
   },
   {
-    name: "Premium",
-    time: "~10 min",
-    accuracy: "98–99%",
+    name: m.mock_tiers_premium(),
+    time: m.mock_tiers_premium_time(),
+    accuracy: m.mock_tiers_premium_accuracy(),
     features: ["Highest accuracy", "Speaker identification"],
     highlight: false,
   },
@@ -37,7 +39,7 @@ const tiers = [
     className,
   ]}
 >
-  <p class="text-xs font-semibold text-muted-foreground">Select Transcription Type</p>
+  <p class="text-xs font-semibold text-muted-foreground">{m.mock_tiers_heading()}</p>
   {
     tiers.map((tier) => (
       <div
@@ -52,16 +54,16 @@ const tiers = [
           <span class="text-sm font-semibold text-foreground">{tier.name}</span>
           {tier.highlight && (
             <span class="rounded-full bg-primary px-2 py-0.5 text-[10px] font-semibold text-white">
-              Popular
+              {m.mock_tiers_popular()}
             </span>
           )}
         </div>
         <div class="mt-2 flex gap-3 text-[11px] text-muted-foreground">
           <span>
-            <span class="font-medium text-foreground/80">Time</span> {tier.time}
+            <span class="font-medium text-foreground/80">{m.mock_tiers_time()}</span> {tier.time}
           </span>
           <span>
-            <span class="font-medium text-foreground/80">Accuracy</span>{" "}
+            <span class="font-medium text-foreground/80">{m.mock_tiers_accuracy()}</span>{" "}
             {tier.accuracy}
           </span>
         </div>

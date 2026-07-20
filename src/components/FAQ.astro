@@ -1,4 +1,7 @@
 ---
+import { m } from "../paraglide/messages.js";
+import { localizeHref } from "../paraglide/runtime.js";
+
 interface FAQItem {
   question: string;
   answer: string;
@@ -10,80 +13,39 @@ interface FAQGroup {
 }
 
 interface Props {
-  /** Show page-style hero header */
   page?: boolean;
   groups?: FAQGroup[];
 }
 
 const defaultGroups: FAQGroup[] = [
   {
-    title: "Getting started",
+    title: m.faq_group_getting_started(),
     items: [
-      {
-        question: "What file formats and sizes are supported?",
-        answer:
-          "We support MP3, MP4, WAV, and M4A audio and video files up to 100MB and about 1 hour in duration. You can also paste a YouTube link or a direct URL to a file hosted online. We’re continuously expanding format support based on user needs.",
-      },
-      {
-        question: "How long does transcription take?",
-        answer:
-          "Processing is typically a fraction of the original length — often in the range of a few minutes for a short meeting. Quick, Standard, and Premium tiers trade speed for accuracy. Exact times depend on audio length, complexity, and current load.",
-      },
-      {
-        question: "What languages are supported?",
-        answer:
-          "Transcribr supports a wide set of languages including English, Spanish, French, German, Italian, Portuguese, Dutch, Russian, Chinese, Japanese, Korean, Arabic, and many more. Language detection is automatic, or you can specify a language for better accuracy.",
-      },
+      { question: m.faq_q1_q(), answer: m.faq_q1_a() },
+      { question: m.faq_q2_q(), answer: m.faq_q2_a() },
+      { question: m.faq_q3_q(), answer: m.faq_q3_a() },
     ],
   },
   {
-    title: "Transcription",
+    title: m.faq_group_transcription(),
     items: [
-      {
-        question: "How accurate is Transcribr’s transcription?",
-        answer:
-          "We aim for industry-leading accuracy on clear audio — often 95–99% depending on tier and conditions. Results vary with audio quality, background noise, accents, and technical terminology. Premium modes prioritize accuracy; Quick is built for speed.",
-      },
-      {
-        question: "What’s the difference between Quick, Standard, and Premium?",
-        answer:
-          "Quick prioritizes turnaround for drafts and rough notes. Standard balances speed and accuracy for most meetings. Premium adds higher accuracy and stronger speaker identification when every word and speaker label matters.",
-      },
-      {
-        question: "Can I edit transcripts and rename speakers?",
-        answer:
-          "Yes. Transcripts are fully editable. Tap any section to adjust text, and rename default speaker labels (Speaker 1, Speaker 2, etc.) to real names so exports stay clear for your team.",
-      },
+      { question: m.faq_q4_q(), answer: m.faq_q4_a() },
+      { question: m.faq_q5_q(), answer: m.faq_q5_a() },
+      { question: m.faq_q6_q(), answer: m.faq_q6_a() },
     ],
   },
   {
-    title: "Plans & billing",
+    title: m.faq_group_plans(),
     items: [
-      {
-        question: "How does the free tier work?",
-        answer:
-          "The free tier is a 7-day free trial that gives you 30 audio minutes or 3 transcripts per day so you can evaluate the product. Upgrade to Weekly or Premium for unlimited minutes, speaker identification, and the full feature set.",
-      },
-      {
-        question: "Can I cancel my subscription anytime?",
-        answer:
-          "Yes. Cancel Premium or Weekly anytime from your account settings. You’ll keep access until the end of the current billing period, then your account reverts to the free tier.",
-      },
+      { question: m.faq_q7_q(), answer: m.faq_q7_a() },
+      { question: m.faq_q8_q(), answer: m.faq_q8_a() },
     ],
   },
   {
-    title: "Privacy & export",
+    title: m.faq_group_privacy(),
     items: [
-      {
-        question: "Is my data secure and private?",
-        answer:
-          "Yes. Audio and transcripts are encrypted in transit and at rest. We don’t sell your content. You own your files and can delete data from your account when you no longer need it. See our Privacy Policy for full details.",
-      },
-      {
-        question: "What export formats are available?",
-        answer:
-          "Export to PDF, TXT, SRT, VTT, and CSV. You can choose plain text only, or include speakers and timestamps depending on your workflow — notes, captions, or archives.",
-      },
+      { question: m.faq_q9_q(), answer: m.faq_q9_a() },
+      { question: m.faq_q10_q(), answer: m.faq_q10_a() },
     ],
   },
 ];
@@ -97,14 +59,13 @@ const { page = false, groups = defaultGroups } = Astro.props;
       <div class="container-page">
         <div class="mx-auto max-w-3xl text-center" data-animate>
           <p class="mb-3 text-sm font-semibold uppercase tracking-wider text-primary">
-            FAQ
+            {m.faq_eyebrow()}
           </p>
           <h1 class="text-4xl font-bold tracking-tight text-foreground md:text-5xl">
-            Frequently asked questions
+            {m.faq_heading()}
           </h1>
           <p class="mx-auto mt-5 max-w-2xl text-lg text-muted-foreground md:text-xl">
-            Everything you need to know about Transcribr, plans, and how
-            transcription works.
+            {m.faq_subtext()}
           </p>
         </div>
       </div>
@@ -118,10 +79,10 @@ const { page = false, groups = defaultGroups } = Astro.props;
       !page && (
         <div class="mx-auto mb-14 max-w-2xl text-center" data-animate>
           <h2 class="text-3xl font-bold tracking-tight text-foreground md:text-4xl">
-            Frequently asked questions
+            {m.faq_subheading()}
           </h2>
           <p class="mt-4 text-lg text-muted-foreground">
-            Everything you need to know about Transcribr.
+            {m.faq_subheading_subtext()}
           </p>
         </div>
       )
@@ -176,16 +137,16 @@ const { page = false, groups = defaultGroups } = Astro.props;
           class="mx-auto mt-14 max-w-xl rounded-2xl border border-border bg-surface px-6 py-8 text-center"
           data-animate
         >
-          <h2 class="text-xl font-bold text-foreground">Still have questions?</h2>
+          <h2 class="text-xl font-bold text-foreground">{m.faq_still_questions()}</h2>
           <p class="mt-2 text-muted-foreground">
-            We’re happy to help with product questions, billing, or feedback.
+            {m.faq_still_subtext()}
           </p>
           <div class="mt-6 flex flex-wrap items-center justify-center gap-3">
-            <a href="/support" class="btn-secondary">
-              Contact support
+            <a href={localizeHref("/support", { locale: undefined })} class="btn-secondary">
+              {m.faq_contact_support()}
             </a>
             <a href="https://app.transcribr.org/auth/signup" class="btn-primary">
-              Get started
+              {m.faq_get_started()}
             </a>
           </div>
         </div>
@@ -208,7 +169,6 @@ const { page = false, groups = defaultGroups } = Astro.props;
 
         const isOpen = !content.classList.contains("hidden");
 
-        // Close others in the same page
         document.querySelectorAll(".faq-content").forEach((el) => {
           el.classList.add("hidden");
         });

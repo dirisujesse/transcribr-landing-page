@@ -1,5 +1,6 @@
 ---
 import PhoneFrame from "./PhoneFrame.astro";
+import { m } from "../../paraglide/messages.js";
 
 /** Compact transcript player fragment */
 interface Props {
@@ -25,28 +26,28 @@ const { class: className = "" } = Astro.props;
       </span>
     </div>
 
-    <h3 class="text-[17px] font-semibold text-foreground">Team Daily Standup</h3>
+    <h3 class="text-[17px] font-semibold text-foreground">{m.mock_playback_title()}</h3>
     <p class="mt-0.5 text-[11px] text-muted-foreground">
-      Sun, Sep 14 · 6:56 PM · 03:49 min · English
+      {m.mock_playback_meta()}
     </p>
 
     <div class="mt-5 space-y-4">
       <div>
         <div class="mb-1.5 flex items-center justify-between">
           <span class="text-[11px] font-medium text-muted-foreground">00:00 – 01:15</span>
-          <span class="text-[11px] font-semibold text-primary">Speaker 1 ▾</span>
+          <span class="text-[11px] font-semibold text-primary">{m.mock_playback_speaker1()} ▾</span>
         </div>
         <p class="text-[13px] leading-relaxed text-foreground">
-          Good morning, everyone. Thanks for joining the stand-up. I've been reviewing the design sprint progress…
+          {m.mock_playback_jesse_text()}
         </p>
       </div>
       <div>
         <div class="mb-1.5 flex items-center justify-between">
           <span class="text-[11px] font-medium text-muted-foreground">01:16 – 03:45</span>
-          <span class="text-[11px] font-semibold text-primary">Speaker 2 ▾</span>
+          <span class="text-[11px] font-semibold text-primary">{m.mock_playback_speaker2()} ▾</span>
         </div>
         <p class="text-[13px] leading-relaxed text-foreground">
-          I'm currently focused on the backend tasks related to the API integration…
+          {m.mock_playback_speaker2_text()}
         </p>
       </div>
     </div>

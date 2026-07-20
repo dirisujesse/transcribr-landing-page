@@ -11,6 +11,7 @@
   "dependencies": {
     "@astrojs/react": "^6.0.0",
     "@astrojs/sitemap": "^3.7.3",
+    "@inlang/paraglide-js": "^2.22.0",
     "@tailwindcss/vite": "^4.1.13",
     "@types/react": "^18.0.0",
     "@types/react-dom": "^18.0.0",

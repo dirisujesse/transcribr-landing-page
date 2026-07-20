@@ -2,22 +2,37 @@
 import Footer from "../components/Footer.astro";
 import Header from "../components/Header.astro";
 import "../styles/global.css";
+import { localizeHref, locales as allLocales, baseLocale, getLocale, getTextDirection } from "../paraglide/runtime.js";
+import { m } from "../paraglide/messages.js";
 
 export interface Props {
   title: string;
   description?: string;
+  locale: string;
 }
 
 const {
   title,
-  description = "Transcribr provides fast, accurate, and affordable audio and video transcription services. Our platform offers advanced AI transcription with manual human-led transcription coming soon, perfect for professionals, journalists, and students.",
+  description = m.layout_meta_description(),
+  locale,
 } = Astro.props;
 
-const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const canonicalPath = Astro.url.pathname;
+const canonicalURL = new URL(localizeHref(canonicalPath, { locale: baseLocale }), Astro.site);
+
+const ogLocales: Record<string, string> = {
+  en: "en_US",
+  nl: "nl_NL",
+  de: "de_DE",
+  es: "es_ES",
+  hr: "hr_HR",
+  it: "it_IT",
+  fr: "fr_FR",
+};
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={locale} dir={getTextDirection()}>
   <head>
     <meta charset="UTF-8" />
     <meta name="description" content={description} />
@@ -39,6 +54,22 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <meta name="generator" content={Astro.generator} />
     <link rel="canonical" href={canonicalURL} />
 
+    <!-- Hreflang -->
+    {
+      allLocales.map((loc) => (
+        <link
+          rel="alternate"
+          hreflang={loc}
+          href={localizeHref(canonicalPath, { locale: loc })}
+        />
+      ))
+    }
+    <link
+      rel="alternate"
+      hreflang="x-default"
+      href={localizeHref(canonicalPath, { locale: baseLocale })}
+    />
+
     <!-- Open Graph -->
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
@@ -47,7 +78,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <meta property="og:image" content="https://transcribr.org/og-image.png" />
     <meta property="og:image:alt" content={title} />
     <meta property="og:site_name" content="Transcribr" />
-    <meta property="og:locale" content="en_US" />
+    <meta property="og:locale" content={ogLocales[locale] || "en_US"} />
     <meta name="theme-color" content="#5B4FE8" />
 
     <!-- Twitter -->
@@ -79,15 +110,25 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
       "description": description,
       "url": "https://transcribr.org"
     })} />
+
+    <!-- Theme flash prevention -->
+    <script is:inline>
+      (function() {
+        var t = localStorage.getItem("theme");
+        if (t === "dark" || (!t && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
+          document.documentElement.classList.add("dark");
+        }
+      })();
+    </script>
   </head>
   <body>
     <a
       href="#main-content"
       class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[100] focus:rounded-full focus:bg-primary focus:px-4 focus:py-2 focus:text-sm focus:font-medium focus:text-primary-foreground"
     >
-      Skip to content
+      {m.layout_skip_to_content()}
     </a>
-    <Header />
+    <Header locale={locale} />
     <div id="main-content">
       <slot />
     </div>

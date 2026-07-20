@@ -1,4 +1,6 @@
 ---
+import { m } from "../../paraglide/messages.js";
+
 /** Processing progress checklist fragment */
 interface Props {
   class?: string;
@@ -7,13 +9,13 @@ interface Props {
 const { class: className = "" } = Astro.props;
 
 const steps = [
-  { label: "Fetching your video and processing", done: true },
-  { label: "Detecting language", done: true },
-  { label: "Transcribing speech to text", done: true, active: true },
-  { label: "Chunking text into sections", done: false },
-  { label: "Identifying speakers", done: false },
-  { label: "Syncing text with audio playback", done: false },
-  { label: "Finalizing transcript", done: false },
+  { label: m.mock_processing_step1(), done: true },
+  { label: m.mock_processing_step2(), done: true },
+  { label: m.mock_processing_step3(), done: true, active: true },
+  { label: m.mock_processing_step4(), done: false },
+  { label: m.mock_processing_step5(), done: false },
+  { label: m.mock_processing_step6(), done: false },
+  { label: m.mock_processing_step7(), done: false },
 ];
 ---
 
@@ -30,15 +32,15 @@ const steps = [
         <path d="M19 10v1a7 7 0 01-14 0v-1" />
       </svg>
     </div>
-    <h3 class="text-base font-semibold text-foreground">Your transcription is being processed</h3>
+    <h3 class="text-base font-semibold text-foreground">{m.mock_processing_heading()}</h3>
     <p class="mt-1 text-xs text-muted-foreground">
-      We're converting your audio into high quality text. Sit tight!
+      {m.mock_processing_subtext()}
     </p>
   </div>
 
   <div class="mb-4">
     <div class="mb-1.5 flex justify-between text-[11px] font-medium">
-      <span class="text-muted-foreground">Progress</span>
+      <span class="text-muted-foreground">{m.mock_processing_progress()}</span>
       <span class="text-primary">57%</span>
     </div>
     <div class="h-1.5 overflow-hidden rounded-full bg-border">

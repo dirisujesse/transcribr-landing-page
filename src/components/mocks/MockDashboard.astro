@@ -1,5 +1,6 @@
 ---
 import PhoneFrame from "./PhoneFrame.astro";
+import { m } from "../../paraglide/messages.js";
 
 export type DashboardVariant = "list" | "empty" | "pro";
 
@@ -13,51 +14,50 @@ interface Props {
 const {
   variant = "list",
   class: className = "",
-  userName = "Oluwafemi",
+  userName = "Drew",
 } = Astro.props;
 
 const showProBanner = variant === "list" || variant === "empty";
 const showEmpty = variant === "empty";
-const planBadge = variant === "pro" ? "Pro" : variant === "list" ? "Pro Trial" : null;
+const planBadge = variant === "pro" ? m.mock_dashboard_pro() : variant === "list" ? m.mock_dashboard_pro_trial() : null;
 
 const transcripts = [
   {
-    title: "Court Recordings",
-    meta: "Sun, Sep 14 · 6:56 PM · 56 secs",
-    preview:
-      "Welcome to our quarterly planning session. Today we'll be discussing the roadmap for Q1 and identify…",
+    title: m.mock_dashboard_court_recordings(),
+    meta: m.mock_dashboard_court_meta(),
+    preview: m.mock_dashboard_court_preview(),
     status: "transcribed" as const,
-    tier: "Quick",
+    tier: m.mock_dashboard_quick(),
   },
   {
-    title: "Team Daily Standup",
-    meta: "Sun, Sep 14 · 6:56 PM · 03:49 min",
+    title: m.mock_dashboard_team_standup(),
+    meta: m.mock_dashboard_standup_meta(),
     preview: "",
     status: "processing" as const,
-    tier: "Standard",
+    tier: m.mock_dashboard_standard(),
   },
   {
-    title: "Customer Feedback Session",
-    meta: "Sun, Sep 14 · 6:56 PM · 03:49 min",
+    title: m.mock_dashboard_customer_feedback(),
+    meta: m.mock_dashboard_standup_meta(),
     preview: "",
     status: "failed" as const,
-    tier: "Premium",
+    tier: m.mock_dashboard_premium(),
   },
 ];
 
 const statusConfig = {
   transcribed: {
-    label: "Transcribed",
+    label: m.mock_dashboard_transcribed(),
     chip: "chip-success",
     dot: "bg-success",
   },
   processing: {
-    label: "Processing",
+    label: m.mock_dashboard_processing(),
     chip: "chip-processing",
     dot: "bg-primary",
   },
   failed: {
-    label: "Failed",
+    label: m.mock_dashboard_failed(),
     chip: "chip-failed",
     dot: "bg-danger",
   },
@@ -70,7 +70,7 @@ const statusConfig = {
   <div class="-mt-11 bg-primary px-4 pb-5 pt-11 text-white">
     <div class="flex items-center justify-between">
       <div class="flex items-center gap-2">
-        <span class="text-[17px] font-semibold tracking-tight">Transcribr</span>
+        <span class="text-[17px] font-semibold tracking-tight">{m.mock_dashboard_title()}</span>
         {
           planBadge && (
             <span class="inline-flex items-center gap-0.5 rounded-full bg-white/15 px-2 py-0.5 text-[10px] font-semibold text-white/95 ring-1 ring-white/20">
@@ -108,10 +108,10 @@ const statusConfig = {
   <div class="flex min-h-[420px] flex-col bg-white px-4 pb-20 pt-4">
     <div class="mb-4">
       <h2 class="text-[20px] font-semibold leading-tight text-foreground">
-        Good morning, {userName}
+        {m.mock_dashboard_greeting({ name: userName })}
       </h2>
       <p class="mt-0.5 text-[13px] text-muted-foreground">
-        Ready to transcribe some audio?
+        {m.mock_dashboard_ready()}
       </p>
     </div>
 
@@ -119,15 +119,15 @@ const statusConfig = {
       showProBanner && (
         <div class="relative mb-4 overflow-hidden rounded-2xl border border-primary/20 bg-primary-soft/60 p-3.5">
           <div class="pr-14">
-            <p class="text-[13px] font-semibold text-foreground">Unlock Pro</p>
+            <p class="text-[13px] font-semibold text-foreground">{m.mock_dashboard_unlock_pro()}</p>
             <p class="mt-0.5 text-[11px] leading-snug text-muted-foreground">
-              Upgrade to Pro for premium features that save time and boost accuracy.
+              {m.mock_dashboard_unlock_desc()}
             </p>
             <span class="mt-2.5 inline-flex items-center gap-1 rounded-full bg-success px-2.5 py-1 text-[11px] font-semibold text-white">
               <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                 <path d="M12 2l2.4 7.4H22l-6 4.6 2.3 7-6.3-4.6L5.7 21l2.3-7-6-4.6h7.6L12 2z" />
               </svg>
-              Try Pro
+              {m.mock_dashboard_try_pro()}
             </span>
           </div>
           <!-- Decorative mark -->
@@ -171,7 +171,7 @@ const statusConfig = {
           <path d="M12 5v14M5 12h14"></path>
         </svg>
       </span>
-      <span class="text-[13px] font-medium text-foreground">Create New Transcript</span>
+      <span class="text-[13px] font-medium text-foreground">{m.mock_dashboard_create_new()}</span>
     </div>
 
     {
@@ -194,10 +194,10 @@ const statusConfig = {
             </svg>
           </div>
           <p class="text-[13px] font-medium text-foreground">
-            Your transcription workspace is empty.
+            {m.mock_dashboard_empty_heading()}
           </p>
           <p class="mt-1 text-[12px] text-muted-foreground">
-            Create your first transcript to begin.
+            {m.mock_dashboard_empty_subtext()}
           </p>
         </div>
       ) : (

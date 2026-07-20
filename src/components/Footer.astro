@@ -1,4 +1,7 @@
 ---
+import { m } from "../paraglide/messages.js";
+import { localizeHref } from "../paraglide/runtime.js";
+
 const year = new Date().getFullYear();
 ---
 
@@ -8,72 +11,71 @@ const year = new Date().getFullYear();
       <div class="mb-12 grid gap-8 md:grid-cols-2 lg:grid-cols-4">
         <div class="lg:col-span-1">
           <div class="mb-6">
-            <a href="/" class="inline-block brightness-0 invert">
+            <a href={localizeHref("/", { locale: undefined })} class="inline-block brightness-0 invert">
               <img src="/logo.svg" alt="Transcribr" class="h-7 w-auto" />
             </a>
           </div>
           <p class="mb-6 text-sm text-background/70">
-            Fast, accurate transcription with synchronized playback, speaker
-            labels, and flexible export — built for professionals.
+            {m.footer_tagline()}
           </p>
         </div>
 
         <div>
-          <h3 class="mb-4 font-semibold text-background">Product</h3>
+          <h3 class="mb-4 font-semibold text-background">{m.footer_product_heading()}</h3>
           <ul class="space-y-3 text-background/70">
             <li>
-              <a href="/features" class="transition-colors hover:text-background"
-                >Features</a
+              <a href={localizeHref("/features", { locale: undefined })} class="transition-colors hover:text-background"
+                >{m.footer_features()}</a
               >
             </li>
             <li>
               <a href="/#pricing" class="transition-colors hover:text-background"
-                >Pricing</a
+                >{m.footer_pricing()}</a
               >
             </li>
             <li>
               <a
                 href="https://app.transcribr.org/auth/signup"
-                class="transition-colors hover:text-background">Get Started</a
+                class="transition-colors hover:text-background">{m.footer_get_started()}</a
               >
             </li>
           </ul>
         </div>
 
         <div>
-          <h3 class="mb-4 font-semibold text-background">Company</h3>
+          <h3 class="mb-4 font-semibold text-background">{m.footer_company_heading()}</h3>
           <ul class="space-y-3 text-background/70">
             <li>
-              <a href="/about" class="transition-colors hover:text-background"
-                >About</a
+              <a href={localizeHref("/about", { locale: undefined })} class="transition-colors hover:text-background"
+                >{m.footer_about()}</a
               >
             </li>
             <li>
-              <a href="/faq" class="transition-colors hover:text-background"
-                >FAQ</a
+              <a href={localizeHref("/faq", { locale: undefined })} class="transition-colors hover:text-background"
+                >{m.footer_faq()}</a
               >
             </li>
             <li>
-              <a href="/support" class="transition-colors hover:text-background"
-                >Support</a
+              <a href={localizeHref("/support", { locale: undefined })} class="transition-colors hover:text-background"
+                >{m.footer_support()}</a
               >
             </li>
           </ul>
         </div>
 
         <div>
-          <h3 class="mb-4 font-semibold text-background">Legal</h3>
+          <h3 class="mb-4 font-semibold text-background">{m.footer_legal_heading()}</h3>
           <ul class="space-y-3 text-background/70">
             <li>
               <a
-                href="/privacy-policy"
-                class="transition-colors hover:text-background">Privacy Policy</a
+                href={localizeHref("/privacy-policy", { locale: undefined })}
+                class="transition-colors hover:text-background">{m.footer_privacy_policy()}</a
               >
             </li>
             <li>
               <a
-                href="/terms-of-use"
-                class="transition-colors hover:text-background">Terms of Use</a
+                href={localizeHref("/terms-of-use", { locale: undefined })}
+                class="transition-colors hover:text-background">{m.footer_terms_of_use()}</a
               >
             </li>
           </ul>
@@ -84,15 +86,15 @@ const year = new Date().getFullYear();
         class="flex flex-col items-center justify-between gap-4 border-t border-background/20 pt-8 md:flex-row"
       >
         <div class="text-sm text-background/70">
-          © {year} Transcribr. All rights reserved.
+          {m.footer_copyright({ year })}
         </div>
         <div class="flex items-center gap-6 text-sm text-background/70">
           <a
-            href="/privacy-policy"
-            class="transition-colors hover:text-background">Privacy</a
+            href={localizeHref("/privacy-policy", { locale: undefined })}
+            class="transition-colors hover:text-background">{m.footer_privacy()}</a
           >
-          <a href="/terms-of-use" class="transition-colors hover:text-background"
-            >Terms</a
+          <a href={localizeHref("/terms-of-use", { locale: undefined })} class="transition-colors hover:text-background"
+            >{m.footer_terms()}</a
           >
         </div>
       </div>

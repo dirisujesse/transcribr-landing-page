@@ -1,0 +1,95 @@
+---
+import {
+  locales as availableLanguageTags,
+  baseLocale,
+} from "../paraglide/runtime.js";
+import { localizeHref } from "../paraglide/runtime.js";
+import { m } from "../paraglide/messages.js";
+
+interface Props {
+  locale: string;
+}
+
+const { locale } = Astro.props;
+
+const currentPath = Astro.url.pathname;
+const currentLocale = locale || baseLocale;
+
+const localeNames: Record<string, string> = {
+  en: "English",
+  nl: "Nederlands",
+  de: "Deutsch",
+  es: "Español",
+  hr: "Hrvatski",
+  it: "Italiano",
+  fr: "Français",
+};
+
+const localeFlags: Record<string, string> = {
+  en: "🇺🇸",
+  nl: "🇳🇱",
+  de: "🇩🇪",
+  es: "🇪🇸",
+  hr: "🇭🇷",
+  it: "🇮🇹",
+  fr: "🇫🇷",
+};
+---
+
+<label class="relative inline-flex items-center">
+  <span class="sr-only">{m.language_switcher_label()}</span>
+  <svg
+    width="18"
+    height="18"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    class="pointer-events-none absolute left-3 text-muted-foreground"
+    aria-hidden="true"
+  >
+    <circle cx="12" cy="12" r="9"></circle>
+    <path d="M3 12h18M12 3a14 14 0 010 18M12 3a14 14 0 000 18"></path>
+  </svg>
+  <select
+    class="btn-ghost cursor-pointer appearance-none pl-9 pr-7 text-sm"
+    aria-label={m.language_switcher_label()}
+    data-lang-switcher
+  >
+    {
+      availableLanguageTags.map((tag) => (
+        <option
+          value={localizeHref(currentPath, { locale: tag })}
+          selected={tag === currentLocale}
+        >
+          {localeFlags[tag]} {localeNames[tag]}
+        </option>
+      ))
+    }
+  </select>
+  <svg
+    width="14"
+    height="14"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    class="pointer-events-none absolute right-2 text-muted-foreground"
+    aria-hidden="true"
+  >
+    <path d="M6 9l6 6 6-6"></path>
+  </svg>
+</label>
+
+<script>
+  document
+    .querySelector("[data-lang-switcher]")
+    ?.addEventListener("change", (e) => {
+      const select = e.target as HTMLSelectElement;
+      if (select.value) {
+        window.location.href = select.value;
+      }
+    });
+</script>

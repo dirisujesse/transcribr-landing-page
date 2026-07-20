@@ -1,36 +1,39 @@
 ---
+import { m } from "../paraglide/messages.js";
+import { localizeHref } from "../paraglide/runtime.js";
+
 const highlights = [
   {
-    title: "Transcription Tiers",
-    description: "Quick, Standard, or Premium — balance speed and accuracy for every recording. Process audio, video, or YouTube links.",
+    title: m.features_teaser_1_title(),
+    description: m.features_teaser_1_desc(),
   },
   {
-    title: "Speaker Identification",
-    description: "Auto-label who said what, then rename speakers to real names in one tap. Bulk-update across all sections.",
+    title: m.features_teaser_2_title(),
+    description: m.features_teaser_2_desc(),
   },
   {
-    title: "Synced Playback",
-    description: "Click any line to jump to that exact moment. ±10s skip, speed control, and the current section highlights as audio plays.",
+    title: m.features_teaser_3_title(),
+    description: m.features_teaser_3_desc(),
   },
   {
-    title: "Inline Editing",
-    description: "Edit transcript text directly in-place. Fix typos, adjust wording, and save changes without leaving the player view.",
+    title: m.features_teaser_4_title(),
+    description: m.features_teaser_4_desc(),
   },
   {
-    title: "Smart Summarisation",
-    description: "Executive summaries with overview, key topics with explanations, decisions & findings, and actionable takeaways.",
+    title: m.features_teaser_5_title(),
+    description: m.features_teaser_5_desc(),
   },
   {
-    title: "Insights & Analysis",
-    description: "Identifies participants, surfaces key decisions, and extracts follow-up items — turning raw transcripts into meeting notes.",
+    title: m.features_teaser_6_title(),
+    description: m.features_teaser_6_desc(),
   },
   {
-    title: "Flexible Export",
-    description: "PDF, TXT, SRT, VTT, and CSV. Toggle plain text, speakers, and timestamps. SRT and VTT for subtitling video content.",
+    title: m.features_teaser_7_title(),
+    description: m.features_teaser_7_desc(),
   },
   {
-    title: "Regeneration",
-    description: "Free users get one free regeneration. Pro users can regenerate unlimited times for the best possible result.",
+    title: m.features_teaser_8_title(),
+    description: m.features_teaser_8_desc(),
   },
 ];
 ---
@@ -43,18 +46,17 @@ const highlights = [
     >
       <div class="max-w-xl">
         <p class="mb-3 text-sm font-semibold uppercase tracking-wider text-primary">
-          Features
+          {m.features_label()}
         </p>
         <h2 class="text-3xl font-bold tracking-tight text-foreground md:text-4xl">
-          Everything you need after the recording ends
+          {m.features_heading()}
         </h2>
         <p class="mt-4 text-lg text-muted-foreground">
-          Transcribe, edit, analyse, and export — with smart summaries,
-          speaker labels, synced playback, and subtitle-ready exports.
+          {m.features_subtext()}
         </p>
       </div>
-      <a href="/features" class="btn-primary shrink-0">
-        Explore all features
+      <a href={localizeHref("/features", { locale: undefined })} class="btn-primary shrink-0">
+        {m.features_explore_all()}
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
           <path d="M5 12h14M13 6l6 6-6 6"></path>
         </svg>

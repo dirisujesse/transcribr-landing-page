@@ -1,4 +1,6 @@
 ---
+import { m } from "../paraglide/messages.js";
+
 const appUrl = "https://app.transcribr.org/auth/signup";
 
 const check = `<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M9 16.17L4.83 12L3.41 13.41L9 19L21 7L19.59 5.59Z"/></svg>`;
@@ -6,54 +8,54 @@ const cross = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" strok
 
 const plans = [
   {
-    name: "Free",
+    name: m.pricing_plan_free_name(),
     price: "$0",
-    period: "/month",
-    blurb: "Perfect to test the waters",
+    period: m.pricing_plan_premium_period(),
+    blurb: m.pricing_plan_free_blurb(),
     featured: false,
-    cta: "Get Started Free",
+    cta: m.pricing_plan_free_cta(),
     features: [
-      { text: "7-day free trial of Pro features", included: true },
-      { text: "Fast transcription", included: true },
-      { text: "Mobile & web apps", included: true },
-      { text: "Export SRT, VTT, PDF, CSV & TXT", included: true },
-      { text: "Synchronized audio playback", included: true },
-      { text: "Inline transcript editing", included: true },
-      { text: "Speaker identification", included: false },
+      { text: m.pricing_plan_free_feat1(), included: true },
+      { text: m.pricing_plan_free_feat2(), included: true },
+      { text: m.pricing_plan_free_feat3(), included: true },
+      { text: m.pricing_plan_free_feat4(), included: true },
+      { text: m.pricing_plan_free_feat5(), included: true },
+      { text: m.pricing_plan_free_feat6(), included: true },
+      { text: m.pricing_plan_free_feat7(), included: false },
     ],
   },
   {
-    name: "Weekly",
-    price: "$3",
-    period: "/week",
-    blurb: "Ideal for short-term projects",
+    name: m.pricing_plan_weekly_name(),
+    price: m.pricing_plan_weekly_price(),
+    period: m.pricing_plan_weekly_period(),
+    blurb: m.pricing_plan_weekly_blurb(),
     featured: false,
-    cta: "Get Started",
+    cta: m.pricing_plan_weekly_cta(),
     features: [
-      { text: "Unlimited minutes for 7 days", included: true },
-      { text: "Speaker identification", included: true },
-      { text: "Synchronized audio playback", included: true },
-      { text: "Time-stamped sections", included: true },
-      { text: "Mobile & web apps", included: true },
-      { text: "All export formats", included: true },
+      { text: m.pricing_plan_weekly_feat1(), included: true },
+      { text: m.pricing_plan_weekly_feat2(), included: true },
+      { text: m.pricing_plan_weekly_feat3(), included: true },
+      { text: m.pricing_plan_weekly_feat4(), included: true },
+      { text: m.pricing_plan_weekly_feat5(), included: true },
+      { text: m.pricing_plan_weekly_feat6(), included: true },
     ],
   },
   {
-    name: "Premium",
-    price: "$10",
-    period: "/month",
-    blurb: "For power users & teams",
+    name: m.pricing_plan_premium_name(),
+    price: m.pricing_plan_premium_price(),
+    period: m.pricing_plan_premium_period(),
+    blurb: m.pricing_plan_premium_blurb(),
     featured: true,
-    badge: "Most popular",
-    cta: "Start Premium Trial",
+    badge: m.pricing_plan_premium_badge(),
+    cta: m.pricing_plan_premium_cta(),
     features: [
-      { text: "Unlimited transcription minutes", included: true },
-      { text: "Speaker identification", included: true },
-      { text: "Quick, Standard & Premium tiers", included: true },
-      { text: "Synchronized audio playback", included: true },
-      { text: "Time-stamped sections", included: true },
-      { text: "Mobile & web apps", included: true },
-      { text: "Priority support", included: true },
+      { text: m.pricing_plan_premium_feat1(), included: true },
+      { text: m.pricing_plan_premium_feat2(), included: true },
+      { text: m.pricing_plan_premium_feat3(), included: true },
+      { text: m.pricing_plan_premium_feat4(), included: true },
+      { text: m.pricing_plan_premium_feat5(), included: true },
+      { text: m.pricing_plan_premium_feat6(), included: true },
+      { text: m.pricing_plan_premium_feat7(), included: true },
     ],
   },
 ];
@@ -63,14 +65,13 @@ const plans = [
   <div class="container-page">
     <div class="mx-auto mb-14 max-w-2xl text-center" data-animate>
       <p class="mb-3 text-sm font-semibold uppercase tracking-wider text-primary">
-        Pricing
+        {m.pricing_label()}
       </p>
       <h2 class="text-3xl font-bold tracking-tight text-foreground md:text-4xl">
-        Pricing that scales with you
+        {m.pricing_heading()}
       </h2>
       <p class="mt-4 text-lg text-muted-foreground">
-        Start free. Upgrade for unlimited minutes and premium accuracy. No
-        hidden fees.
+        {m.pricing_subtext()}
       </p>
     </div>
 
@@ -158,7 +159,7 @@ const plans = [
                 "inline-flex w-full items-center justify-center rounded-full px-5 py-3 text-sm font-semibold transition-colors",
                 plan.featured
                   ? "bg-white text-primary hover:bg-white/90"
-                  : plan.name === "Weekly"
+                  : plan.name === m.pricing_plan_weekly_name()
                     ? "bg-primary-soft text-primary hover:bg-primary/15"
                     : "bg-surface text-foreground hover:bg-border/60",
               ]}
@@ -192,12 +193,10 @@ const plans = [
         </svg>
       </div>
       <h3 class="text-xl font-bold text-foreground md:text-2xl">
-        Need 100% accuracy? Human-led transcription coming soon
+        {m.pricing_human_heading()}
       </h3>
       <p class="mx-auto mt-3 max-w-xl text-muted-foreground">
-        Professional human review when every word matters —
-        <strong class="font-semibold text-foreground">pay-per-request</strong>, no
-        subscription required.
+        {m.pricing_human_subtext()}
       </p>
     </div>
   </div>

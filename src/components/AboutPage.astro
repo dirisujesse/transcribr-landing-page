@@ -1,40 +1,39 @@
 ---
+import { m } from "../paraglide/messages.js";
+import { localizeHref } from "../paraglide/runtime.js";
 import CTABand from "./CTABand.astro";
 
 const principles = [
   {
-    title: "Speed without sacrifice",
-    description:
-      "Get usable transcripts in minutes, with tiers that let you trade a little time for higher accuracy when it matters.",
+    title: m.about_principle_1_title(),
+    description: m.about_principle_1_desc(),
   },
   {
-    title: "Clarity for real conversations",
-    description:
-      "Speaker labels, timestamps, and synced playback turn messy meetings into something you can actually work with.",
+    title: m.about_principle_2_title(),
+    description: m.about_principle_2_desc(),
   },
   {
-    title: "Fits your workflow",
-    description:
-      "Export to the formats you already use — notes, captions, archives — on web and mobile from the same account.",
+    title: m.about_principle_3_title(),
+    description: m.about_principle_3_desc(),
   },
 ];
 
 const audiences = [
   {
-    title: "Journalists & researchers",
-    description: "Interviews and field recordings, searchable and citable.",
+    title: m.about_audience_1_title(),
+    description: m.about_audience_1_desc(),
   },
   {
-    title: "Product & ops teams",
-    description: "Standups, customer calls, and planning sessions — captured.",
+    title: m.about_audience_2_title(),
+    description: m.about_audience_2_desc(),
   },
   {
-    title: "Students & creators",
-    description: "Lectures, podcasts, and content drafts without the rewatch.",
+    title: m.about_audience_3_title(),
+    description: m.about_audience_3_desc(),
   },
   {
-    title: "Legal & professional",
-    description: "Court notes and formal audio when structure and export matter.",
+    title: m.about_audience_4_title(),
+    description: m.about_audience_4_desc(),
   },
 ];
 ---
@@ -45,15 +44,13 @@ const audiences = [
   <div class="container-page">
     <div class="mx-auto max-w-3xl text-center" data-animate>
       <p class="mb-3 text-sm font-semibold uppercase tracking-wider text-primary">
-        About
+        {m.about_eyebrow()}
       </p>
       <h1 class="text-4xl font-bold tracking-tight text-foreground md:text-5xl">
-        Transcription that keeps up with how you work
+        {m.about_heading()}
       </h1>
       <p class="mx-auto mt-5 max-w-2xl text-lg text-muted-foreground md:text-xl">
-        Transcribr turns audio and video into accurate, editable text — so
-        professionals spend less time typing and more time on the work that
-        matters.
+        {m.about_subtext()}
       </p>
     </div>
   </div>
@@ -64,20 +61,16 @@ const audiences = [
     <div class="mx-auto grid max-w-6xl items-center gap-12 lg:grid-cols-2 lg:gap-16">
       <div data-animate>
         <p class="mb-3 text-sm font-semibold uppercase tracking-wider text-primary">
-          Our mission
+          {m.about_mission_label()}
         </p>
         <h2 class="text-3xl font-bold tracking-tight text-foreground md:text-4xl">
-          Make every recording useful the moment it ends
+          {m.about_mission_heading()}
         </h2>
         <p class="mt-4 text-lg leading-relaxed text-muted-foreground">
-          Meetings, interviews, court notes, and content all start as audio.
-          Most tools stop at a wall of text. We built Transcribr for what comes
-          next: speakers, playback, edits, and exports that fit real jobs — not
-          demos.
+          {m.about_mission_p1()}
         </p>
         <p class="mt-4 text-lg leading-relaxed text-muted-foreground">
-          Whether you’re on a phone between sessions or at a desk finishing a
-          draft, the same workspace follows you.
+          {m.about_mission_p2()}
         </p>
       </div>
 
@@ -92,12 +85,10 @@ const audiences = [
           </svg>
         </div>
         <blockquote class="text-xl font-semibold leading-snug text-foreground md:text-2xl">
-          “Transform your audio files into accurate, searchable transcripts in
-          seconds.”
+          "{m.about_quote()}"
         </blockquote>
         <p class="mt-4 text-sm text-muted-foreground">
-          Built for meetings, interviews, and content creation — with the polish
-          professionals expect.
+          {m.about_quote_caption()}
         </p>
       </div>
     </div>
@@ -108,10 +99,10 @@ const audiences = [
   <div class="container-page">
     <div class="mx-auto mb-12 max-w-2xl text-center" data-animate>
       <p class="mb-3 text-sm font-semibold uppercase tracking-wider text-primary">
-        Principles
+        {m.about_principles_label()}
       </p>
       <h2 class="text-3xl font-bold tracking-tight text-foreground md:text-4xl">
-        What we optimize for
+        {m.about_principles_heading()}
       </h2>
     </div>
 
@@ -138,10 +129,10 @@ const audiences = [
   <div class="container-page">
     <div class="mx-auto mb-12 max-w-2xl text-center" data-animate>
       <p class="mb-3 text-sm font-semibold uppercase tracking-wider text-primary">
-        Who it’s for
+        {m.about_audience_label()}
       </p>
       <h2 class="text-3xl font-bold tracking-tight text-foreground md:text-4xl">
-        Designed for people who live in recordings
+        {m.about_audience_heading()}
       </h2>
     </div>
 
@@ -167,11 +158,11 @@ const audiences = [
     </div>
 
     <div class="mt-14 text-center" data-animate>
-      <a href="/features" class="btn-secondary mr-3">
-        Explore features
+      <a href={localizeHref("/features", { locale: undefined })} class="btn-secondary mr-3">
+        {m.about_explore_features()}
       </a>
       <a href="/#pricing" class="btn-primary">
-        View pricing
+        {m.about_view_pricing()}
       </a>
     </div>
   </div>

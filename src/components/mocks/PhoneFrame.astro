@@ -1,4 +1,6 @@
 ---
+import { m } from "../../paraglide/messages.js";
+
 interface Props {
   /** Extra classes on the outer device shell */
   class?: string;
@@ -26,7 +28,7 @@ const isLight = statusBarTheme === "light";
     className,
   ]}
   role="img"
-  aria-label="Transcribr app preview"
+  aria-label={m.mock_phoneframe_aria()}
 >
   <!-- Subtle device bezel -->
   <div class="pointer-events-none absolute inset-0 rounded-[2rem] ring-1 ring-inset ring-black/5">

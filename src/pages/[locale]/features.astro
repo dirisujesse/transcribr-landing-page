@@ -1,0 +1,15 @@
+---
+import { locales } from "../../paraglide/runtime.js";
+import Layout from "../../layouts/Layout.astro";
+import FeaturesPage from "../../components/FeaturesPage.astro";
+
+export function getStaticPaths() {
+  return locales.map((locale) => ({ params: { locale } }));
+}
+
+const { locale } = Astro.params;
+---
+
+<Layout title="Features -- Transcribr" locale={locale}>
+  <FeaturesPage />
+</Layout>

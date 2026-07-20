@@ -1,18 +1,25 @@
----
-import Layout from "../layouts/Layout.astro";
-import Hero from "../components/Hero.astro";
-import HowItWorks from "../components/HowItWorks.astro";
-import FeaturesTeaser from "../components/FeaturesTeaser.astro";
-import Pricing from "../components/Pricing.astro";
-import CTABand from "../components/CTABand.astro";
----
-
-<Layout title="Transcribr - Transform Audio to Accurate Text">
-  <main>
-    <Hero />
-    <HowItWorks />
-    <FeaturesTeaser />
-    <Pricing />
-    <CTABand />
-  </main>
-</Layout>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="canonical" href="/en" />
+    <title>Transcribr</title>
+  </head>
+  <body>
+    <p>Redirecting to <a href="/en">Transcribr</a>...</p>
+    <script>
+      (function () {
+        var supported = ["en", "nl", "de", "es", "hr", "it", "fr"];
+        var languages = navigator.languages || [navigator.language || "en"];
+        var match = languages
+          .map(function (l) {
+            return l.split("-")[0];
+          })
+          .find(function (l) {
+            return supported.indexOf(l) !== -1;
+          });
+        window.location.replace(match ? "/" + match : "/en");
+      })();
+    </script>
+  </body>
+</html>

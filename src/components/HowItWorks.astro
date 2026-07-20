@@ -1,24 +1,23 @@
 ---
+import { m } from "../paraglide/messages.js";
+
 const steps = [
   {
     step: "01",
-    title: "Upload or paste a link",
-    description:
-      "Drop an audio or video file, or paste a URL. MP3, MP4, WAV, and more — up to an hour per file.",
+    title: m.howitworks_step1_title(),
+    description: m.howitworks_step1_desc(),
     icon: "upload",
   },
   {
     step: "02",
-    title: "Transcription in minutes",
-    description:
-      "Choose Quick, Standard, or Premium. We detect language, chunk audio, identify speakers, and finalize your transcript.",
+    title: m.howitworks_step2_title(),
+    description: m.howitworks_step2_desc(),
     icon: "process",
   },
   {
     step: "03",
-    title: "Edit, play, and export",
-    description:
-      "Tap any section to jump in the audio, rename speakers, polish the text, then export PDF, TXT, SRT, VTT, or CSV.",
+    title: m.howitworks_step3_title(),
+    description: m.howitworks_step3_desc(),
     icon: "export",
   },
 ];
@@ -28,14 +27,13 @@ const steps = [
   <div class="container-page">
     <div class="mx-auto mb-14 max-w-2xl text-center" data-animate>
       <p class="mb-3 text-sm font-semibold uppercase tracking-wider text-primary">
-        How it works
+        {m.howitworks_label()}
       </p>
       <h2 class="text-3xl font-bold tracking-tight text-foreground md:text-4xl">
-        From audio to finished transcript in three steps
+        {m.howitworks_heading()}
       </h2>
       <p class="mt-4 text-lg text-muted-foreground">
-        Built for meetings, interviews, court notes, and content — without the
-        busywork.
+        {m.howitworks_subtext()}
       </p>
     </div>
 

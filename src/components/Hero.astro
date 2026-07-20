@@ -1,4 +1,5 @@
 ---
+import { m } from "../paraglide/messages.js";
 import AppStoreButtons from "./AppStoreButtons.astro";
 import MockDashboard from "./mocks/MockDashboard.astro";
 ---
@@ -10,27 +11,25 @@ import MockDashboard from "./mocks/MockDashboard.astro";
     <div
       class="mx-auto grid max-w-6xl items-center gap-12 lg:grid-cols-2 lg:gap-16"
     >
-      <!-- Copy -->
       <div class="text-center lg:text-left" data-animate>
         <div
           class="mb-6 inline-flex items-center gap-2 rounded-full border border-primary/15 bg-white px-3 py-1 text-xs font-medium text-primary shadow-sm"
         >
           <span class="h-1.5 w-1.5 rounded-full bg-success"></span>
-          Transcription for web & mobile
+          {m.hero_badge()}
         </div>
 
         <h1
           class="text-4xl font-bold leading-[1.1] tracking-tight text-foreground md:text-5xl lg:text-6xl"
         >
-          Turn your audio into
-          <span class="text-primary"> perfect text</span>
+          {m.hero_headline_part1()}
+          <span class="text-primary"> {m.hero_headline_accent()}</span>
         </h1>
 
         <p
           class="mx-auto mt-5 max-w-xl text-lg leading-relaxed text-muted-foreground md:text-xl lg:mx-0"
         >
-          Lightning-fast transcripts with speaker labels, synced playback,
-          and exports — so you can edit and share in seconds.
+          {m.hero_subtitle()}
         </p>
 
         <div class="mt-8 flex flex-col items-center gap-4 lg:items-start">
@@ -38,7 +37,6 @@ import MockDashboard from "./mocks/MockDashboard.astro";
         </div>
       </div>
 
-      <!-- Dashboard mock -->
       <div class="relative flex justify-center lg:justify-end" data-animate>
         <div
           class="pointer-events-none absolute -right-8 top-1/4 h-64 w-64 rounded-full bg-primary/15 blur-3xl"

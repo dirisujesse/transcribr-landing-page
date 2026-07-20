@@ -1,4 +1,6 @@
 ---
+import { m } from "../paraglide/messages.js";
+import { localizeHref } from "../paraglide/runtime.js";
 import MockDashboard from "./mocks/MockDashboard.astro";
 import MockTiers from "./mocks/MockTiers.astro";
 import MockPlayback from "./mocks/MockPlayback.astro";
@@ -9,117 +11,109 @@ import CTABand from "./CTABand.astro";
 const features = [
   {
     id: "tiers",
-    eyebrow: "Transcription",
-    title: "Speed or accuracy — you choose",
-    description:
-      "Pick Quick for drafts, Standard for everyday meetings, or Premium when every word and speaker label matters. Upload MP3, MP4, YouTube links, or other audio/video sources.",
+    eyebrow: m.features_tiers_eyebrow(),
+    title: m.features_tiers_title(),
+    description: m.features_tiers_desc(),
     points: [
-      "Quick, Standard, and Premium modes",
-      "Works with audio files, video, and YouTube URLs",
-      "Clear accuracy and time estimates per tier",
+      m.features_tiers_point1(),
+      m.features_tiers_point2(),
+      m.features_tiers_point3(),
     ],
     visual: "tiers" as const,
     reverse: false,
   },
   {
     id: "processing",
-    eyebrow: "Processing pipeline",
-    title: "See every step as it happens",
-    description:
-      "From fetching your media to language detection, speech-to-text, speaker identification, and finalising — Transcribr shows live progress so you never wonder what's happening.",
+    eyebrow: m.features_processing_eyebrow(),
+    title: m.features_processing_title(),
+    description: m.features_processing_desc(),
     points: [
-      "Live step-by-step progress checklist",
-      "Detect errors early and retry if needed",
-      "Track all jobs from your dashboard",
+      m.features_processing_point1(),
+      m.features_processing_point2(),
+      m.features_processing_point3(),
     ],
     visual: "processing" as const,
     reverse: true,
   },
   {
     id: "summarisation",
-    eyebrow: "Summarisation & insights",
-    title: "Turn raw transcripts into actionable notes",
-    description:
-      "Every completed transcript comes with a quick summary plus an executive summary that breaks down key topics with explanations, decisions and findings, and actionable takeaways — ideal for meetings, interviews, and court notes.",
+    eyebrow: m.features_summarisation_eyebrow(),
+    title: m.features_summarisation_title(),
+    description: m.features_summarisation_desc(),
     points: [
-      "Quick summary for instant context",
-      "Executive summary: overview, key topics, decisions, takeaways",
-      "Identifies participants and follow-up items",
-      "Save or share the summary as a PDF",
+      m.features_summarisation_point1(),
+      m.features_summarisation_point2(),
+      m.features_summarisation_point3(),
+      m.features_summarisation_point4(),
     ],
     visual: "speakers" as const,
     reverse: false,
   },
   {
     id: "playback",
-    eyebrow: "Synced playback",
-    title: "Never lose your place again",
-    description:
-      "Read along while audio plays. Current section highlights automatically. Jump to any timestamped block, scrub with ±10s controls, and adjust playback speed.",
+    eyebrow: m.features_playback_eyebrow(),
+    title: m.features_playback_title(),
+    description: m.features_playback_desc(),
     points: [
-      "Section timestamps on every block",
-      "Large play control with ±10s skip",
-      "Current section highlights as audio plays",
-      "Works with audio, video, and YouTube sources",
+      m.features_playback_point1(),
+      m.features_playback_point2(),
+      m.features_playback_point3(),
+      m.features_playback_point4(),
     ],
     visual: "playback" as const,
     reverse: true,
   },
   {
     id: "speakers",
-    eyebrow: "Speakers & inline editing",
-    title: "Know who said what — and fix it fast",
-    description:
-      "Automatic speaker labels keep multi-person meetings readable. Rename Speaker 1 and Speaker 2 to real names, edit text directly in-place, and bulk-update across all sections with one tap.",
+    eyebrow: m.features_speakers_eyebrow(),
+    title: m.features_speakers_title(),
+    description: m.features_speakers_desc(),
     points: [
-      "Automatic speaker detection with label assignment",
-      "Rename speakers in one tap with modal",
-      "Edit transcript text inline without leaving the view",
-      "Bulk-update a speaker name across all sections",
+      m.features_speakers_point1(),
+      m.features_speakers_point2(),
+      m.features_speakers_point3(),
+      m.features_speakers_point4(),
     ],
     visual: "speakers" as const,
     reverse: false,
   },
   {
     id: "regeneration",
-    eyebrow: "Regeneration",
-    title: "Don't settle — regenerate",
-    description:
-      "Not happy with the result? Free users get one free regeneration. Pro users can regenerate unlimited times for the best possible transcript. No need to re-upload — just tap Regenerate.",
+    eyebrow: m.features_regeneration_eyebrow(),
+    title: m.features_regeneration_title(),
+    description: m.features_regeneration_desc(),
     points: [
-      "Free users: one regeneration per transcript",
-      "Pro users: unlimited regenerations",
-      "No re-upload needed — regenerates from stored audio",
+      m.features_regeneration_point1(),
+      m.features_regeneration_point2(),
+      m.features_regeneration_point3(),
     ],
     visual: "tiers" as const,
     reverse: true,
   },
   {
     id: "export",
-    eyebrow: "Export",
-    title: "Ship transcripts in any format",
-    description:
-      "Download PDF, TXT, SRT, VTT, or CSV. Toggle plain text, speakers, and timestamps. SRT and VTT formats are built for subtitling — drop them straight into your video editor or media player.",
+    eyebrow: m.features_export_eyebrow(),
+    title: m.features_export_title(),
+    description: m.features_export_desc(),
     points: [
-      "PDF, TXT, SRT, VTT, CSV — five formats",
-      "Free formats available on every plan",
-      "SRT / VTT for video subtitling workflows",
-      "Include speakers and timestamps as needed",
+      m.features_export_point1(),
+      m.features_export_point2(),
+      m.features_export_point3(),
+      m.features_export_point4(),
     ],
     visual: "export" as const,
     reverse: false,
   },
   {
     id: "workspace",
-    eyebrow: "Workspace",
-    title: "Your transcripts, organised",
-    description:
-      "A clean dashboard for everything you've transcribed — status chips for Transcribed, Processing, and Failed. Create new transcripts in one tap. Pro tools are ready when you need them.",
+    eyebrow: m.features_workspace_eyebrow(),
+    title: m.features_workspace_title(),
+    description: m.features_workspace_desc(),
     points: [
-      "Status at a glance: Transcribed, Processing, Failed",
-      "Create new transcripts in one tap",
-      "Web and mobile, same account and workflow",
-      "Pro banner with Unlock Pro CTA",
+      m.features_workspace_point1(),
+      m.features_workspace_point2(),
+      m.features_workspace_point3(),
+      m.features_workspace_point4(),
     ],
     visual: "dashboard" as const,
     reverse: true,
@@ -131,15 +125,13 @@ const features = [
   <div class="container-page">
     <div class="mx-auto max-w-3xl text-center" data-animate>
       <p class="mb-3 text-sm font-semibold uppercase tracking-wider text-primary">
-        Features
+        {m.features_page_eyebrow()}
       </p>
       <h1 class="text-4xl font-bold tracking-tight text-foreground md:text-5xl">
-        Built for speed. Designed for accuracy.
+        {m.features_page_heading()}
       </h1>
       <p class="mx-auto mt-5 max-w-2xl text-lg text-muted-foreground md:text-xl">
-        Transcription with summarisation, insights, synced playback, inline
-        editing, unlimited regeneration, and subtitle-ready exports — on web and
-        mobile.
+        {m.features_page_subtext()}
       </p>
     </div>
   </div>
@@ -193,32 +185,32 @@ const features = [
             {feature.visual === "speakers" && (
               <div class="w-full max-w-sm rounded-2xl border border-border bg-white p-5 shadow-lg shadow-black/5">
                 <p class="mb-1 text-xs font-medium text-muted-foreground">
-                  00:00 – 01:15
+                  {m.features_page_speakers_mock_time()}
                 </p>
                 <div class="mb-2 flex items-center justify-between">
-                  <span class="text-sm font-semibold text-primary">Jesse Makanaki ▾</span>
-                  <span class="chip-processing">Renamed</span>
+                  <span class="text-sm font-semibold text-primary">{m.features_page_speakers_mock_speaker()}</span>
+                  <span class="chip-processing">{m.features_page_speakers_mock_renamed()}</span>
                 </div>
                 <p class="text-sm leading-relaxed text-foreground">
-                  Good morning, everyone. Thanks for joining the stand-up. I've been reviewing the design sprint progress…
+                  {m.features_page_speakers_mock_jesse_text()}
                 </p>
                 <div class="my-4 border-t border-border" />
                 <p class="mb-1 text-xs font-medium text-muted-foreground">
-                  01:16 – 03:45
+                  {m.features_page_speakers_mock_time2()}
                 </p>
                 <div class="mb-2 flex items-center justify-between">
-                  <span class="text-sm font-semibold text-primary">Speaker 2 ▾</span>
+                  <span class="text-sm font-semibold text-primary">{m.features_page_speakers_mock_speaker2()}</span>
                 </div>
                 <p class="text-sm leading-relaxed text-foreground">
-                  I'm currently focused on the backend tasks related to the API integration…
+                  {m.features_page_speakers_mock_speaker2_text()}
                 </p>
                 <div class="mt-5 rounded-xl border border-border bg-surface p-4">
-                  <p class="text-xs font-semibold text-foreground">Rename Speaker 1</p>
+                  <p class="text-xs font-semibold text-foreground">{m.features_page_speakers_mock_rename_title()}</p>
                   <div class="mt-2 rounded-lg border border-border bg-white px-3 py-2 text-sm text-muted-foreground">
-                    Enter new name
+                    {m.features_page_speakers_mock_rename_input()}
                   </div>
                   <div class="mt-3 rounded-full bg-primary py-2.5 text-center text-sm font-semibold text-white">
-                    Rename Speaker
+                    {m.features_page_speakers_mock_rename_button()}
                   </div>
                 </div>
               </div>
@@ -237,19 +229,18 @@ const features = [
       data-animate
     >
       <h2 class="text-2xl font-bold text-foreground md:text-3xl">
-        Same workflow on web, iOS, and beyond
+        {m.features_cross_platform_heading()}
       </h2>
       <p class="mx-auto mt-3 max-w-xl text-muted-foreground">
-        Start a transcript on your phone, finish editing on the web. Your
-        workspace stays in sync so nothing gets stuck on one device.
+        {m.features_cross_platform_subtext()}
       </p>
       <div class="mt-6 flex flex-wrap items-center justify-center gap-3">
-        <span class="chip-neutral">Web app</span>
-        <span class="chip-neutral">iOS</span>
-        <span class="chip-neutral">Android coming soon</span>
+        <span class="chip-neutral">{m.features_cross_platform_web()}</span>
+        <span class="chip-neutral">{m.features_cross_platform_ios()}</span>
+        <span class="chip-neutral">{m.features_cross_platform_android()}</span>
       </div>
       <a href="/#pricing" class="btn-primary mt-8">
-        View pricing
+        {m.features_cross_platform_cta()}
       </a>
     </div>
   </div>

@@ -1,4 +1,6 @@
 ---
+import { m } from "../paraglide/messages.js";
+
 interface Props {
   align?: "center" | "start";
   theme?: "default" | "on-primary";
@@ -31,7 +33,7 @@ const onPrimary = theme === "on-primary";
           ? "bg-white text-foreground hover:bg-white/90"
           : "bg-foreground text-white hover:bg-foreground/90",
       ]}
-      aria-label="Download on the App Store"
+      aria-label={m.store_aria_app_store()}
     >
       <svg
         width="22"
@@ -46,8 +48,8 @@ const onPrimary = theme === "on-primary";
         ></path>
       </svg>
       <div class="text-left">
-        <div class="text-[10px] leading-none opacity-70">Download on the</div>
-        <div class="text-sm font-semibold leading-tight">App Store</div>
+        <div class="text-[10px] leading-none opacity-70">{m.store_download_label()}</div>
+        <div class="text-sm font-semibold leading-tight">{m.store_app_store()}</div>
       </div>
     </a>
 
@@ -61,7 +63,7 @@ const onPrimary = theme === "on-primary";
           ? "bg-white/15 text-white ring-1 ring-white/30 hover:bg-white/25"
           : "bg-primary text-primary-foreground hover:bg-primary-dark",
       ]}
-      aria-label="Try Web App"
+      aria-label={m.store_aria_web_app()}
     >
       <svg
         width="22"
@@ -77,8 +79,8 @@ const onPrimary = theme === "on-primary";
         <path d="M3 12h18M12 3a14 14 0 010 18M12 3a14 14 0 000 18"></path>
       </svg>
       <div class="text-left">
-        <div class="text-[10px] leading-none opacity-70">Try it in your</div>
-        <div class="text-sm font-semibold leading-tight">Browser</div>
+        <div class="text-[10px] leading-none opacity-70">{m.store_try_label()}</div>
+        <div class="text-sm font-semibold leading-tight">{m.store_browser()}</div>
       </div>
     </a>
   </div>
@@ -91,7 +93,7 @@ const onPrimary = theme === "on-primary";
           onPrimary ? "text-center text-white/70" : align === "center" ? "text-center text-muted-foreground" : "text-center text-muted-foreground lg:text-left",
         ]}
       >
-        Free to start · No credit card required
+        {m.store_free_note()}
       </p>
     )
   }

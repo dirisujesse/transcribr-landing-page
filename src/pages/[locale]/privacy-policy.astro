@@ -1,0 +1,67 @@
+---
+import { locales } from "../../paraglide/runtime.js";
+import Layout from "../../layouts/Layout.astro";
+
+export function getStaticPaths() {
+  return locales.map((locale) => ({ params: { locale } }));
+}
+
+const { locale } = Astro.params;
+
+const sections = [
+  {
+    heading: "Information We Collect",
+    body: "When you use Transcribr, we collect information necessary to provide and improve our service. This may include your email address (for account creation), uploaded audio and video files (for transcription), device information (such as browser type and operating system), and usage data (such as features used and session duration). We do not sell your personal information to third parties.",
+  },
+  {
+    heading: "How We Use Your Information",
+    body: "We use the information we collect to provide transcription services, improve our AI models and service quality, communicate with you about your account and our services, respond to your support requests, ensure the security and integrity of our platform, and comply with legal obligations. Audio files are processed for transcription purposes and are not used for any other purpose without your explicit consent.",
+  },
+  {
+    heading: "Data Security",
+    body: "We implement appropriate technical and organizational measures to protect your personal information against unauthorized access, alteration, disclosure, or destruction. Audio files and transcripts are encrypted in transit using TLS and at rest using AES-256 encryption. Access to your data is strictly limited to authorized personnel who need it to provide the service.",
+  },
+  {
+    heading: "Third-Party Services",
+    body: "We may use third-party service providers to help us operate our platform, such as cloud hosting providers and AI transcription engines. These providers are contractually obligated to protect your data and may only use it as instructed by us. We do not share your personal information with advertisers or data brokers.",
+  },
+  {
+    heading: "Your Rights",
+    body: "Depending on your jurisdiction, you may have rights regarding your personal data, including the right to access the personal data we hold about you, request correction of inaccurate data, request deletion of your data, object to or restrict certain processing, data portability, and withdraw consent at any time. To exercise these rights, contact us at the email address provided at the end of this policy.",
+  },
+  {
+    heading: "Changes to This Privacy Policy",
+    body: "We may update this Privacy Policy from time to time to reflect changes in our practices or legal requirements. We will notify you of material changes by posting the updated policy on our website and, where required, by sending an email notification. Your continued use of Transcribr after such changes constitutes acceptance of the updated policy.",
+  },
+  {
+    heading: "Contact Us",
+    body: "If you have questions or concerns about this Privacy Policy or our data practices, please contact us at privacy@transcribr.org. We will respond to your inquiry as soon as possible, typically within 30 days.",
+  },
+];
+---
+
+<Layout title="Privacy Policy -- Transcribr" locale={locale}>
+  <section class="relative overflow-hidden bg-gradient-to-b from-primary-soft/50 to-white pt-28 pb-12 md:pt-32 md:pb-16">
+    <div class="container-page">
+      <div class="mx-auto max-w-3xl text-center" data-animate>
+        <p class="mb-3 text-sm font-semibold uppercase tracking-wider text-primary">Privacy Policy</p>
+        <h1 class="text-4xl font-bold tracking-tight text-foreground md:text-5xl">Privacy Policy</h1>
+        <p class="mt-2 text-lg text-muted-foreground">for Transcribr</p>
+        <p class="mt-1 text-sm text-muted-foreground">Last updated: September 2, 2025</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section bg-white pt-4 md:pt-8">
+    <div class="container-page">
+      <div class="prose mx-auto max-w-3xl">
+        {sections.map((section) => (
+          <div>
+            <h2>{section.heading}</h2>
+            <p>{section.body}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+</Layout>
