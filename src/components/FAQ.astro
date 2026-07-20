@@ -73,7 +73,9 @@ const { page = false, groups = defaultGroups } = Astro.props;
   )
 }
 
-<section class:list={[page ? "section bg-white pt-4 md:pt-8" : "section-muted"]}>
+<section
+  class:list={[page ? "section bg-white pt-4 md:pt-8" : "section-muted"]}
+>
   <div class="container-page">
     {
       !page && (
@@ -137,15 +139,18 @@ const { page = false, groups = defaultGroups } = Astro.props;
           class="mx-auto mt-14 max-w-xl rounded-2xl border border-border bg-surface px-6 py-8 text-center"
           data-animate
         >
-          <h2 class="text-xl font-bold text-foreground">{m.faq_still_questions()}</h2>
-          <p class="mt-2 text-muted-foreground">
-            {m.faq_still_subtext()}
-          </p>
+          <h2 class="text-xl font-bold text-foreground">
+            {m.faq_still_questions()}
+          </h2>
+          <p class="mt-2 text-muted-foreground">{m.faq_still_subtext()}</p>
           <div class="mt-6 flex flex-wrap items-center justify-center gap-3">
-            <a href={localizeHref("/support", { locale: undefined })} class="btn-secondary">
+            <a
+              href={localizeHref("/support", { locale: undefined })}
+              class="btn-secondary"
+            >
               {m.faq_contact_support()}
             </a>
-            <a href="https://app.transcribr.org/auth/signup" class="btn-primary">
+            <a href="https://app.transcribr.org/auth" class="btn-primary">
               {m.faq_get_started()}
             </a>
           </div>

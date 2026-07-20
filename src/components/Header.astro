@@ -1,8 +1,8 @@
 ---
 import Logo from "./Logo.astro";
 import LanguageSwitcher from "./LanguageSwitcher.astro";
-import ThemeToggle from "./ThemeToggle.astro";
-import { localizeHref } from "../paraglide/runtime.js";
+// import ThemeToggle from "./ThemeToggle.astro";
+import { localizeHref, type Locale } from "../paraglide/runtime.js";
 import { m } from "../paraglide/messages.js";
 
 export interface Props {
@@ -10,14 +10,24 @@ export interface Props {
 }
 
 const { locale } = Astro.props;
+const currentLocale = locale as Locale;
 
 const pathname = Astro.url.pathname.replace(/\/$/, "") || "/";
 
 const nav = [
-  { href: localizeHref("/features", { locale }), label: m.nav_features() },
-  { href: localizeHref("/#pricing", { locale }), label: m.nav_pricing() },
-  { href: localizeHref("/about", { locale }), label: m.nav_about() },
-  { href: localizeHref("/faq", { locale }), label: m.nav_faq() },
+  {
+    href: localizeHref("/features", { locale: currentLocale }),
+    label: m.nav_features(),
+  },
+  {
+    href: localizeHref("/#pricing", { locale: currentLocale }),
+    label: m.nav_pricing(),
+  },
+  {
+    href: localizeHref("/about", { locale: currentLocale }),
+    label: m.nav_about(),
+  },
+  { href: localizeHref("/faq", { locale: currentLocale }), label: m.nav_faq() },
 ];
 
 function isActive(href: string) {
@@ -51,18 +61,15 @@ const closeMenuLabel = m.nav_close_menu();
       </nav>
 
       <div class="flex items-center gap-2 sm:gap-3">
-        <ThemeToggle />
+        <!-- <ThemeToggle /> -->
         <LanguageSwitcher locale={locale} />
         <a
-          href="https://app.transcribr.org/auth/login"
+          href="https://app.transcribr.org/auth"
           class="btn-ghost hidden sm:inline-flex"
         >
           {m.nav_sign_in()}
         </a>
-        <a
-          href="https://app.transcribr.org/auth/signup"
-          class="btn-primary"
-        >
+        <a href="https://app.transcribr.org/auth" class="btn-primary">
           {m.nav_get_started()}
         </a>
 
@@ -112,7 +119,10 @@ const closeMenuLabel = m.nav_close_menu();
     class="hidden border-t border-border bg-white md:hidden"
     data-mobile-nav
   >
-    <nav class="container mx-auto flex flex-col gap-1 px-4 py-4" aria-label={m.nav_mobile()}>
+    <nav
+      class="container mx-auto flex flex-col gap-1 px-4 py-4"
+      aria-label={m.nav_mobile()}
+    >
       {
         nav.map((item) => (
           <a
@@ -130,7 +140,7 @@ const closeMenuLabel = m.nav_close_menu();
         ))
       }
       <a
-        href="https://app.transcribr.org/auth/login"
+        href="https://app.transcribr.org/auth"
         class="rounded-xl px-4 py-3 text-sm font-medium text-foreground/80 hover:bg-surface hover:text-foreground sm:hidden"
         data-menu-link
       >
@@ -147,7 +157,7 @@ const closeMenuLabel = m.nav_close_menu();
   const iconClose = document.querySelector("[data-menu-icon-close]");
   const links = document.querySelectorAll("[data-menu-link]");
 
-  function setOpen(open: boolean) {
+  function setOpen(open) {
     if (!toggle || !panel || !iconOpen || !iconClose) return;
     panel.classList.toggle("hidden", !open);
     iconOpen.classList.toggle("hidden", open);

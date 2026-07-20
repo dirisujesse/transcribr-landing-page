@@ -111,9 +111,10 @@ const ogLocales: Record<string, string> = {
       "url": "https://transcribr.org"
     })} />
 
-    <!-- Theme flash prevention -->
+    <!-- Theme flash prevention & JS detection -->
     <script is:inline>
       (function() {
+        document.documentElement.classList.add("js");
         var t = localStorage.getItem("theme");
         if (t === "dark" || (!t && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
           document.documentElement.classList.add("dark");

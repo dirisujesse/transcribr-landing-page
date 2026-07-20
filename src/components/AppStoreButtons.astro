@@ -7,11 +7,7 @@ interface Props {
   showNote?: boolean;
 }
 
-const {
-  align = "center",
-  theme = "default",
-  showNote = true,
-} = Astro.props;
+const { align = "center", theme = "default", showNote = true } = Astro.props;
 
 const onPrimary = theme === "on-primary";
 ---
@@ -20,7 +16,9 @@ const onPrimary = theme === "on-primary";
   <div
     class:list={[
       "flex flex-col gap-3 sm:flex-row sm:items-center",
-      align === "center" ? "items-center justify-center" : "items-stretch sm:justify-start",
+      align === "center"
+        ? "items-center justify-center"
+        : "items-stretch sm:justify-start",
     ]}
   >
     <a
@@ -48,13 +46,17 @@ const onPrimary = theme === "on-primary";
         ></path>
       </svg>
       <div class="text-left">
-        <div class="text-[10px] leading-none opacity-70">{m.store_download_label()}</div>
-        <div class="text-sm font-semibold leading-tight">{m.store_app_store()}</div>
+        <div class="text-[10px] leading-none opacity-70">
+          {m.store_download_label()}
+        </div>
+        <div class="text-sm font-semibold leading-tight">
+          {m.store_app_store()}
+        </div>
       </div>
     </a>
 
     <a
-      href="https://app.transcribr.org/auth/signup"
+      href="https://app.transcribr.org/auth"
       target="_blank"
       rel="noopener noreferrer"
       class:list={[
@@ -79,8 +81,12 @@ const onPrimary = theme === "on-primary";
         <path d="M3 12h18M12 3a14 14 0 010 18M12 3a14 14 0 000 18"></path>
       </svg>
       <div class="text-left">
-        <div class="text-[10px] leading-none opacity-70">{m.store_try_label()}</div>
-        <div class="text-sm font-semibold leading-tight">{m.store_browser()}</div>
+        <div class="text-[10px] leading-none opacity-70">
+          {m.store_try_label()}
+        </div>
+        <div class="text-sm font-semibold leading-tight">
+          {m.store_browser()}
+        </div>
       </div>
     </a>
   </div>
@@ -90,7 +96,11 @@ const onPrimary = theme === "on-primary";
       <p
         class:list={[
           "mt-4 text-sm",
-          onPrimary ? "text-center text-white/70" : align === "center" ? "text-center text-muted-foreground" : "text-center text-muted-foreground lg:text-left",
+          onPrimary
+            ? "text-center text-white/70"
+            : align === "center"
+              ? "text-center text-muted-foreground"
+              : "text-center text-muted-foreground lg:text-left",
         ]}
       >
         {m.store_free_note()}

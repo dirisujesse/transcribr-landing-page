@@ -11,7 +11,10 @@ const year = new Date().getFullYear();
       <div class="mb-12 grid gap-8 md:grid-cols-2 lg:grid-cols-4">
         <div class="lg:col-span-1">
           <div class="mb-6">
-            <a href={localizeHref("/", { locale: undefined })} class="inline-block brightness-0 invert">
+            <a
+              href={localizeHref("/", { locale: undefined })}
+              class="inline-block brightness-0 invert"
+            >
               <img src="/logo.svg" alt="Transcribr" class="h-7 w-auto" />
             </a>
           </div>
@@ -21,42 +24,57 @@ const year = new Date().getFullYear();
         </div>
 
         <div>
-          <h3 class="mb-4 font-semibold text-background">{m.footer_product_heading()}</h3>
+          <h3 class="mb-4 font-semibold text-background">
+            {m.footer_product_heading()}
+          </h3>
           <ul class="space-y-3 text-background/70">
             <li>
-              <a href={localizeHref("/features", { locale: undefined })} class="transition-colors hover:text-background"
+              <a
+                href={localizeHref("/features", { locale: undefined })}
+                class="transition-colors hover:text-background"
                 >{m.footer_features()}</a
               >
             </li>
             <li>
-              <a href="/#pricing" class="transition-colors hover:text-background"
+              <a
+                href="/#pricing"
+                class="transition-colors hover:text-background"
                 >{m.footer_pricing()}</a
               >
             </li>
             <li>
               <a
-                href="https://app.transcribr.org/auth/signup"
-                class="transition-colors hover:text-background">{m.footer_get_started()}</a
+                href="https://app.transcribr.org/auth"
+                class="transition-colors hover:text-background"
+                >{m.footer_get_started()}</a
               >
             </li>
           </ul>
         </div>
 
         <div>
-          <h3 class="mb-4 font-semibold text-background">{m.footer_company_heading()}</h3>
+          <h3 class="mb-4 font-semibold text-background">
+            {m.footer_company_heading()}
+          </h3>
           <ul class="space-y-3 text-background/70">
             <li>
-              <a href={localizeHref("/about", { locale: undefined })} class="transition-colors hover:text-background"
+              <a
+                href={localizeHref("/about", { locale: undefined })}
+                class="transition-colors hover:text-background"
                 >{m.footer_about()}</a
               >
             </li>
             <li>
-              <a href={localizeHref("/faq", { locale: undefined })} class="transition-colors hover:text-background"
+              <a
+                href={localizeHref("/faq", { locale: undefined })}
+                class="transition-colors hover:text-background"
                 >{m.footer_faq()}</a
               >
             </li>
             <li>
-              <a href={localizeHref("/support", { locale: undefined })} class="transition-colors hover:text-background"
+              <a
+                href={localizeHref("/support", { locale: undefined })}
+                class="transition-colors hover:text-background"
                 >{m.footer_support()}</a
               >
             </li>
@@ -64,18 +82,22 @@ const year = new Date().getFullYear();
         </div>
 
         <div>
-          <h3 class="mb-4 font-semibold text-background">{m.footer_legal_heading()}</h3>
+          <h3 class="mb-4 font-semibold text-background">
+            {m.footer_legal_heading()}
+          </h3>
           <ul class="space-y-3 text-background/70">
             <li>
               <a
                 href={localizeHref("/privacy-policy", { locale: undefined })}
-                class="transition-colors hover:text-background">{m.footer_privacy_policy()}</a
+                class="transition-colors hover:text-background"
+                >{m.footer_privacy_policy()}</a
               >
             </li>
             <li>
               <a
                 href={localizeHref("/terms-of-use", { locale: undefined })}
-                class="transition-colors hover:text-background">{m.footer_terms_of_use()}</a
+                class="transition-colors hover:text-background"
+                >{m.footer_terms_of_use()}</a
               >
             </li>
           </ul>
@@ -91,9 +113,12 @@ const year = new Date().getFullYear();
         <div class="flex items-center gap-6 text-sm text-background/70">
           <a
             href={localizeHref("/privacy-policy", { locale: undefined })}
-            class="transition-colors hover:text-background">{m.footer_privacy()}</a
+            class="transition-colors hover:text-background"
+            >{m.footer_privacy()}</a
           >
-          <a href={localizeHref("/terms-of-use", { locale: undefined })} class="transition-colors hover:text-background"
+          <a
+            href={localizeHref("/terms-of-use", { locale: undefined })}
+            class="transition-colors hover:text-background"
             >{m.footer_terms()}</a
           >
         </div>
