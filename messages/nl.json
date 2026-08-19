@@ -404,5 +404,8 @@
 	"demo_failed": "Dat bestand kon niet worden geconverteerd.",
 	"demo_noaudio": "Dat bestand heeft geen audiospoor.",
 	"demo_privacy": "Er is niets van je apparaat verstuurd.",
-	"nav_converter": "Gratis converter"
+	"nav_converter": "Gratis converter",
+	"demo_sample": "Geen bestand bij de hand? Probeer een voorbeeldclip",
+	"demo_sample_name": "meeting-clip.wav",
+	"demo_sample_loading": "Voorbeeld laden…"
 }

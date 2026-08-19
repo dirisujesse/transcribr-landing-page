@@ -404,5 +404,8 @@
 	"demo_failed": "That file could not be converted.",
 	"demo_noaudio": "That file has no audio track.",
 	"demo_privacy": "Nothing left your device.",
-	"nav_converter": "Free converter"
+	"nav_converter": "Free converter",
+	"demo_sample": "No file handy? Try a sample clip",
+	"demo_sample_name": "meeting-clip.wav",
+	"demo_sample_loading": "Loading sample…"
 }

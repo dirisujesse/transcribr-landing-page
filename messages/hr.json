@@ -404,5 +404,8 @@
 	"demo_failed": "Datoteku nije bilo moguće pretvoriti.",
 	"demo_noaudio": "Ta datoteka nema zvučni zapis.",
 	"demo_privacy": "Ništa nije napustilo vaš uređaj.",
-	"nav_converter": "Besplatni pretvarač"
+	"nav_converter": "Besplatni pretvarač",
+	"demo_sample": "Nemate datoteku? Isprobajte primjer",
+	"demo_sample_name": "meeting-clip.wav",
+	"demo_sample_loading": "Učitavanje primjera…"
 }

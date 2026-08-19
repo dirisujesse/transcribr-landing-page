@@ -404,5 +404,8 @@
 	"demo_failed": "Diese Datei konnte nicht konvertiert werden.",
 	"demo_noaudio": "Diese Datei enthält keine Tonspur.",
 	"demo_privacy": "Nichts hat Ihr Gerät verlassen.",
-	"nav_converter": "Gratis-Konverter"
+	"nav_converter": "Gratis-Konverter",
+	"demo_sample": "Keine Datei zur Hand? Beispiel ausprobieren",
+	"demo_sample_name": "meeting-clip.wav",
+	"demo_sample_loading": "Beispiel wird geladen…"
 }
