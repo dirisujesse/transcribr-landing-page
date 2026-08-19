@@ -1,0 +1,130 @@
+---
+import { locales } from "../../paraglide/runtime.js";
+import Layout from "../../layouts/Layout.astro";
+import ConverterDemo from "../../components/ConverterDemo.astro";
+import CTABand from "../../components/CTABand.astro";
+import { m } from "../../paraglide/messages.js";
+import { localizeHref } from "../../paraglide/runtime.js";
+
+export function getStaticPaths() {
+  return locales.map((locale) => ({ params: { locale } }));
+}
+
+const { locale } = Astro.params;
+
+/**
+ * A page for people searching to convert a file, not to buy transcription.
+ *
+ * "convert m4a to mp3" and similar are high-volume, high-intent queries, and
+ * nearly every result asks the visitor to upload their audio to a stranger's
+ * server. Doing the work locally is a genuinely different answer, and it costs
+ * nothing per visitor because there is no backend involved — which makes this
+ * the cheapest acquisition surface the product has.
+ */
+const howSteps = [m.convert_how_1(), m.convert_how_2(), m.convert_how_3()];
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  name: m.seo_convert_title(),
+  applicationCategory: "MultimediaApplication",
+  operatingSystem: "Web",
+  offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+  description: m.seo_convert_description(),
+  featureList: [
+    "Convert audio to MP3",
+    "Convert audio to M4A (AAC)",
+    "Convert audio to WAV",
+    "Convert audio to OGG (Opus)",
+    "Extract audio from video",
+    "Compress audio files",
+  ],
+  browserRequirements: "Requires a browser with WebCodecs support",
+};
+---
+
+<Layout
+  title={m.seo_convert_title()}
+  description={m.seo_convert_description()}
+  locale={locale}
+  schema={schema}
+>
+  <section class="section pt-28 md:pt-32">
+    <div class="container-page">
+      <div class="mx-auto max-w-3xl text-center" data-animate>
+        <h1
+          class="text-4xl font-bold tracking-tight text-balance text-foreground md:text-5xl"
+        >
+          {m.convert_h1()}
+        </h1>
+        <p class="mt-5 text-lg leading-relaxed text-muted-foreground">
+          {m.convert_intro()}
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <ConverterDemo />
+
+  <section class="section-muted">
+    <div class="container-page">
+      <div class="mx-auto grid max-w-5xl gap-10 md:grid-cols-2">
+        <div data-animate>
+          <h2
+            class="text-2xl font-bold tracking-tight text-foreground md:text-3xl"
+          >
+            {m.convert_how_title()}
+          </h2>
+          <ol class="mt-4 grid gap-3">
+            {
+              howSteps.map((step, index) => (
+                <li class="flex items-start gap-3">
+                  <span class="mt-0.5 flex size-6 shrink-0 items-center justify-center rounded-full bg-primary/10 text-xs font-semibold text-primary">
+                    {index + 1}
+                  </span>
+                  <span class="text-sm leading-relaxed text-foreground">
+                    {step}
+                  </span>
+                </li>
+              ))
+            }
+          </ol>
+        </div>
+
+        <div data-animate>
+          <h2
+            class="text-2xl font-bold tracking-tight text-foreground md:text-3xl"
+          >
+            {m.convert_why_title()}
+          </h2>
+          <p class="mt-4 text-sm leading-relaxed text-muted-foreground">
+            {m.convert_why_body()}
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container-page">
+      <div class="mx-auto max-w-3xl text-center" data-animate>
+        <h2
+          class="text-2xl font-bold tracking-tight text-foreground md:text-3xl"
+        >
+          {m.convert_transcribe_title()}
+        </h2>
+        <p class="mt-4 text-lg text-muted-foreground">
+          {m.convert_transcribe_body()}
+        </p>
+        <a
+          href={localizeHref("/features", { locale })}
+          class="btn-primary mt-6 inline-flex"
+        >
+          {m.convert_transcribe_cta()}
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <CTABand />
+</Layout>

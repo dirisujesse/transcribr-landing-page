@@ -2,14 +2,84 @@
 import { locales } from "../../paraglide/runtime.js";
 import Layout from "../../layouts/Layout.astro";
 import FAQ from "../../components/FAQ.astro";
+import { m } from "../../paraglide/messages.js";
 
 export function getStaticPaths() {
   return locales.map((locale) => ({ params: { locale } }));
 }
 
 const { locale } = Astro.params;
+
+/**
+ * FAQPage structured data, built from the same messages the page renders.
+ *
+ * This is what lets the answers appear expanded directly in search results,
+ * which is the highest-leverage schema available to a site like this — and
+ * generating it from the rendered copy means the two cannot drift apart.
+ */
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": m.faq_q1_q(),
+      "acceptedAnswer": { "@type": "Answer", "text": m.faq_q1_a() }
+    },
+    {
+      "@type": "Question",
+      "name": m.faq_q2_q(),
+      "acceptedAnswer": { "@type": "Answer", "text": m.faq_q2_a() }
+    },
+    {
+      "@type": "Question",
+      "name": m.faq_q3_q(),
+      "acceptedAnswer": { "@type": "Answer", "text": m.faq_q3_a() }
+    },
+    {
+      "@type": "Question",
+      "name": m.faq_q4_q(),
+      "acceptedAnswer": { "@type": "Answer", "text": m.faq_q4_a() }
+    },
+    {
+      "@type": "Question",
+      "name": m.faq_q5_q(),
+      "acceptedAnswer": { "@type": "Answer", "text": m.faq_q5_a() }
+    },
+    {
+      "@type": "Question",
+      "name": m.faq_q6_q(),
+      "acceptedAnswer": { "@type": "Answer", "text": m.faq_q6_a() }
+    },
+    {
+      "@type": "Question",
+      "name": m.faq_q7_q(),
+      "acceptedAnswer": { "@type": "Answer", "text": m.faq_q7_a() }
+    },
+    {
+      "@type": "Question",
+      "name": m.faq_q8_q(),
+      "acceptedAnswer": { "@type": "Answer", "text": m.faq_q8_a() }
+    },
+    {
+      "@type": "Question",
+      "name": m.faq_q9_q(),
+      "acceptedAnswer": { "@type": "Answer", "text": m.faq_q9_a() }
+    },
+    {
+      "@type": "Question",
+      "name": m.faq_q10_q(),
+      "acceptedAnswer": { "@type": "Answer", "text": m.faq_q10_a() }
+    }
+  ]
+};
 ---
 
-<Layout title="FAQ -- Transcribr" locale={locale}>
+<Layout
+  title={m.seo_faq_title()}
+  description={m.seo_faq_description()}
+  locale={locale}
+  schema={faqSchema}
+>
   <FAQ page />
 </Layout>

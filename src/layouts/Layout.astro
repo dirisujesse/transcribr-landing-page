@@ -8,12 +8,15 @@ import { m } from "../paraglide/messages.js";
 export interface Props {
   title: string;
   description?: string;
+  /** Extra JSON-LD for this page, merged alongside the site-wide block. */
+  schema?: Record<string, unknown>;
   locale: string;
 }
 
 const {
   title,
   description = m.layout_meta_description(),
+  schema,
   locale,
 } = Astro.props;
 
@@ -74,7 +77,7 @@ const ogLocales: Record<string, string> = {
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://transcribr.org" />
+    <meta property="og:url" content={canonicalURL} />
     <meta property="og:image" content="https://transcribr.org/og-image.png" />
     <meta property="og:image:alt" content={title} />
     <meta property="og:site_name" content="Transcribr" />
@@ -108,8 +111,20 @@ const ogLocales: Record<string, string> = {
         "priceCurrency": "USD"
       },
       "description": description,
-      "url": "https://transcribr.org"
+      "url": canonicalURL.toString(),
+      "featureList": [
+        "Audio and video transcription",
+        "Speaker identification",
+        "Summaries and insights",
+        "Audio conversion to MP3, M4A, WAV and OGG",
+        "Audio compression",
+        "Export to SRT, VTT, PDF, TXT and CSV"
+      ]
     })} />
+
+    <!-- Page-specific structured data, e.g. FAQPage, which is what earns the
+         expandable answers in search results. -->
+    {schema && <script type="application/ld+json" set:html={JSON.stringify(schema)} />}
 
     <!-- Theme flash prevention & JS detection -->
     <script is:inline>
