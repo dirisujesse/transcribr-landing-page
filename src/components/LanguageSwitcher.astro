@@ -37,10 +37,7 @@ const options = availableLanguageTags.map((tag) => ({
 }));
 ---
 
-<div
-  class:list={["relative", fullWidth && "w-full"]}
-  data-lang-root
->
+<div class:list={["relative", fullWidth && "w-full"]} data-lang-root>
   <button
     type="button"
     class:list={[
@@ -118,19 +115,20 @@ const options = availableLanguageTags.map((tag) => ({
   function initLanguageSwitcher(root: Element) {
     const trigger = root.querySelector("[data-lang-trigger]");
     const menu = root.querySelector("[data-lang-menu]");
-    if (!(trigger instanceof HTMLElement) || !(menu instanceof HTMLElement)) return;
+    if (!(trigger instanceof HTMLElement) || !(menu instanceof HTMLElement))
+      return;
 
     function setOpen(open: boolean) {
-      menu.classList.toggle("hidden", !open);
-      trigger.setAttribute("aria-expanded", String(open));
+      menu?.classList.toggle("hidden", !open);
+      trigger?.setAttribute("aria-expanded", String(open));
     }
 
     function toggleOpen(e: Event) {
       const target = e.target as Node | null;
-      if (target && menu.contains(target)) return;
+      if (target && menu?.contains(target)) return;
       e.preventDefault();
       e.stopPropagation();
-      const open = trigger.getAttribute("aria-expanded") === "true";
+      const open = trigger?.getAttribute("aria-expanded") === "true";
       setOpen(!open);
     }
 
