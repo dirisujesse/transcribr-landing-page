@@ -114,6 +114,8 @@ const features = [
       m.features_converter_point2(),
       m.features_converter_point3(),
       m.features_converter_point4(),
+      m.features_converter_point5(),
+      m.features_converter_point6(),
     ],
     visual: "export" as const,
     reverse: true,
@@ -128,6 +130,8 @@ const features = [
       m.features_livenotes_point2(),
       m.features_livenotes_point3(),
       m.features_livenotes_point4(),
+      m.features_livenotes_point5(),
+      m.features_livenotes_point6(),
     ],
     visual: "processing" as const,
     reverse: false,
@@ -267,7 +271,7 @@ const features = [
         <span class="chip-neutral">{m.features_cross_platform_ios()}</span>
         <span class="chip-neutral">{m.features_cross_platform_android()}</span>
       </div>
-      <a href="/#pricing" class="btn-primary mt-8">
+	  <a href={localizeHref("/#pricing", { locale: undefined })} class="btn-primary mt-8">
         {m.features_cross_platform_cta()}
       </a>
     </div>

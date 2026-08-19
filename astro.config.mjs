@@ -5,7 +5,12 @@ import sitemap from "@astrojs/sitemap";
 import tailwindcss from "@tailwindcss/vite";
 
 export default defineConfig({
-  integrations: [react(), sitemap()],
+  integrations: [
+    react(),
+    sitemap({
+      filter: (page) => page !== "https://transcribr.org/",
+    }),
+  ],
   output: "static",
   site: "https://transcribr.org",
   i18n: {

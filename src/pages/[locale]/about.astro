@@ -2,6 +2,7 @@
 import { locales } from "../../paraglide/runtime.js";
 import Layout from "../../layouts/Layout.astro";
 import AboutPage from "../../components/AboutPage.astro";
+import { m } from "../../paraglide/messages.js";
 
 export function getStaticPaths() {
   return locales.map((locale) => ({ params: { locale } }));
@@ -10,6 +11,6 @@ export function getStaticPaths() {
 const { locale } = Astro.params;
 ---
 
-<Layout title="About -- Transcribr" locale={locale}>
+<Layout title={`${m.about_eyebrow()} — Transcribr`} description={m.about_subtext()} locale={locale}>
   <AboutPage />
 </Layout>

@@ -2,7 +2,7 @@
 import Footer from "../components/Footer.astro";
 import Header from "../components/Header.astro";
 import "../styles/global.css";
-import { localizeHref, locales as allLocales, baseLocale, getLocale, getTextDirection } from "../paraglide/runtime.js";
+import { localizeHref, locales as allLocales, baseLocale, getTextDirection } from "../paraglide/runtime.js";
 import { m } from "../paraglide/messages.js";
 
 export interface Props {
@@ -11,6 +11,8 @@ export interface Props {
   /** Extra JSON-LD for this page, merged alongside the site-wide block. */
   schema?: Record<string, unknown>;
   locale: string;
+  canonicalPath?: string;
+  robots?: string;
 }
 
 const {
@@ -18,10 +20,18 @@ const {
   description = m.layout_meta_description(),
   schema,
   locale,
+  canonicalPath: canonicalPathOverride,
+  robots,
 } = Astro.props;
 
-const canonicalPath = Astro.url.pathname;
-const canonicalURL = new URL(localizeHref(canonicalPath, { locale: baseLocale }), Astro.site);
+const canonicalPath = canonicalPathOverride ?? Astro.url.pathname;
+const canonicalURL = new URL(canonicalPath, Astro.site);
+const localizedURLs = allLocales.map((loc) => ({
+  locale: loc,
+  url: new URL(localizeHref(canonicalPath, { locale: loc }), Astro.site),
+}));
+const defaultURL = new URL(localizeHref(canonicalPath, { locale: baseLocale }), Astro.site);
+const ogImageURL = new URL("/og-image.png", Astro.site);
 
 const ogLocales: Record<string, string> = {
   en: "en_US",
@@ -39,6 +49,7 @@ const ogLocales: Record<string, string> = {
   <head>
     <meta charset="UTF-8" />
     <meta name="description" content={description} />
+    {robots && <meta name="robots" content={robots} />}
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" sizes="any" href="/favicon.ico" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -59,18 +70,18 @@ const ogLocales: Record<string, string> = {
 
     <!-- Hreflang -->
     {
-      allLocales.map((loc) => (
+      localizedURLs.map(({ locale: loc, url }) => (
         <link
           rel="alternate"
           hreflang={loc}
-          href={localizeHref(canonicalPath, { locale: loc })}
+          href={url}
         />
       ))
     }
     <link
       rel="alternate"
       hreflang="x-default"
-      href={localizeHref(canonicalPath, { locale: baseLocale })}
+      href={defaultURL}
     />
 
     <!-- Open Graph -->
@@ -78,24 +89,29 @@ const ogLocales: Record<string, string> = {
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
     <meta property="og:url" content={canonicalURL} />
-    <meta property="og:image" content="https://transcribr.org/og-image.png" />
+    <meta property="og:image" content={ogImageURL} />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content={title} />
     <meta property="og:site_name" content="Transcribr" />
     <meta property="og:locale" content={ogLocales[locale] || "en_US"} />
+    {allLocales.filter((loc) => loc !== locale).map((loc) => (
+      <meta property="og:locale:alternate" content={ogLocales[loc]} />
+    ))}
     <meta name="theme-color" content="#5B4FE8" />
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content="https://transcribr.org/og-image.png" />
+    <meta name="twitter:image" content={ogImageURL} />
     <meta name="twitter:image:alt" content={title} />
     <meta name="twitter:site" content="@transcribr" />
     <meta name="twitter:creator" content="@transcribr" />
     <meta name="twitter:domain" content="transcribr.org" />
-    <meta name="twitter:url" content="https://transcribr.org" />
+    <meta name="twitter:url" content={canonicalURL} />
 
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" defer async></script>
     <title>{title}</title>
 
     <!-- JSON-LD Structured Data -->
@@ -103,7 +119,7 @@ const ogLocales: Record<string, string> = {
       "@context": "https://schema.org",
       "@type": "SoftwareApplication",
       "name": "Transcribr",
-      "operatingSystem": "Web, iOS, Android",
+      "operatingSystem": "Web, iOS",
       "applicationCategory": "BusinessApplication",
       "offers": {
         "@type": "Offer",
@@ -116,8 +132,10 @@ const ogLocales: Record<string, string> = {
         "Audio and video transcription",
         "Speaker identification",
         "Summaries and insights",
-        "Audio conversion to MP3, M4A, WAV and OGG",
-        "Audio compression",
+        "Private in-browser audio conversion and codec-preserving compression",
+        "Persistent local batch conversion and clip extraction",
+        "On-device live notes with optional local audio recording",
+        "Encrypted local note and recording backups",
         "Export to SRT, VTT, PDF, TXT and CSV"
       ]
     })} />

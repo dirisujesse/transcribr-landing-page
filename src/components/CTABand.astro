@@ -1,5 +1,6 @@
 ---
 import { m } from "../paraglide/messages.js";
+import { localizeHref } from "../paraglide/runtime.js";
 import AppStoreButtons from "./AppStoreButtons.astro";
 ---
 
@@ -26,6 +27,12 @@ import AppStoreButtons from "./AppStoreButtons.astro";
       <div class="mt-8 flex justify-center">
         <AppStoreButtons theme="on-primary" />
       </div>
+      <a
+        href={localizeHref("/#pricing", { locale: undefined })}
+        class="mt-5 inline-flex text-sm font-semibold text-white underline decoration-white/40 underline-offset-4 transition hover:decoration-white"
+      >
+        {m.cta_plans()}
+      </a>
     </div>
   </div>
 </section>
