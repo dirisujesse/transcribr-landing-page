@@ -1,0 +1,62 @@
+---
+import { m } from "../paraglide/messages.js";
+
+/**
+ * The privacy claim, stated at site level.
+ *
+ * Converting, compressing and live notes genuinely run in the browser, which
+ * most competitors cannot say. It was previously mentioned only inside two
+ * feature cards, where it read as a detail rather than as the reason to trust
+ * the product with a confidential recording.
+ */
+const points = [m.privacy_point1(), m.privacy_point2(), m.privacy_point3()];
+---
+
+<section class="section-muted" id="privacy">
+  <div class="container-page">
+    <div class="mx-auto grid max-w-5xl gap-10 md:grid-cols-2 md:items-center">
+      <div data-animate>
+        <p
+          class="mb-3 text-sm font-semibold uppercase tracking-wider text-primary"
+        >
+          {m.privacy_eyebrow()}
+        </p>
+        <h2
+          class="text-3xl font-bold tracking-tight text-balance text-foreground md:text-4xl"
+        >
+          {m.privacy_heading()}
+        </h2>
+        <p class="mt-4 text-lg leading-relaxed text-muted-foreground">
+          {m.privacy_body()}
+        </p>
+      </div>
+
+      <ul class="grid gap-3" data-animate>
+        {
+          points.map((point) => (
+            <li class="flex items-start gap-3 rounded-2xl border border-border bg-white p-4 shadow-sm">
+              <span class="mt-0.5 flex size-6 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary">
+                <svg
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="3"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <path d="M20 6 9 17l-5-5" />
+                </svg>
+              </span>
+              <span class="text-sm leading-relaxed text-foreground">
+                {point}
+              </span>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </div>
+</section>

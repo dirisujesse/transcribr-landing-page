@@ -2,46 +2,41 @@
 import { m } from "../paraglide/messages.js";
 import { localizeHref } from "../paraglide/runtime.js";
 
-const highlights = [
+/**
+ * Grouped by what the reader is trying to do, not by when we built it.
+ *
+ * Ten flat cards read as a catalogue and give no sense of what the product is
+ * for. Three outcomes give the list a spine, and put the browser-only tools in
+ * a group of their own rather than buried at the end of a long grid.
+ */
+const groups = [
   {
-    title: m.features_teaser_1_title(),
-    description: m.features_teaser_1_desc(),
+    title: m.features_group_1(),
+    description: m.features_group_1_desc(),
+    items: [
+      { title: m.features_teaser_1_title(), description: m.features_teaser_1_desc() },
+      { title: m.features_teaser_8_title(), description: m.features_teaser_8_desc() },
+      { title: m.features_teaser_3_title(), description: m.features_teaser_3_desc() },
+      { title: m.features_teaser_4_title(), description: m.features_teaser_4_desc() },
+    ],
   },
   {
-    title: m.features_teaser_2_title(),
-    description: m.features_teaser_2_desc(),
+    title: m.features_group_2(),
+    description: m.features_group_2_desc(),
+    items: [
+      { title: m.features_teaser_5_title(), description: m.features_teaser_5_desc() },
+      { title: m.features_teaser_6_title(), description: m.features_teaser_6_desc() },
+      { title: m.features_teaser_2_title(), description: m.features_teaser_2_desc() },
+      { title: m.features_teaser_7_title(), description: m.features_teaser_7_desc() },
+    ],
   },
   {
-    title: m.features_teaser_3_title(),
-    description: m.features_teaser_3_desc(),
-  },
-  {
-    title: m.features_teaser_4_title(),
-    description: m.features_teaser_4_desc(),
-  },
-  {
-    title: m.features_teaser_5_title(),
-    description: m.features_teaser_5_desc(),
-  },
-  {
-    title: m.features_teaser_6_title(),
-    description: m.features_teaser_6_desc(),
-  },
-  {
-    title: m.features_teaser_7_title(),
-    description: m.features_teaser_7_desc(),
-  },
-  {
-    title: m.features_teaser_8_title(),
-    description: m.features_teaser_8_desc(),
-  },
-  {
-    title: m.features_teaser_9_title(),
-    description: m.features_teaser_9_desc(),
-  },
-  {
-    title: m.features_teaser_10_title(),
-    description: m.features_teaser_10_desc(),
+    title: m.features_group_3(),
+    description: m.features_group_3_desc(),
+    items: [
+      { title: m.features_teaser_9_title(), description: m.features_teaser_9_desc() },
+      { title: m.features_teaser_10_title(), description: m.features_teaser_10_desc() },
+    ],
   },
 ];
 ---
@@ -71,18 +66,27 @@ const highlights = [
       </a>
     </div>
 
-    <div class="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+    <div class="mt-12 space-y-10">
       {
-        highlights.map((item) => (
-          <div
-            class="rounded-2xl border border-border bg-white p-5 shadow-sm"
-            data-animate
-          >
-            <div class="mb-3 h-1 w-8 rounded-full bg-primary" />
-            <h3 class="font-semibold text-foreground">{item.title}</h3>
-            <p class="mt-2 text-sm leading-relaxed text-muted-foreground">
-              {item.description}
-            </p>
+        groups.map((group) => (
+          <div data-animate>
+            <div class="mb-4 flex flex-col gap-1 sm:flex-row sm:items-baseline sm:gap-3">
+              <h3 class="text-xl font-bold tracking-tight text-foreground">
+                {group.title}
+              </h3>
+              <p class="text-sm text-muted-foreground">{group.description}</p>
+            </div>
+            <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+              {group.items.map((item) => (
+                <div class="rounded-2xl border border-border bg-white p-5 shadow-sm">
+                  <div class="mb-3 h-1 w-8 rounded-full bg-primary" />
+                  <h4 class="font-semibold text-foreground">{item.title}</h4>
+                  <p class="mt-2 text-sm leading-relaxed text-muted-foreground">
+                    {item.description}
+                  </p>
+                </div>
+              ))}
+            </div>
           </div>
         ))
       }

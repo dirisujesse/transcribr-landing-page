@@ -376,5 +376,17 @@
 	"pricing_plan_free_feat8": "3 bestandsconversies per dag, in je browser",
 	"pricing_plan_premium_feat8": "Onbeperkt converteren & comprimeren",
 	"pricing_plan_premium_feat9": "Live notities met herkenning op het apparaat",
-	"pricing_plan_weekly_feat7": "Onbeperkt converteren & live notities"
+	"pricing_plan_weekly_feat7": "Onbeperkt converteren & live notities",
+	"privacy_eyebrow": "Privacy",
+	"privacy_heading": "Een deel bereikt ons nooit",
+	"privacy_body": "Converteren, comprimeren en live notities draaien volledig in je browser. Je bestand wordt niet geüpload, komt niet in een wachtrij en wordt niet op onze servers bewaard — het verlaat je apparaat simpelweg nooit.",
+	"privacy_point1": "Converteer en comprimeer lokaal, niets geüpload",
+	"privacy_point2": "Live notities herkend op je apparaat en bewaard in je browser",
+	"privacy_point3": "Transcripties die je wel uploadt zijn altijd te verwijderen",
+	"features_group_1": "Transcriberen",
+	"features_group_1_desc": "Maak van elke opname nauwkeurige, doorzoekbare tekst.",
+	"features_group_2": "Begrijpen",
+	"features_group_2_desc": "Samenvattingen, inzichten en sprekers — geen muur van tekst.",
+	"features_group_3": "Beheer je media",
+	"features_group_3_desc": "Converteer, comprimeer en leg vast — zonder te uploaden."
 }

@@ -376,5 +376,17 @@
 	"pricing_plan_free_feat8": "3 conversions de fichiers par jour, dans votre navigateur",
 	"pricing_plan_premium_feat8": "Conversion et compression illimitées",
 	"pricing_plan_premium_feat9": "Notes en direct avec reconnaissance sur l’appareil",
-	"pricing_plan_weekly_feat7": "Conversion et notes en direct illimitées"
+	"pricing_plan_weekly_feat7": "Conversion et notes en direct illimitées",
+	"privacy_eyebrow": "Confidentialité",
+	"privacy_heading": "Une partie ne nous parvient jamais",
+	"privacy_body": "La conversion, la compression et les notes en direct s’exécutent entièrement dans votre navigateur. Votre fichier n’est ni téléversé, ni mis en file d’attente, ni stocké sur nos serveurs — il ne quitte tout simplement jamais votre appareil.",
+	"privacy_point1": "Convertissez et compressez en local, sans téléversement",
+	"privacy_point2": "Notes en direct reconnues sur l’appareil et stockées dans votre navigateur",
+	"privacy_point3": "Les transcriptions que vous téléversez restent supprimables à tout moment",
+	"features_group_1": "Transcrire",
+	"features_group_1_desc": "Transformez vos enregistrements en texte précis et consultable.",
+	"features_group_2": "Comprendre",
+	"features_group_2_desc": "Résumés, analyses et intervenants — pas seulement un mur de texte.",
+	"features_group_3": "Gérer vos médias",
+	"features_group_3_desc": "Convertissez, compressez et capturez — sans aucun téléversement."
 }

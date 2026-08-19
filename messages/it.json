@@ -376,5 +376,17 @@
 	"pricing_plan_free_feat8": "3 conversioni di file al giorno, nel browser",
 	"pricing_plan_premium_feat8": "Conversione e compressione illimitate",
 	"pricing_plan_premium_feat9": "Note dal vivo con riconoscimento sul dispositivo",
-	"pricing_plan_weekly_feat7": "Conversione e note dal vivo illimitate"
+	"pricing_plan_weekly_feat7": "Conversione e note dal vivo illimitate",
+	"privacy_eyebrow": "Privacy",
+	"privacy_heading": "Una parte non ci raggiunge mai",
+	"privacy_body": "Conversione, compressione e note dal vivo funzionano interamente nel tuo browser. Il tuo file non viene caricato, non entra in coda e non viene conservato sui nostri server — semplicemente non lascia mai il tuo dispositivo.",
+	"privacy_point1": "Converti e comprimi in locale, senza caricare nulla",
+	"privacy_point2": "Note dal vivo riconosciute sul dispositivo e salvate nel browser",
+	"privacy_point3": "Le trascrizioni che carichi restano eliminabili in qualsiasi momento",
+	"features_group_1": "Trascrivi",
+	"features_group_1_desc": "Trasforma qualsiasi registrazione in testo preciso e ricercabile.",
+	"features_group_2": "Comprendi",
+	"features_group_2_desc": "Riassunti, analisi e interlocutori — non solo un muro di parole.",
+	"features_group_3": "Gestisci i tuoi media",
+	"features_group_3_desc": "Converti, comprimi e cattura — senza alcun caricamento."
 }

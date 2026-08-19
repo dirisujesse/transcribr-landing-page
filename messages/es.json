@@ -376,5 +376,17 @@
 	"pricing_plan_free_feat8": "3 conversiones de archivos al día, en tu navegador",
 	"pricing_plan_premium_feat8": "Conversión y compresión ilimitadas",
 	"pricing_plan_premium_feat9": "Notas en vivo con reconocimiento en el dispositivo",
-	"pricing_plan_weekly_feat7": "Conversión y notas en vivo ilimitadas"
+	"pricing_plan_weekly_feat7": "Conversión y notas en vivo ilimitadas",
+	"privacy_eyebrow": "Privacidad",
+	"privacy_heading": "Parte de esto nunca llega hasta nosotros",
+	"privacy_body": "Convertir, comprimir y las notas en vivo se ejecutan por completo en tu navegador. Tu archivo no se sube, no entra en ninguna cola y no se guarda en nuestros servidores — sencillamente nunca sale de tu dispositivo.",
+	"privacy_point1": "Convierte y comprime localmente, sin subir nada",
+	"privacy_point2": "Notas en vivo reconocidas en el dispositivo y guardadas en tu navegador",
+	"privacy_point3": "Las transcripciones que sí subes se pueden borrar cuando quieras",
+	"features_group_1": "Transcribir",
+	"features_group_1_desc": "Convierte cualquier grabación en texto preciso y consultable.",
+	"features_group_2": "Comprender",
+	"features_group_2_desc": "Resúmenes, ideas y hablantes — no solo un muro de palabras.",
+	"features_group_3": "Gestiona tus medios",
+	"features_group_3_desc": "Convierte, comprime y captura — todo sin subir nada."
 }

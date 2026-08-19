@@ -376,5 +376,17 @@
 	"pricing_plan_free_feat8": "3 pretvorbe datoteka dnevno, u pregledniku",
 	"pricing_plan_premium_feat8": "Neograničena pretvorba i sažimanje",
 	"pricing_plan_premium_feat9": "Bilješke uživo s prepoznavanjem na uređaju",
-	"pricing_plan_weekly_feat7": "Neograničena pretvorba i bilješke uživo"
+	"pricing_plan_weekly_feat7": "Neograničena pretvorba i bilješke uživo",
+	"privacy_eyebrow": "Privatnost",
+	"privacy_heading": "Dio toga nikada ne dolazi do nas",
+	"privacy_body": "Pretvorba, sažimanje i bilješke uživo rade u potpunosti u vašem pregledniku. Vaša se datoteka ne prenosi, ne čeka u redu i ne pohranjuje na našim poslužiteljima — jednostavno nikada ne napušta vaš uređaj.",
+	"privacy_point1": "Pretvarajte i sažimajte lokalno, bez prijenosa",
+	"privacy_point2": "Bilješke uživo prepoznate na uređaju i spremljene u pregledniku",
+	"privacy_point3": "Prenesene transkripte možete izbrisati u bilo kojem trenutku",
+	"features_group_1": "Transkribiraj",
+	"features_group_1_desc": "Pretvorite snimke u točan tekst koji se može pretraživati.",
+	"features_group_2": "Razumij",
+	"features_group_2_desc": "Sažeci, uvidi i govornici — ne samo zid teksta.",
+	"features_group_3": "Upravljajte medijima",
+	"features_group_3_desc": "Pretvarajte, sažimajte i snimajte — bez ijednog prijenosa."
 }

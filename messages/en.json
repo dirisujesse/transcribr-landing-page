@@ -376,5 +376,17 @@
 	"pricing_plan_free_feat8": "3 file conversions a day, in your browser",
 	"pricing_plan_premium_feat8": "Unlimited conversion & compression",
 	"pricing_plan_premium_feat9": "Live notes with on-device recognition",
-	"pricing_plan_weekly_feat7": "Unlimited conversion & live notes"
+	"pricing_plan_weekly_feat7": "Unlimited conversion & live notes",
+	"privacy_eyebrow": "Privacy",
+	"privacy_heading": "Some of it never reaches us at all",
+	"privacy_body": "Converting, compressing and live notes run entirely in your browser. Your file is not uploaded, not queued, and not stored on our servers — it simply never leaves your device.",
+	"privacy_point1": "Convert and compress locally, nothing uploaded",
+	"privacy_point2": "Live notes recognised on-device and stored in your browser",
+	"privacy_point3": "Transcripts you do upload are deletable at any time",
+	"features_group_1": "Transcribe",
+	"features_group_1_desc": "Turn any recording into accurate, searchable text.",
+	"features_group_2": "Understand",
+	"features_group_2_desc": "Summaries, insights and speakers — not just a wall of words.",
+	"features_group_3": "Handle your media",
+	"features_group_3_desc": "Convert, compress and capture — all without an upload."
 }

@@ -376,5 +376,17 @@
 	"pricing_plan_free_feat8": "3 Dateikonvertierungen täglich, im Browser",
 	"pricing_plan_premium_feat8": "Unbegrenzte Konvertierung & Komprimierung",
 	"pricing_plan_premium_feat9": "Live-Notizen mit Erkennung auf dem Gerät",
-	"pricing_plan_weekly_feat7": "Unbegrenzte Konvertierung & Live-Notizen"
+	"pricing_plan_weekly_feat7": "Unbegrenzte Konvertierung & Live-Notizen",
+	"privacy_eyebrow": "Datenschutz",
+	"privacy_heading": "Vieles erreicht uns nie",
+	"privacy_body": "Konvertieren, Komprimieren und Live-Notizen laufen vollständig in Ihrem Browser. Ihre Datei wird nicht hochgeladen, nicht eingereiht und nicht auf unseren Servern gespeichert — sie verlässt Ihr Gerät schlicht nie.",
+	"privacy_point1": "Lokal konvertieren und komprimieren, nichts wird hochgeladen",
+	"privacy_point2": "Live-Notizen auf dem Gerät erkannt und im Browser gespeichert",
+	"privacy_point3": "Hochgeladene Transkripte jederzeit löschbar",
+	"features_group_1": "Transkribieren",
+	"features_group_1_desc": "Verwandeln Sie Aufnahmen in genauen, durchsuchbaren Text.",
+	"features_group_2": "Verstehen",
+	"features_group_2_desc": "Zusammenfassungen, Erkenntnisse und Sprecher statt einer Textwand.",
+	"features_group_3": "Medien verwalten",
+	"features_group_3_desc": "Konvertieren, komprimieren und aufnehmen — ganz ohne Upload."
 }
