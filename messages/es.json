@@ -403,5 +403,6 @@
 	"demo_unsupported": "Tu navegador no puede hacerlo. Prueba Chrome, Edge o Safari 26 o posterior.",
 	"demo_failed": "No se pudo convertir ese archivo.",
 	"demo_noaudio": "Ese archivo no tiene pista de audio.",
-	"demo_privacy": "Nada salió de tu dispositivo."
+	"demo_privacy": "Nada salió de tu dispositivo.",
+	"nav_converter": "Conversor gratis"
 }

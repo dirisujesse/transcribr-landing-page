@@ -403,5 +403,6 @@
 	"demo_unsupported": "Je browser kan dit niet. Probeer Chrome, Edge of Safari 26 en later.",
 	"demo_failed": "Dat bestand kon niet worden geconverteerd.",
 	"demo_noaudio": "Dat bestand heeft geen audiospoor.",
-	"demo_privacy": "Er is niets van je apparaat verstuurd."
+	"demo_privacy": "Er is niets van je apparaat verstuurd.",
+	"nav_converter": "Gratis converter"
 }

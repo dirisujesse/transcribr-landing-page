@@ -15,6 +15,10 @@ const pathname = Astro.url.pathname.replace(/\/$/, "") || "/";
 
 const nav = [
   {
+    href: localizeHref("/#try", { locale: currentLocale }),
+    label: m.nav_converter(),
+  },
+  {
     href: localizeHref("/features", { locale: currentLocale }),
     label: m.nav_features(),
   },

@@ -403,5 +403,6 @@
 	"demo_unsupported": "Vaš preglednik to ne može. Pokušajte Chrome, Edge ili Safari 26 i noviji.",
 	"demo_failed": "Datoteku nije bilo moguće pretvoriti.",
 	"demo_noaudio": "Ta datoteka nema zvučni zapis.",
-	"demo_privacy": "Ništa nije napustilo vaš uređaj."
+	"demo_privacy": "Ništa nije napustilo vaš uređaj.",
+	"nav_converter": "Besplatni pretvarač"
 }
