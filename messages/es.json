@@ -445,5 +445,19 @@
 	"convert_upgrade_eyebrow": "Para flujos de trabajo habituales",
 	"convert_upgrade_heading": "Elimina el límite diario cuando siguen llegando archivos",
 	"convert_upgrade_body": "El plan gratuito incluye tres conversiones al día. Un plan de pago ofrece conversión y compresión ilimitadas, archivos de hasta 500 MB, lotes persistentes y Live Notes ilimitado.",
-	"convert_upgrade_cta": "Obtener procesamiento ilimitado"
+	"convert_upgrade_cta": "Obtener procesamiento ilimitado",
+	"features_studio_eyebrow": "Estudio privado · Pro",
+	"features_studio_title": "Termina el trabajo sensible antes de que salga de tu dispositivo",
+	"features_studio_desc": "Pro incluye un espacio privado para los últimos pasos entre una grabación original y un texto listo para compartir.",
+	"features_studio_point1": "Abre, edita, ajusta y convierte subtítulos SRT o VTT localmente",
+	"features_studio_point2": "Visualiza la onda, selecciona un rango exacto y exporta un nuevo clip",
+	"features_studio_point3": "Detecta correos, teléfonos, enlaces, tarjetas de pago y direcciones IP",
+	"features_studio_point4": "Oculta nombres o términos personalizados con etiquetas o máscaras, sin subir el texto",
+	"features_teaser_11_title": "Estudio privado · Pro",
+	"features_teaser_11_desc": "Edita subtítulos, corta clips precisos y oculta texto sensible localmente.",
+	"faq_q15_q": "¿Qué incluye el Estudio privado de Pro?",
+	"faq_q15_a": "Incluye un editor y conversor local de SRT/VTT, un editor visual de clips y redacción de datos sensibles. Todo se procesa en el navegador y los archivos fuente no se suben a Transcribr.",
+	"pricing_plan_free_feat9": "Herramientas de Estudio privado",
+	"pricing_plan_weekly_feat8": "Estudio privado Pro",
+	"pricing_plan_premium_feat10": "Estudio privado Pro"
 }

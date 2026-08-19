@@ -445,5 +445,19 @@
 	"convert_upgrade_eyebrow": "Pour les usages réguliers",
 	"convert_upgrade_heading": "Supprimez la limite quotidienne quand les fichiers s’accumulent",
 	"convert_upgrade_body": "L’offre gratuite comprend trois conversions par jour. Une offre payante débloque la conversion et la compression illimitées, les fichiers jusqu’à 500 Mo, les lots persistants et Live Notes illimité.",
-	"convert_upgrade_cta": "Obtenir un traitement illimité"
+	"convert_upgrade_cta": "Obtenir un traitement illimité",
+	"features_studio_eyebrow": "Studio privé · Pro",
+	"features_studio_title": "Finalisez les contenus sensibles avant qu’ils quittent votre appareil",
+	"features_studio_desc": "Pro inclut un atelier privé pour les dernières étapes entre un enregistrement brut et une transcription prête à partager.",
+	"features_studio_point1": "Ouvrez, modifiez, resynchronisez et convertissez des sous-titres SRT ou VTT localement",
+	"features_studio_point2": "Visualisez la forme d’onde, choisissez une plage précise et exportez un extrait",
+	"features_studio_point3": "Détectez e-mails, téléphones, liens, cartes de paiement et adresses IP",
+	"features_studio_point4": "Masquez noms ou termes personnalisés avec des libellés ou des blocs, sans téléversement",
+	"features_teaser_11_title": "Studio privé · Pro",
+	"features_teaser_11_desc": "Modifiez les sous-titres, découpez des extraits précis et masquez les données sensibles localement.",
+	"faq_q15_q": "Que comprend le Studio privé Pro ?",
+	"faq_q15_a": "Il comprend un éditeur-convertisseur SRT/VTT local, un éditeur visuel d’extraits audio et le masquage des données sensibles. Tout s’exécute dans le navigateur sans téléverser les sources vers Transcribr.",
+	"pricing_plan_free_feat9": "Outils du Studio privé",
+	"pricing_plan_weekly_feat8": "Outils Studio privé Pro",
+	"pricing_plan_premium_feat10": "Outils Studio privé Pro"
 }

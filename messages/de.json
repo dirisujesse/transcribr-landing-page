@@ -445,5 +445,19 @@
 	"convert_upgrade_eyebrow": "Für regelmäßige Arbeitsabläufe",
 	"convert_upgrade_heading": "Tageslimit aufheben, wenn immer neue Dateien kommen",
 	"convert_upgrade_body": "Kostenlos sind drei Konvertierungen täglich enthalten. Ein bezahlter Tarif bietet unbegrenzte Konvertierung und Komprimierung, Dateien bis 500 MB, dauerhafte Stapelverarbeitung und unbegrenzte Live Notes.",
-	"convert_upgrade_cta": "Unbegrenzt verarbeiten"
+	"convert_upgrade_cta": "Unbegrenzt verarbeiten",
+	"features_studio_eyebrow": "Privates Studio · Pro",
+	"features_studio_title": "Sensible Inhalte bearbeiten, bevor sie dein Gerät verlassen",
+	"features_studio_desc": "Pro enthält einen privaten Arbeitsbereich für die letzten Schritte zwischen Rohaufnahme und freigabefertigem Transkript.",
+	"features_studio_point1": "SRT- oder VTT-Untertitel lokal öffnen, bearbeiten, zeitlich verschieben und konvertieren",
+	"features_studio_point2": "Wellenform anzeigen, exakten Bereich wählen und einen neuen Audioclip exportieren",
+	"features_studio_point3": "E-Mails, Telefonnummern, Links, Zahlungskarten und IP-Adressen erkennen",
+	"features_studio_point4": "Eigene Namen oder Begriffe mit Labels oder Masken schwärzen—ohne Upload",
+	"features_teaser_11_title": "Privates Studio · Pro",
+	"features_teaser_11_desc": "Untertitel bearbeiten, präzise Clips schneiden und sensible Texte lokal schwärzen.",
+	"faq_q15_q": "Was ist im Pro Private Studio enthalten?",
+	"faq_q15_a": "Private Studio umfasst einen lokalen SRT/VTT-Editor und -Konverter, einen visuellen Wellenform-Clipeditor und die Schwärzung sensibler Daten. Alles läuft im Browser; Quelldateien werden nicht zu Transcribr hochgeladen.",
+	"pricing_plan_free_feat9": "Private-Studio-Bearbeitungstools",
+	"pricing_plan_weekly_feat8": "Pro Private-Studio-Tools",
+	"pricing_plan_premium_feat10": "Pro Private-Studio-Tools"
 }

@@ -445,5 +445,19 @@
 	"convert_upgrade_eyebrow": "Voor regelmatig gebruik",
 	"convert_upgrade_heading": "Haal de daglimiet weg wanneer bestanden blijven komen",
 	"convert_upgrade_body": "Gratis omvat drie conversies per dag. Een betaald abonnement geeft onbeperkte conversie en compressie, bestanden tot 500 MB, blijvende batchtaken en onbeperkte Live Notes.",
-	"convert_upgrade_cta": "Krijg onbeperkte verwerking"
+	"convert_upgrade_cta": "Krijg onbeperkte verwerking",
+	"features_studio_eyebrow": "Privéstudio · Pro",
+	"features_studio_title": "Rond gevoelig werk af voordat het je apparaat verlaat",
+	"features_studio_desc": "Pro bevat een privéwerkbank voor de laatste stappen tussen een ruwe opname en een transcript dat klaar is om te delen.",
+	"features_studio_point1": "Open, bewerk, verschuif en converteer SRT- of VTT-ondertitels lokaal",
+	"features_studio_point2": "Bekijk de golfvorm, kies een exact bereik en exporteer een nieuwe audioclip",
+	"features_studio_point3": "Detecteer e-mails, telefoonnummers, links, betaalkaarten en IP-adressen",
+	"features_studio_point4": "Verberg eigen namen of termen met labels of maskers, zonder upload",
+	"features_teaser_11_title": "Privéstudio · Pro",
+	"features_teaser_11_desc": "Bewerk ondertitels, knip precieze clips en verberg gevoelige tekst lokaal.",
+	"faq_q15_q": "Wat bevat de Pro Privéstudio?",
+	"faq_q15_a": "De Privéstudio bevat een lokale SRT/VTT-editor en converter, een visuele audioclip-editor en redactie van gevoelige gegevens. Alles draait in de browser en bronbestanden worden niet geüpload.",
+	"pricing_plan_free_feat9": "Privéstudio-bewerkingstools",
+	"pricing_plan_weekly_feat8": "Pro Privéstudio-tools",
+	"pricing_plan_premium_feat10": "Pro Privéstudio-tools"
 }

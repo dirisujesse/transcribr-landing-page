@@ -137,6 +137,20 @@ const features = [
     reverse: false,
   },
   {
+    id: "private-studio",
+    eyebrow: m.features_studio_eyebrow(),
+    title: m.features_studio_title(),
+    description: m.features_studio_desc(),
+    points: [
+      m.features_studio_point1(),
+      m.features_studio_point2(),
+      m.features_studio_point3(),
+      m.features_studio_point4(),
+    ],
+    visual: "export" as const,
+    reverse: true,
+  },
+  {
     id: "workspace",
     eyebrow: m.features_workspace_eyebrow(),
     title: m.features_workspace_title(),
@@ -148,7 +162,7 @@ const features = [
       m.features_workspace_point4(),
     ],
     visual: "dashboard" as const,
-    reverse: true,
+    reverse: false,
   },
 ];
 ---

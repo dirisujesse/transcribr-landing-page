@@ -445,5 +445,19 @@
 	"convert_upgrade_eyebrow": "Za redovite radne tijekove",
 	"convert_upgrade_heading": "Uklonite dnevno ograničenje kada datoteke stalno pristižu",
 	"convert_upgrade_body": "Besplatni plan uključuje tri pretvorbe dnevno. Plaćeni plan donosi neograničenu pretvorbu i kompresiju, datoteke do 500 MB, trajne skupne zadatke i neograničene Live Notes.",
-	"convert_upgrade_cta": "Dobijte neograničenu obradu"
+	"convert_upgrade_cta": "Dobijte neograničenu obradu",
+	"features_studio_eyebrow": "Privatni studio · Pro",
+	"features_studio_title": "Dovršite osjetljiv sadržaj prije nego napusti vaš uređaj",
+	"features_studio_desc": "Pro uključuje privatni radni prostor za završne korake između sirove snimke i prijepisa spremnog za dijeljenje.",
+	"features_studio_point1": "Lokalno otvorite, uredite, pomaknite i pretvorite SRT ili VTT titlove",
+	"features_studio_point2": "Prikažite valni oblik, odaberite točan raspon i izvezite novi audioisječak",
+	"features_studio_point3": "Otkrijte e-poštu, telefone, poveznice, platne kartice i IP adrese",
+	"features_studio_point4": "Sakrijte prilagođena imena ili pojmove oznakama ili maskama, bez prijenosa",
+	"features_teaser_11_title": "Privatni studio · Pro",
+	"features_teaser_11_desc": "Uredite titlove, izrežite precizne isječke i lokalno sakrijte osjetljiv tekst.",
+	"faq_q15_q": "Što uključuje Pro Privatni studio?",
+	"faq_q15_a": "Uključuje lokalni SRT/VTT uređivač i pretvarač, vizualni uređivač audioisječaka i uklanjanje osjetljivih podataka. Obrada se odvija u pregledniku bez prijenosa izvornih datoteka.",
+	"pricing_plan_free_feat9": "Alati Privatnog studija",
+	"pricing_plan_weekly_feat8": "Pro alati Privatnog studija",
+	"pricing_plan_premium_feat10": "Pro alati Privatnog studija"
 }
