@@ -211,7 +211,7 @@
 	"faq_group_plans": "Tarife & Abrechnung",
 	"faq_group_privacy": "Datenschutz & Export",
 	"faq_q1_q": "Welche Dateiformate und -größen werden unterstützt?",
-	"faq_q1_a": "Wir unterstützen MP3-, MP4-, WAV- und M4A-Audio- und Videodateien bis zu 100 MB und einer Dauer von etwa 1 Stunde. Sie können auch einen YouTube-Link oder eine direkte URL zu einer online gehosteten Datei einfügen. Wir erweitern die Formatunterstützung kontinuierlich basierend auf den Wünschen unserer Nutzer.",
+	"faq_q1_a": "Wir unterstützen MP3, WAV, M4A, AAC, FLAC, AIFF, OGG, Opus, AMR und WMA sowie MP4, MOV, MPEG, WebM, MKV, AVI, WMV und 3GP — bis zu 100 MB im kostenlosen Tarif und 200 MB mit Pro. Sie können auch einen YouTube-Link oder eine direkte Datei-URL einfügen.",
 	"faq_q2_q": "Wie lange dauert die Transkription?",
 	"faq_q2_a": "Die Verarbeitung dauert in der Regel nur einen Bruchteil der ursprünglichen Länge – oft nur wenige Minuten für eine kurze Besprechung. Die Stufen Schnell, Standard und Premium wägen Geschwindigkeit gegen Genauigkeit ab. Die genaue Zeit hängt von der Audiolänge, der Komplexität und der aktuellen Serverauslastung ab.",
 	"faq_q3_q": "Welche Sprachen werden unterstützt?",

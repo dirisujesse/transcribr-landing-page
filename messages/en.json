@@ -211,7 +211,7 @@
 	"faq_group_plans": "Plans & billing",
 	"faq_group_privacy": "Privacy & export",
 	"faq_q1_q": "What file formats and sizes are supported?",
-	"faq_q1_a": "We support MP3, MP4, WAV, and M4A audio and video files up to 100MB and about 1 hour in duration. You can also paste a YouTube link or a direct URL to a file hosted online. We're continuously expanding format support based on user needs.",
+	"faq_q1_a": "We support MP3, WAV, M4A, AAC, FLAC, AIFF, OGG, Opus, AMR and WMA audio, and MP4, MOV, MPEG, WebM, MKV, AVI, WMV and 3GP video — up to 100MB on the free plan and 200MB on Pro. You can also paste a YouTube link or a direct URL to a file hosted online.",
 	"faq_q2_q": "How long does transcription take?",
 	"faq_q2_a": "Processing is typically a fraction of the original length — often in the range of a few minutes for a short meeting. Quick, Standard, and Premium tiers trade speed for accuracy. Exact times depend on audio length, complexity, and current load.",
 	"faq_q3_q": "What languages are supported?",

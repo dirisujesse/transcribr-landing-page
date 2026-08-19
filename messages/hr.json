@@ -211,7 +211,7 @@
 	"faq_group_plans": "Planovi i naplata",
 	"faq_group_privacy": "Privatnost i izvoz",
 	"faq_q1_q": "Koji su formati i veličine datoteka podržani?",
-	"faq_q1_a": "Podržavamo MP3, MP4, WAV i M4A audio i video datoteke veličine do 100 MB i trajanja oko 1 sat. Također možete zalijepiti YouTube poveznicu ili izravni URL do datoteke na mreži. Kontinuirano proširujemo podršku za formate na temelju potreba korisnika.",
+	"faq_q1_a": "Podržavamo MP3, WAV, M4A, AAC, FLAC, AIFF, OGG, Opus, AMR i WMA te MP4, MOV, MPEG, WebM, MKV, AVI, WMV i 3GP — do 100 MB u besplatnom planu i 200 MB uz Pro. Možete zalijepiti i YouTube poveznicu ili izravni URL datoteke.",
 	"faq_q2_q": "Koliko traje transkripcija?",
 	"faq_q2_a": "Obrada obično traje samo dio izvornog trajanja snimke — često nekoliko minuta za kratki sastanak. Brza, Standardna i Premium razina balansiraju brzinu i točnost. Točno vrijeme ovisi o duljini zvuka, složenosti i trenutnom opterećenju.",
 	"faq_q3_q": "Koji su jezici podržani?",

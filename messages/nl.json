@@ -211,7 +211,7 @@
 	"faq_group_plans": "Abonnementen & facturering",
 	"faq_group_privacy": "Privacy & exporteren",
 	"faq_q1_q": "Welke bestandsformaten en -groottes worden ondersteund?",
-	"faq_q1_a": "We ondersteunen MP3-, MP4-, WAV- en M4A-audio- en videobestanden tot 100 MB en met een duur van ongeveer 1 uur. Je kunt ook een YouTube-link of een directe URL naar een online bestand plakken. We breiden de ondersteuning voor formaten continu uit op basis van feedback van gebruikers.",
+	"faq_q1_a": "We ondersteunen MP3, WAV, M4A, AAC, FLAC, AIFF, OGG, Opus, AMR en WMA, en MP4, MOV, MPEG, WebM, MKV, AVI, WMV en 3GP — tot 100 MB in het gratis plan en 200 MB met Pro. Je kunt ook een YouTube-link of een directe bestands-URL plakken.",
 	"faq_q2_q": "Hoe lang duurt de transcriptie?",
 	"faq_q2_a": "Het verwerken van een opname kost meestal een fractie van de originele duur — vaak slechts enkele minuten voor een korte vergadering. De niveaus Snel, Standaard en Premium wisselen snelheid uit voor nauwkeurigheid. De exacte tijd is afhankelijk van de lengte, complexiteit en huidige serverbelasting.",
 	"faq_q3_q": "Welke talen worden ondersteund?",

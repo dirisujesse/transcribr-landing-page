@@ -211,7 +211,7 @@
 	"faq_group_plans": "Offres & facturation",
 	"faq_group_privacy": "Confidentialité & export",
 	"faq_q1_q": "Quels formats et tailles de fichiers sont pris en charge ?",
-	"faq_q1_a": "Nous prenons en charge les fichiers audio et vidéo MP3, MP4, WAV et M4A jusqu'à 100 Mo et environ 1 heure. Vous pouvez également coller un lien YouTube ou une URL directe vers un fichier en ligne. Nous élargissons continuellement les formats pris en charge selon les besoins.",
+	"faq_q1_a": "Nous prenons en charge MP3, WAV, M4A, AAC, FLAC, AIFF, OGG, Opus, AMR et WMA, ainsi que MP4, MOV, MPEG, WebM, MKV, AVI, WMV et 3GP — jusqu’à 100 Mo avec l’offre gratuite et 200 Mo avec Pro. Vous pouvez aussi coller un lien YouTube ou l’URL directe d’un fichier.",
 	"faq_q2_q": "Combien de temps prend la transcription ?",
 	"faq_q2_a": "Le traitement prend généralement une fraction de la durée d'origine — souvent quelques minutes pour une réunion courte. Les niveaux Rapide, Standard et Premium équilibrent vitesse et précision. Les temps exacts dépendent de la longueur de l'audio, de sa complexité et de la charge actuelle du service.",
 	"faq_q3_q": "Quelles langues sont prises en charge ?",
