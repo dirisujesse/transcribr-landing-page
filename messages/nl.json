@@ -388,5 +388,20 @@
 	"features_group_2": "Begrijpen",
 	"features_group_2_desc": "Samenvattingen, inzichten en sprekers — geen muur van tekst.",
 	"features_group_3": "Beheer je media",
-	"features_group_3_desc": "Converteer, comprimeer en leg vast — zonder te uploaden."
+	"features_group_3_desc": "Converteer, comprimeer en leg vast — zonder te uploaden.",
+	"demo_eyebrow": "Probeer het nu",
+	"demo_heading": "Converteer een bestand zonder account",
+	"demo_body": "Kies een bestand en zie het converteren. Geen registratie, geen upload, geen server — dit draait in het tabblad dat je nu leest.",
+	"demo_pick": "Kies een bestand",
+	"demo_hint": "Audio of video, elke grootte",
+	"demo_format": "Converteren naar",
+	"demo_go": "Converteren",
+	"demo_working": "Bezig…",
+	"demo_download": "Downloaden",
+	"demo_again": "Nog een proberen",
+	"demo_result": "{from} → {to}",
+	"demo_unsupported": "Je browser kan dit niet. Probeer Chrome, Edge of Safari 26 en later.",
+	"demo_failed": "Dat bestand kon niet worden geconverteerd.",
+	"demo_noaudio": "Dat bestand heeft geen audiospoor.",
+	"demo_privacy": "Er is niets van je apparaat verstuurd."
 }

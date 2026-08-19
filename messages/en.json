@@ -388,5 +388,20 @@
 	"features_group_2": "Understand",
 	"features_group_2_desc": "Summaries, insights and speakers — not just a wall of words.",
 	"features_group_3": "Handle your media",
-	"features_group_3_desc": "Convert, compress and capture — all without an upload."
+	"features_group_3_desc": "Convert, compress and capture — all without an upload.",
+	"demo_eyebrow": "Try it now",
+	"demo_heading": "Convert a file without an account",
+	"demo_body": "Pick a file and watch it convert. No signup, no upload, no server — this runs in the tab you are reading.",
+	"demo_pick": "Choose a file",
+	"demo_hint": "Audio or video, any size",
+	"demo_format": "Convert to",
+	"demo_go": "Convert",
+	"demo_working": "Converting…",
+	"demo_download": "Download",
+	"demo_again": "Try another",
+	"demo_result": "{from} → {to}",
+	"demo_unsupported": "Your browser cannot do this. Try Chrome, Edge, or Safari 26 and later.",
+	"demo_failed": "That file could not be converted.",
+	"demo_noaudio": "That file has no audio track.",
+	"demo_privacy": "Nothing left your device."
 }

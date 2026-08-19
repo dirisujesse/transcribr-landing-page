@@ -1,0 +1,391 @@
+---
+import { m } from "../paraglide/messages.js";
+
+/**
+ * A working converter on the marketing page.
+ *
+ * The claim above this section is that conversion happens in the browser and
+ * nothing is uploaded. This is the proof: a real conversion, no account, no
+ * network call. It is also a demo a competitor with a server-side pipeline
+ * cannot copy without building the same thing.
+ *
+ * mediabunny is ~640KB, far too much to load with the page, so it is imported
+ * only once someone actually picks a file. Until then this costs a few hundred
+ * bytes of markup.
+ */
+---
+
+<section class="section" id="try">
+  <div class="container-page">
+    <div class="mx-auto max-w-3xl text-center" data-animate>
+      <p class="mb-3 text-sm font-semibold uppercase tracking-wider text-primary">
+        {m.demo_eyebrow()}
+      </p>
+      <h2 class="text-3xl font-bold tracking-tight text-balance text-foreground md:text-4xl">
+        {m.demo_heading()}
+      </h2>
+      <p class="mt-4 text-lg leading-relaxed text-muted-foreground">
+        {m.demo_body()}
+      </p>
+    </div>
+
+    <div
+      class="mx-auto mt-10 max-w-xl rounded-3xl border border-border bg-white p-6 shadow-sm"
+      data-animate
+      data-demo
+      data-msg-failed={m.demo_failed()}
+      data-msg-noaudio={m.demo_noaudio()}
+      data-msg-pick={m.demo_pick()}
+      data-msg-hint={m.demo_hint()}
+    >
+      <!-- Hidden until the script confirms the browser can encode. Without JS,
+           or without WebCodecs, the section simply shows the fallback note. -->
+      <div data-demo-unsupported hidden>
+        <p class="text-center text-sm text-muted-foreground">
+          {m.demo_unsupported()}
+        </p>
+      </div>
+
+      <div data-demo-ui hidden>
+        <button
+          type="button"
+          data-demo-pick
+          class="flex w-full flex-col items-center gap-2 rounded-2xl border border-dashed border-border p-8 text-center transition hover:border-primary"
+        >
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" class="text-muted-foreground" aria-hidden="true">
+            <path d="M12 3v12M7 8l5-5 5 5M5 21h14"></path>
+          </svg>
+          <span class="font-semibold text-foreground" data-demo-name>{m.demo_pick()}</span>
+          <span class="text-sm text-muted-foreground" data-demo-size>{m.demo_hint()}</span>
+        </button>
+        <input type="file" accept="audio/*,video/*" class="hidden" data-demo-input />
+
+        <div class="mt-4 flex flex-wrap items-center justify-center gap-2" data-demo-formats></div>
+
+        <button
+          type="button"
+          data-demo-go
+          class="btn-primary mt-4 w-full justify-center disabled:cursor-not-allowed disabled:opacity-50"
+          disabled
+        >
+          {m.demo_go()}
+        </button>
+
+        <div class="mt-4 hidden" data-demo-progress-wrap>
+          <div class="h-2 w-full overflow-hidden rounded-full bg-muted">
+            <div class="h-full w-0 rounded-full bg-primary transition-all" data-demo-progress></div>
+          </div>
+          <p class="mt-2 text-center text-sm text-muted-foreground">{m.demo_working()}</p>
+        </div>
+
+        <div class="mt-4 hidden rounded-2xl border border-border bg-muted/30 p-4 text-center" data-demo-result>
+          <p class="text-sm text-foreground" data-demo-result-text></p>
+          <p class="mt-1 text-xs text-primary">{m.demo_privacy()}</p>
+          <div class="mt-3 flex flex-wrap justify-center gap-2">
+            <button type="button" class="btn-primary" data-demo-download>{m.demo_download()}</button>
+            <button type="button" class="btn-secondary" data-demo-reset>{m.demo_again()}</button>
+          </div>
+        </div>
+
+        <p class="mt-3 hidden text-center text-sm text-destructive" data-demo-error></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  type Target = {
+    id: string;
+    label: string;
+    ext: string;
+    mime: string;
+    codec: string;
+    make: (lib: any) => any;
+  };
+
+  const TARGETS: Target[] = [
+    { id: "mp3", label: "MP3", ext: "mp3", mime: "audio/mpeg", codec: "mp3", make: (l) => new l.Mp3OutputFormat() },
+    { id: "m4a", label: "M4A", ext: "aac", mime: "audio/aac", codec: "aac", make: (l) => new l.AdtsOutputFormat() },
+    { id: "ogg", label: "OGG", ext: "ogg", mime: "audio/ogg", codec: "opus", make: (l) => new l.OggOutputFormat() },
+    { id: "wav", label: "WAV", ext: "wav", mime: "audio/wav", codec: "pcm-s16", make: (l) => new l.WavOutputFormat() },
+  ];
+
+  function humanSize(bytes: number): string {
+    if (!bytes) return "0 KB";
+    const units = ["B", "KB", "MB", "GB"];
+    const i = Math.floor(Math.log(bytes) / Math.log(1024));
+    return `${(bytes / Math.pow(1024, i)).toFixed(i === 0 ? 0 : 1)} ${units[i]}`;
+  }
+
+  const root = document.querySelector<HTMLElement>("[data-demo]");
+  if (root) {
+    const ui = root.querySelector<HTMLElement>("[data-demo-ui]")!;
+    const unsupported = root.querySelector<HTMLElement>("[data-demo-unsupported]")!;
+    const input = root.querySelector<HTMLInputElement>("[data-demo-input]")!;
+    const pick = root.querySelector<HTMLButtonElement>("[data-demo-pick]")!;
+    const nameEl = root.querySelector<HTMLElement>("[data-demo-name]")!;
+    const sizeEl = root.querySelector<HTMLElement>("[data-demo-size]")!;
+    const formatsEl = root.querySelector<HTMLElement>("[data-demo-formats]")!;
+    const goBtn = root.querySelector<HTMLButtonElement>("[data-demo-go]")!;
+    const progressWrap = root.querySelector<HTMLElement>("[data-demo-progress-wrap]")!;
+    const progressBar = root.querySelector<HTMLElement>("[data-demo-progress]")!;
+    const resultEl = root.querySelector<HTMLElement>("[data-demo-result]")!;
+    const resultText = root.querySelector<HTMLElement>("[data-demo-result-text]")!;
+    const downloadBtn = root.querySelector<HTMLButtonElement>("[data-demo-download]")!;
+    const resetBtn = root.querySelector<HTMLButtonElement>("[data-demo-reset]")!;
+    const errorEl = root.querySelector<HTMLElement>("[data-demo-error]")!;
+
+    let lib: any = null;
+    let file: File | null = null;
+    let chosen = TARGETS[0];
+    let output: { blob: Blob; name: string } | null = null;
+    let available: Target[] = [];
+
+    const strings = {
+      failed: root.dataset.msgFailed ?? "That file could not be converted.",
+      noAudio: root.dataset.msgNoaudio ?? "That file has no audio track.",
+      pick: root.dataset.msgPick ?? "Choose a file",
+      hint: root.dataset.msgHint ?? "Audio or video, any size",
+    };
+
+    /**
+     * Loads the media library, and teaches it MP3.
+     *
+     * No browser exposes an MP3 encoder through WebCodecs, but MP3 is the
+     * format visitors expect a converter to produce. mediabunny's
+     * registerEncoder hook lets a JavaScript encoder fill that one gap while
+     * the library still handles demuxing, resampling and muxing.
+     *
+     * Both are loaded on demand — together they dwarf the rest of the page.
+     */
+    async function load() {
+      if (lib) return lib;
+
+      const [media, lame] = await Promise.all([
+        import("mediabunny"),
+        import("@breezystack/lamejs"),
+      ]);
+
+      const SPF = 1152;
+      const BLOCK = SPF * 4;
+
+      class LameMp3Encoder extends media.CustomAudioEncoder {
+        static supports(codec: string, config: any) {
+          return (
+            codec === "mp3" &&
+            (config.numberOfChannels === 1 || config.numberOfChannels === 2) &&
+            [32000, 44100, 48000].includes(config.sampleRate)
+          );
+        }
+        enc: any; left!: Int16Array; right!: Int16Array;
+        pending = 0; emitted = 0; channels = 2; rate = 44100;
+
+        init() {
+          this.channels = (this as any).config.numberOfChannels;
+          this.rate = (this as any).config.sampleRate;
+          const kbps = Math.max(32, Math.round(((this as any).config.bitrate ?? 128000) / 1000));
+          this.enc = new lame.Mp3Encoder(this.channels, this.rate, kbps);
+          this.left = new Int16Array(BLOCK);
+          this.right = new Int16Array(BLOCK);
+          this.pending = 0;
+          this.emitted = 0;
+        }
+        encode(sample: any) {
+          const size = sample.allocationSize({ planeIndex: 0, format: "s16" });
+          const inter = new Int16Array(new ArrayBuffer(size));
+          sample.copyTo(inter, { planeIndex: 0, format: "s16" });
+          for (let f = 0; f < sample.numberOfFrames; f++) {
+            this.left[this.pending] = inter[f * this.channels] ?? 0;
+            if (this.channels === 2) this.right[this.pending] = inter[f * this.channels + 1] ?? 0;
+            if (++this.pending === BLOCK) this.drain();
+          }
+        }
+        flush() {
+          if (this.pending) this.drain();
+          const tail = this.enc.flush();
+          if (tail?.length) this.emit(tail, 0);
+        }
+        close() { this.enc = null; }
+        drain() {
+          const consumed = this.pending;
+          const l = this.left.subarray(0, consumed);
+          const data = this.channels === 2
+            ? this.enc.encodeBuffer(l, this.right.subarray(0, consumed))
+            : this.enc.encodeBuffer(l);
+          this.pending = 0;
+          this.emit(data ?? new Uint8Array(0), consumed);
+        }
+        emit(data: any, consumed: number) {
+          if (!data.byteLength && !consumed) return;
+          const bytes = data instanceof Uint8Array
+            ? data
+            : new Uint8Array(data.buffer, data.byteOffset, data.byteLength);
+          const ts = this.emitted / this.rate;
+          const dur = consumed / this.rate;
+          this.emitted += consumed;
+          if (!bytes.byteLength) return;
+          (this as any).onPacket(new media.EncodedPacket(new Uint8Array(bytes), "key", ts, dur));
+        }
+      }
+
+      media.registerEncoder(LameMp3Encoder as any);
+      lib = media;
+      return lib;
+    }
+
+    function showError(message: string) {
+      errorEl.textContent = message;
+      errorEl.classList.remove("hidden");
+    }
+
+    function renderFormats() {
+      formatsEl.innerHTML = "";
+      for (const target of available) {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.textContent = target.label;
+        button.className =
+          "rounded-lg border px-3 py-1.5 text-sm transition " +
+          (chosen.id === target.id
+            ? "border-primary bg-primary/10 text-primary"
+            : "border-border text-muted-foreground hover:border-primary/50");
+        button.addEventListener("click", () => {
+          chosen = target;
+          renderFormats();
+        });
+        formatsEl.appendChild(button);
+      }
+    }
+
+    async function detect() {
+      if (typeof (window as any).AudioEncoder === "undefined") {
+        unsupported.hidden = false;
+        ui.hidden = true;
+        return;
+      }
+
+      const l = await load();
+      const checks = await Promise.all(
+        TARGETS.map(async (t) => ((await l.canEncodeAudio(t.codec)) ? t : null)),
+      );
+      available = checks.filter(Boolean) as Target[];
+
+      if (!available.length) {
+        unsupported.hidden = false;
+        ui.hidden = true;
+        return;
+      }
+
+      chosen = available[0];
+      renderFormats();
+    }
+
+    // The picker is shown immediately. Detection is what needs the library, and
+    // an earlier version gated the whole UI behind the IntersectionObserver —
+    // if that never fired the visitor got an empty box with no explanation.
+    ui.hidden = false;
+
+    let detecting: Promise<void> | null = null;
+    const detectOnce = () => (detecting ??= detect());
+
+    // Warm the library when the section comes into view, so the first click is
+    // instant, but never depend on it having happened.
+    if (typeof IntersectionObserver !== "undefined") {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          if (!entries.some((e) => e.isIntersecting)) return;
+          observer.disconnect();
+          detectOnce();
+        },
+        { rootMargin: "200px" },
+      );
+      observer.observe(root);
+    } else {
+      detectOnce();
+    }
+
+    pick.addEventListener("click", async () => {
+      await detectOnce();
+      input.click();
+    });
+
+    input.addEventListener("change", () => {
+      const picked = input.files?.[0];
+      if (!picked) return;
+      file = picked;
+      output = null;
+      nameEl.textContent = picked.name;
+      sizeEl.textContent = humanSize(picked.size);
+      goBtn.disabled = false;
+      resultEl.classList.add("hidden");
+      errorEl.classList.add("hidden");
+    });
+
+    goBtn.addEventListener("click", async () => {
+      if (!file) return;
+
+      goBtn.disabled = true;
+      errorEl.classList.add("hidden");
+      resultEl.classList.add("hidden");
+      progressWrap.classList.remove("hidden");
+      progressBar.style.width = "0%";
+
+      try {
+        const l = await load();
+        const input_ = new l.Input({ source: new l.BlobSource(file), formats: l.ALL_FORMATS });
+
+        if (!(await input_.getPrimaryAudioTrack())) {
+          throw new Error("no-audio");
+        }
+
+        const out = new l.Output({ format: chosen.make(l), target: new l.BufferTarget() });
+        const conversion = await l.Conversion.init({
+          input: input_,
+          output: out,
+          audio: { codec: chosen.codec, ...(chosen.codec === "pcm-s16" ? {} : { bitrate: 128000 }) },
+          video: { discard: true },
+        });
+
+        conversion.onProgress = (p: number) => {
+          progressBar.style.width = `${Math.round(p * 100)}%`;
+        };
+
+        if (!conversion.isValid) throw new Error("invalid");
+        await conversion.execute();
+
+        const buffer = out.target.buffer as ArrayBuffer;
+        const base = file.name.replace(/\.[^.]+$/, "") || "converted";
+        output = { blob: new Blob([buffer], { type: chosen.mime }), name: `${base}.${chosen.ext}` };
+
+        resultText.textContent = `${humanSize(file.size)} → ${humanSize(buffer.byteLength)}`;
+        resultEl.classList.remove("hidden");
+      } catch (e) {
+        showError((e as Error)?.message === "no-audio" ? strings.noAudio : strings.failed);
+      } finally {
+        progressWrap.classList.add("hidden");
+        goBtn.disabled = false;
+      }
+    });
+
+    downloadBtn.addEventListener("click", () => {
+      if (!output) return;
+      const url = URL.createObjectURL(output.blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = output.name;
+      a.click();
+      URL.revokeObjectURL(url);
+    });
+
+    resetBtn.addEventListener("click", () => {
+      file = null;
+      output = null;
+      input.value = "";
+      goBtn.disabled = true;
+      resultEl.classList.add("hidden");
+      errorEl.classList.add("hidden");
+      nameEl.textContent = strings.pick;
+      sizeEl.textContent = strings.hint;
+    });
+  }
+</script>

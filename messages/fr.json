@@ -388,5 +388,20 @@
 	"features_group_2": "Comprendre",
 	"features_group_2_desc": "Résumés, analyses et intervenants — pas seulement un mur de texte.",
 	"features_group_3": "Gérer vos médias",
-	"features_group_3_desc": "Convertissez, compressez et capturez — sans aucun téléversement."
+	"features_group_3_desc": "Convertissez, compressez et capturez — sans aucun téléversement.",
+	"demo_eyebrow": "Essayez maintenant",
+	"demo_heading": "Convertissez un fichier sans compte",
+	"demo_body": "Choisissez un fichier et regardez-le se convertir. Sans inscription, sans téléversement, sans serveur — tout se passe dans l’onglet que vous lisez.",
+	"demo_pick": "Choisir un fichier",
+	"demo_hint": "Audio ou vidéo, toute taille",
+	"demo_format": "Convertir en",
+	"demo_go": "Convertir",
+	"demo_working": "Conversion…",
+	"demo_download": "Télécharger",
+	"demo_again": "En essayer un autre",
+	"demo_result": "{from} → {to}",
+	"demo_unsupported": "Votre navigateur ne peut pas le faire. Essayez Chrome, Edge ou Safari 26 ou ultérieur.",
+	"demo_failed": "Ce fichier n’a pas pu être converti.",
+	"demo_noaudio": "Ce fichier ne contient pas de piste audio.",
+	"demo_privacy": "Rien n’a quitté votre appareil."
 }

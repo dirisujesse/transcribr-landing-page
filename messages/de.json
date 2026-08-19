@@ -388,5 +388,20 @@
 	"features_group_2": "Verstehen",
 	"features_group_2_desc": "Zusammenfassungen, Erkenntnisse und Sprecher statt einer Textwand.",
 	"features_group_3": "Medien verwalten",
-	"features_group_3_desc": "Konvertieren, komprimieren und aufnehmen — ganz ohne Upload."
+	"features_group_3_desc": "Konvertieren, komprimieren und aufnehmen — ganz ohne Upload.",
+	"demo_eyebrow": "Jetzt ausprobieren",
+	"demo_heading": "Datei konvertieren — ohne Konto",
+	"demo_body": "Wählen Sie eine Datei und sehen Sie zu. Keine Anmeldung, kein Upload, kein Server — das läuft im Tab, den Sie gerade lesen.",
+	"demo_pick": "Datei wählen",
+	"demo_hint": "Audio oder Video, beliebige Größe",
+	"demo_format": "Konvertieren zu",
+	"demo_go": "Konvertieren",
+	"demo_working": "Wird konvertiert…",
+	"demo_download": "Herunterladen",
+	"demo_again": "Weitere probieren",
+	"demo_result": "{from} → {to}",
+	"demo_unsupported": "Ihr Browser kann das nicht. Versuchen Sie Chrome, Edge oder Safari 26 und neuer.",
+	"demo_failed": "Diese Datei konnte nicht konvertiert werden.",
+	"demo_noaudio": "Diese Datei enthält keine Tonspur.",
+	"demo_privacy": "Nichts hat Ihr Gerät verlassen."
 }

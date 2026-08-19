@@ -388,5 +388,20 @@
 	"features_group_2": "Razumij",
 	"features_group_2_desc": "Sažeci, uvidi i govornici — ne samo zid teksta.",
 	"features_group_3": "Upravljajte medijima",
-	"features_group_3_desc": "Pretvarajte, sažimajte i snimajte — bez ijednog prijenosa."
+	"features_group_3_desc": "Pretvarajte, sažimajte i snimajte — bez ijednog prijenosa.",
+	"demo_eyebrow": "Isprobajte odmah",
+	"demo_heading": "Pretvorite datoteku bez računa",
+	"demo_body": "Odaberite datoteku i gledajte pretvorbu. Bez registracije, bez prijenosa, bez poslužitelja — sve se odvija u kartici koju čitate.",
+	"demo_pick": "Odaberi datoteku",
+	"demo_hint": "Zvuk ili video, bilo koje veličine",
+	"demo_format": "Pretvori u",
+	"demo_go": "Pretvori",
+	"demo_working": "Pretvaranje…",
+	"demo_download": "Preuzmi",
+	"demo_again": "Pokušaj s drugom",
+	"demo_result": "{from} → {to}",
+	"demo_unsupported": "Vaš preglednik to ne može. Pokušajte Chrome, Edge ili Safari 26 i noviji.",
+	"demo_failed": "Datoteku nije bilo moguće pretvoriti.",
+	"demo_noaudio": "Ta datoteka nema zvučni zapis.",
+	"demo_privacy": "Ništa nije napustilo vaš uređaj."
 }
