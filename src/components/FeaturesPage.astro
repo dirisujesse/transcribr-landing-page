@@ -116,6 +116,8 @@ const features = [
       m.features_converter_point4(),
       m.features_converter_point5(),
       m.features_converter_point6(),
+      m.features_converter_point7(),
+      m.features_converter_point8(),
     ],
     visual: "export" as const,
     reverse: true,
@@ -132,9 +134,30 @@ const features = [
       m.features_livenotes_point4(),
       m.features_livenotes_point5(),
       m.features_livenotes_point6(),
+      m.features_livenotes_point7(),
+      m.features_livenotes_point8(),
     ],
     visual: "processing" as const,
     reverse: false,
+  },
+  {
+    /*
+      The obvious objection to local-only storage is that a cleared browser
+      takes the notes with it. Answering it next to Live Notes, rather than in
+      a bullet, is what makes the local-first story survivable long term.
+    */
+    id: "backup",
+    eyebrow: m.features_backup_eyebrow(),
+    title: m.features_backup_title(),
+    description: m.features_backup_desc(),
+    points: [
+      m.features_backup_point1(),
+      m.features_backup_point2(),
+      m.features_backup_point3(),
+      m.features_backup_point4(),
+    ],
+    visual: "export" as const,
+    reverse: true,
   },
   {
     id: "private-studio",
@@ -146,9 +169,12 @@ const features = [
       m.features_studio_point2(),
       m.features_studio_point3(),
       m.features_studio_point4(),
+      m.features_studio_point5(),
+      m.features_studio_point6(),
+      m.features_studio_point7(),
     ],
     visual: "export" as const,
-    reverse: true,
+    reverse: false,
   },
   {
     id: "workspace",
@@ -162,7 +188,7 @@ const features = [
       m.features_workspace_point4(),
     ],
     visual: "dashboard" as const,
-    reverse: false,
+    reverse: true,
   },
 ];
 ---

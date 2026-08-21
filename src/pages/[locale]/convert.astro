@@ -41,6 +41,9 @@ const schema = {
     "Preserve the source audio codec when compressing",
     "Extract clips by start and end time",
     "Queue multiple conversion jobs locally",
+    "Convert very large files by streaming to a file you choose instead of memory",
+    "Estimate the output size before converting",
+    "Play the converted audio before downloading it",
   ],
   browserRequirements: "Requires a browser with WebCodecs support",
 };
@@ -71,7 +74,7 @@ const schema = {
 
   <section class="section-muted">
     <div class="container-page">
-      <div class="mx-auto grid max-w-5xl gap-10 md:grid-cols-2">
+      <div class="mx-auto grid max-w-5xl gap-10 md:grid-cols-2 lg:grid-cols-3">
         <div data-animate>
           <h2
             class="text-2xl font-bold tracking-tight text-foreground md:text-3xl"
@@ -102,6 +105,22 @@ const schema = {
           </h2>
           <p class="mt-4 text-sm leading-relaxed text-muted-foreground">
             {m.convert_why_body()}
+          </p>
+        </div>
+
+        {/*
+          The size ceiling is the usual reason a browser-based converter is
+          dismissed out of hand, so it is answered on the page rather than left
+          for the visitor to discover by crashing a tab.
+        */}
+        <div data-animate>
+          <h2
+            class="text-2xl font-bold tracking-tight text-foreground md:text-3xl"
+          >
+            {m.convert_large_title()}
+          </h2>
+          <p class="mt-4 text-sm leading-relaxed text-muted-foreground">
+            {m.convert_large_body()}
           </p>
         </div>
       </div>

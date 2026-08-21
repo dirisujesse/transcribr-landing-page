@@ -35,6 +35,8 @@ import { m } from "../paraglide/messages.js";
       data-demo
       data-msg-failed={m.demo_failed()}
       data-msg-noaudio={m.demo_noaudio()}
+      data-msg-badformat={m.demo_badformat()}
+      data-msg-toolarge={m.demo_toolarge()}
       data-msg-pick={m.demo_pick()}
       data-msg-hint={m.demo_hint()}
       data-msg-sample-loading={m.demo_sample_loading()}
@@ -90,6 +92,16 @@ import { m } from "../paraglide/messages.js";
             <div class="h-full w-0 rounded-full bg-primary transition-all" data-demo-progress></div>
           </div>
           <p class="mt-2 text-center text-sm text-muted-foreground">{m.demo_working()}</p>
+          <!-- A conversion on the main thread can take a while on a long file,
+               and a visitor who only wanted to see it work should never be stuck
+               watching it finish. -->
+          <button
+            type="button"
+            data-demo-cancel
+            class="mt-2 w-full text-center text-sm text-muted-foreground underline-offset-4 hover:underline disabled:opacity-50"
+          >
+            {m.demo_cancel()}
+          </button>
         </div>
 
         <div class="mt-4 hidden rounded-2xl border border-border bg-muted/30 p-4 text-center" data-demo-result>
@@ -102,6 +114,10 @@ import { m } from "../paraglide/messages.js";
         </div>
 
         <p class="mt-3 hidden text-center text-sm text-destructive" data-demo-error></p>
+
+        <!-- Kept apart from the error line: a file this demo declines to take on
+             is not a failure the visitor caused, and red would read as one. -->
+        <p class="mt-3 hidden text-center text-sm text-muted-foreground" data-demo-note></p>
       </div>
     </div>
   </div>
@@ -123,6 +139,61 @@ import { m } from "../paraglide/messages.js";
     { id: "ogg", label: "OGG", ext: "ogg", mime: "audio/ogg", codec: "opus", make: (l) => new l.OggOutputFormat() },
     { id: "wav", label: "WAV", ext: "wav", mime: "audio/wav", codec: "pcm-s16", make: (l) => new l.WavOutputFormat() },
   ];
+
+  /** The MPEG-1 Layer III rates — the only ones lamejs encodes reliably. */
+  const MP3_SAMPLE_RATES = [32000, 44100, 48000];
+
+  /**
+   * The rate to resample to so MP3 encoding can proceed, or undefined when the
+   * source rate is already encodable.
+   *
+   * MP3 is the default target here, so without this a 16kHz source — phone voice
+   * memos, and Transcribr's own compressed output — makes the conversion invalid
+   * and the visitor meets a generic failure on the format they did not choose.
+   */
+  function mp3CompatibleSampleRate(sourceRate: number | undefined): number | undefined {
+    if (!sourceRate || MP3_SAMPLE_RATES.includes(sourceRate)) return undefined;
+    // Upward, so no fidelity is lost: 8–32kHz voice lands on 32kHz, everything
+    // else on the universal 44.1kHz.
+    return sourceRate <= 32000 ? 32000 : 44100;
+  }
+
+  /**
+   * The largest input this demo will take on.
+   *
+   * Everything here runs on the main thread into a BufferTarget, so the source
+   * and the finished file both sit in the tab's memory at once. Past roughly
+   * 200MB that costs a mid-range phone the tab — a worse outcome on a marketing
+   * page than declining politely. The app itself uses a worker and streams to
+   * disk, so it has no such ceiling.
+   */
+  const MAX_INPUT_BYTES = 200 * 1024 * 1024;
+
+  /**
+   * How long the MP3 encoder may hold the main thread before handing it back.
+   *
+   * lamejs is synchronous with no yield points, so encoding blocked the thread
+   * start to finish: no frames painted, and the progress bar sat still and then
+   * jumped to done — on the one demo meant to look effortless. Roughly one frame
+   * at 60Hz: long enough that yielding costs almost nothing, short enough that
+   * the browser always gets a chance to paint.
+   */
+  const YIELD_EVERY_MS = 12;
+
+  function now(): number {
+    return typeof performance !== "undefined" ? performance.now() : Date.now();
+  }
+
+  /**
+   * Returns control to the browser so it can paint. `scheduler.yield` resumes
+   * sooner and at higher priority than a timer where it exists; setTimeout is
+   * the fallback everywhere else.
+   */
+  function yieldToBrowser(): Promise<void> {
+    const scheduler = (globalThis as any).scheduler;
+    if (typeof scheduler?.yield === "function") return scheduler.yield();
+    return new Promise((resolve) => setTimeout(resolve, 0));
+  }
 
   function humanSize(bytes: number): string {
     if (!bytes) return "0 KB";
@@ -147,19 +218,25 @@ import { m } from "../paraglide/messages.js";
     const resultText = root.querySelector<HTMLElement>("[data-demo-result-text]")!;
     const downloadBtn = root.querySelector<HTMLButtonElement>("[data-demo-download]")!;
     const resetBtn = root.querySelector<HTMLButtonElement>("[data-demo-reset]")!;
+    const cancelBtn = root.querySelector<HTMLButtonElement>("[data-demo-cancel]")!;
     const errorEl = root.querySelector<HTMLElement>("[data-demo-error]")!;
+    const noteEl = root.querySelector<HTMLElement>("[data-demo-note]")!;
 
     let lib: any = null;
     let file: File | null = null;
     let chosen = TARGETS[0];
     let output: { blob: Blob; name: string } | null = null;
     let available: Target[] = [];
+    let running: any = null;
+    let canceled = false;
 
     const strings = {
       failed: root.dataset.msgFailed ?? "That file could not be converted.",
       noAudio: root.dataset.msgNoaudio ?? "That file has no audio track.",
+      badFormat: root.dataset.msgBadformat ?? "That format did not work for this file. Try another one.",
+      tooLarge: root.dataset.msgToolarge ?? "That file is over 200 MB. The full app handles sizes like that.",
       pick: root.dataset.msgPick ?? "Choose a file",
-      hint: root.dataset.msgHint ?? "Audio or video, any size",
+      hint: root.dataset.msgHint ?? "Audio or video · processed on this device",
       sampleLoading: root.dataset.msgSampleLoading ?? "Loading sample…",
     };
 
@@ -189,11 +266,12 @@ import { m } from "../paraglide/messages.js";
           return (
             codec === "mp3" &&
             (config.numberOfChannels === 1 || config.numberOfChannels === 2) &&
-            [32000, 44100, 48000].includes(config.sampleRate)
+            MP3_SAMPLE_RATES.includes(config.sampleRate)
           );
         }
         enc: any; left!: Int16Array; right!: Int16Array;
-        pending = 0; emitted = 0; channels = 2; rate = 44100;
+        pending = 0; emitted = 0; carried = 0; lastYield = 0;
+        channels = 2; rate = 44100;
 
         init() {
           this.channels = (this as any).config.numberOfChannels;
@@ -204,41 +282,77 @@ import { m } from "../paraglide/messages.js";
           this.right = new Int16Array(BLOCK);
           this.pending = 0;
           this.emitted = 0;
+          this.carried = 0;
+          this.lastYield = now();
         }
-        encode(sample: any) {
+        async encode(sample: any) {
+          if (!this.enc) return;
           const size = sample.allocationSize({ planeIndex: 0, format: "s16" });
           const inter = new Int16Array(new ArrayBuffer(size));
           sample.copyTo(inter, { planeIndex: 0, format: "s16" });
           for (let f = 0; f < sample.numberOfFrames; f++) {
             this.left[this.pending] = inter[f * this.channels] ?? 0;
             if (this.channels === 2) this.right[this.pending] = inter[f * this.channels + 1] ?? 0;
-            if (++this.pending === BLOCK) this.drain();
+            if (++this.pending === BLOCK) {
+              this.drain();
+              // Checked per block rather than per frame: the clock read would
+              // otherwise cost more than the encoding it interrupts.
+              if (now() - this.lastYield >= YIELD_EVERY_MS) {
+                await yieldToBrowser();
+                this.lastYield = now();
+              }
+            }
           }
         }
         flush() {
+          if (!this.enc) return;
           if (this.pending) this.drain();
+          // lamejs holds a final partial frame back until flushed. It covers no
+          // input beyond what is already carried, so it adds no duration itself.
           const tail = this.enc.flush();
           if (tail?.length) this.emit(tail, 0);
         }
         close() { this.enc = null; }
         drain() {
+          if (!this.enc || !this.pending) return;
           const consumed = this.pending;
           const l = this.left.subarray(0, consumed);
           const data = this.channels === 2
             ? this.enc.encodeBuffer(l, this.right.subarray(0, consumed))
             : this.enc.encodeBuffer(l);
           this.pending = 0;
+          // Emit even when lamejs returns nothing this round, so the samples it
+          // buffered are still accounted for in the timeline.
           this.emit(data ?? new Uint8Array(0), consumed);
         }
+        /**
+         * Emits a packet covering the input samples it consumed.
+         *
+         * Timing comes from samples fed in, never from output size — a count
+         * derived from byteLength drifts whenever lamejs's real bitrate differs
+         * from the configured one, and the drift lands in the container's
+         * duration header.
+         *
+         * Rounds where lamejs returns nothing carry their samples forward
+         * instead of advancing the clock: those samples are still inside the
+         * encoder and come out with the next packet, so charging them to a
+         * packet that was never written would leave a hole between the packets'
+         * accumulated durations and their timestamps.
+         */
         emit(data: any, consumed: number) {
           if (!data.byteLength && !consumed) return;
           const bytes = data instanceof Uint8Array
             ? data
             : new Uint8Array(data.buffer, data.byteOffset, data.byteLength);
+          if (!bytes.byteLength) {
+            this.carried += consumed;
+            return;
+          }
+          const covered = consumed + this.carried;
           const ts = this.emitted / this.rate;
-          const dur = consumed / this.rate;
-          this.emitted += consumed;
-          if (!bytes.byteLength) return;
+          const dur = covered / this.rate;
+          this.emitted += covered;
+          this.carried = 0;
           (this as any).onPacket(new media.EncodedPacket(new Uint8Array(bytes), "key", ts, dur));
         }
       }
@@ -249,8 +363,20 @@ import { m } from "../paraglide/messages.js";
     }
 
     function showError(message: string) {
+      noteEl.classList.add("hidden");
       errorEl.textContent = message;
       errorEl.classList.remove("hidden");
+    }
+
+    function showNote(message: string) {
+      errorEl.classList.add("hidden");
+      noteEl.textContent = message;
+      noteEl.classList.remove("hidden");
+    }
+
+    function clearMessages() {
+      errorEl.classList.add("hidden");
+      noteEl.classList.add("hidden");
     }
 
     function renderFormats() {
@@ -280,8 +406,20 @@ import { m } from "../paraglide/messages.js";
       }
 
       const l = await load();
+      // Probed with a concrete config: an unconfigured probe answers for the
+      // library's defaults, which for MP3 says yes regardless of what the
+      // registered encoder actually accepts. 44.1kHz stereo is what every
+      // source is normalised to below, so it is the honest question to ask.
       const checks = await Promise.all(
-        TARGETS.map(async (t) => ((await l.canEncodeAudio(t.codec)) ? t : null)),
+        TARGETS.map(async (t) =>
+          (await l.canEncodeAudio(t.codec, {
+            numberOfChannels: 2,
+            sampleRate: 44100,
+            ...(t.codec === "pcm-s16" ? {} : { bitrate: 128000 }),
+          }))
+            ? t
+            : null,
+        ),
       );
       available = checks.filter(Boolean) as Target[];
 
@@ -298,42 +436,86 @@ import { m } from "../paraglide/messages.js";
     // The picker is shown immediately. Detection is what needs the library, and
     // an earlier version gated the whole UI behind the IntersectionObserver —
     // if that never fired the visitor got an empty box with no explanation.
-    ui.hidden = false;
+    // Missing WebCodecs is knowable without the library, so that verdict is
+    // reached now rather than waiting for a warm-up that may never be wanted.
+    const webCodecs = typeof (window as any).AudioEncoder !== "undefined";
+    ui.hidden = !webCodecs;
+    unsupported.hidden = webCodecs;
 
     let detecting: Promise<void> | null = null;
-    const detectOnce = () => (detecting ??= detect());
+    const detectOnce = () =>
+      (detecting ??= detect().catch((error) => {
+        // A failed import is usually a transient network problem. Forget it so
+        // the next click retries instead of replaying the failure forever.
+        detecting = null;
+        throw error;
+      }));
+
+    /**
+     * ~700KB of encoder libraries is a bad trade for someone who merely scrolled
+     * past on a metered or slow connection — they never asked for a conversion.
+     * They still get the libraries the moment they click.
+     */
+    function warmUpIsWelcome(): boolean {
+      const connection = (navigator as any).connection;
+      if (!connection) return true;
+      if (connection.saveData) return false;
+      return !["slow-2g", "2g", "3g"].includes(connection.effectiveType);
+    }
 
     // Warm the library when the section comes into view, so the first click is
     // instant, but never depend on it having happened.
-    if (typeof IntersectionObserver !== "undefined") {
+    if (typeof IntersectionObserver !== "undefined" && warmUpIsWelcome()) {
       const observer = new IntersectionObserver(
         (entries) => {
           if (!entries.some((e) => e.isIntersecting)) return;
           observer.disconnect();
-          detectOnce();
+          void detectOnce().catch(() => {});
         },
         { rootMargin: "200px" },
       );
       observer.observe(root);
-    } else {
-      detectOnce();
     }
 
-    pick.addEventListener("click", async () => {
-      await detectOnce();
+    pick.addEventListener("click", () => {
+      // Synchronously, before anything is awaited: awaiting the dynamic import
+      // first spends the user activation on a network fetch, and Safari and some
+      // mobile browsers then refuse to open the picker at all. Detection is
+      // idempotent and every path that needs it awaits it again.
       input.click();
+      void detectOnce().catch(() => {});
     });
+
+    function accept(picked: File, label: string) {
+      if (picked.size > MAX_INPUT_BYTES) {
+        // Not a failure the visitor caused, and the product being advertised
+        // handles this file fine — so this points onward instead of apologising.
+        showNote(strings.tooLarge);
+        file = null;
+        output = null;
+        // Cleared so choosing a smaller file, or the same one again, still fires
+        // a change event.
+        input.value = "";
+        goBtn.disabled = true;
+        nameEl.textContent = strings.pick;
+        sizeEl.textContent = strings.hint;
+        resultEl.classList.add("hidden");
+        return;
+      }
+
+      file = picked;
+      output = null;
+      nameEl.textContent = label;
+      sizeEl.textContent = humanSize(picked.size);
+      goBtn.disabled = false;
+      resultEl.classList.add("hidden");
+      clearMessages();
+    }
 
     input.addEventListener("change", () => {
       const picked = input.files?.[0];
       if (!picked) return;
-      file = picked;
-      output = null;
-      nameEl.textContent = picked.name;
-      sizeEl.textContent = humanSize(picked.size);
-      goBtn.disabled = false;
-      resultEl.classList.add("hidden");
-      errorEl.classList.add("hidden");
+      accept(picked, picked.name);
     });
 
     const sampleBtn = root.querySelector<HTMLButtonElement>("[data-demo-sample]");
@@ -351,13 +533,7 @@ import { m } from "../paraglide/messages.js";
         const blob = await response.blob();
         const name = root.dataset.sampleName ?? "sample.wav";
 
-        file = new File([blob], name, { type: "audio/wav" });
-        output = null;
-        nameEl.textContent = name;
-        sizeEl.textContent = humanSize(file.size);
-        goBtn.disabled = false;
-        resultEl.classList.add("hidden");
-        errorEl.classList.add("hidden");
+        accept(new File([blob], name, { type: "audio/wav" }), name);
       } catch {
         sizeEl.textContent = strings.hint;
         showError(strings.failed);
@@ -366,28 +542,50 @@ import { m } from "../paraglide/messages.js";
       }
     });
 
+    cancelBtn.addEventListener("click", () => {
+      // Flagged whether or not a conversion object exists yet: the first moments
+      // of a run are spent opening the input, and a button that did nothing
+      // during them would be a lie.
+      canceled = true;
+      cancelBtn.disabled = true;
+      void running?.cancel();
+    });
+
     goBtn.addEventListener("click", async () => {
       if (!file) return;
 
       goBtn.disabled = true;
-      errorEl.classList.add("hidden");
+      canceled = false;
+      clearMessages();
       resultEl.classList.add("hidden");
       progressWrap.classList.remove("hidden");
       progressBar.style.width = "0%";
 
       try {
+        // The picker may have been used before the warm-up finished, so the
+        // library is only guaranteed to be here — and `chosen` only known to be
+        // encodable — once detection has resolved.
+        await detectOnce();
         const l = await load();
         const input_ = new l.Input({ source: new l.BlobSource(file), formats: l.ALL_FORMATS });
 
-        if (!(await input_.getPrimaryAudioTrack())) {
-          throw new Error("no-audio");
-        }
+        const track = await input_.getPrimaryAudioTrack();
+        if (!track) throw new Error("no-audio");
+
+        // lamejs accepts MPEG-1 rates only, so anything else has to be resampled
+        // on the way out or MP3 — the default target — is refused outright.
+        const outputSampleRate =
+          chosen.codec === "mp3" ? mp3CompatibleSampleRate(track.sampleRate) : undefined;
 
         const out = new l.Output({ format: chosen.make(l), target: new l.BufferTarget() });
         const conversion = await l.Conversion.init({
           input: input_,
           output: out,
-          audio: { codec: chosen.codec, ...(chosen.codec === "pcm-s16" ? {} : { bitrate: 128000 }) },
+          audio: {
+            codec: chosen.codec,
+            ...(chosen.codec === "pcm-s16" ? {} : { bitrate: 128000 }),
+            ...(outputSampleRate ? { sampleRate: outputSampleRate } : {}),
+          },
           video: { discard: true },
         });
 
@@ -396,7 +594,14 @@ import { m } from "../paraglide/messages.js";
         };
 
         if (!conversion.isValid) throw new Error("invalid");
+        if (canceled) {
+          void conversion.cancel();
+          return;
+        }
+
+        running = conversion;
         await conversion.execute();
+        if (canceled) return;
 
         const buffer = out.target.buffer as ArrayBuffer;
         const base = file.name.replace(/\.[^.]+$/, "") || "converted";
@@ -405,10 +610,24 @@ import { m } from "../paraglide/messages.js";
         resultText.textContent = `${humanSize(file.size)} → ${humanSize(buffer.byteLength)}`;
         resultEl.classList.remove("hidden");
       } catch (e) {
-        showError((e as Error)?.message === "no-audio" ? strings.noAudio : strings.failed);
+        // A cancel surfaces as a thrown error, but it is a choice rather than a
+        // fault: leave the file selected and say nothing, so pressing Convert
+        // again is all it takes.
+        if (!canceled) {
+          const reason = (e as Error)?.message;
+          showError(
+            reason === "no-audio"
+              ? strings.noAudio
+              : reason === "invalid"
+                ? strings.badFormat
+                : strings.failed,
+          );
+        }
       } finally {
+        running = null;
+        cancelBtn.disabled = false;
         progressWrap.classList.add("hidden");
-        goBtn.disabled = false;
+        goBtn.disabled = !file;
       }
     });
 
@@ -418,8 +637,15 @@ import { m } from "../paraglide/messages.js";
       const a = document.createElement("a");
       a.href = url;
       a.download = output.name;
+      a.style.display = "none";
+      // Firefox honours the download only for an anchor in the document, and
+      // both it and Safari may still be reading the blob after click() returns —
+      // revoking on the same tick truncates a large file. The blob itself stays
+      // referenced by `output`, so the delay costs no extra memory.
+      document.body.appendChild(a);
       a.click();
-      URL.revokeObjectURL(url);
+      a.remove();
+      setTimeout(() => URL.revokeObjectURL(url), 60_000);
     });
 
     resetBtn.addEventListener("click", () => {
@@ -428,7 +654,7 @@ import { m } from "../paraglide/messages.js";
       input.value = "";
       goBtn.disabled = true;
       resultEl.classList.add("hidden");
-      errorEl.classList.add("hidden");
+      clearMessages();
       nameEl.textContent = strings.pick;
       sizeEl.textContent = strings.hint;
     });
