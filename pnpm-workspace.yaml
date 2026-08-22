@@ -1,3 +1,7 @@
+# Left as pnpm's fill-in-the-blank prompt, which made every build fail on
+# ERR_PNPM_IGNORED_BUILDS. Both are the same packages the web app already
+# allows, and both need their install scripts: oxide compiles Tailwind's native
+# binary and esbuild fetches its platform binary.
 allowBuilds:
-  '@tailwindcss/oxide': set this to true or false
-  esbuild: set this to true or false
+  '@tailwindcss/oxide': true
+  esbuild: true

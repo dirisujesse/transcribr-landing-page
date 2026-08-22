@@ -1,3 +1,16 @@
+/*
+ * Figtree, self-hosted — matching the app.
+ *
+ * Layout.astro used to link Google's stylesheet with `ital,wght@0,400..800;
+ * 1,400..800`. The `1,...` half is the italic axis, and there is not one italic
+ * in this project, so a whole second variable font was downloaded on every
+ * visit for nothing. Serving it from our own origin also removes a third-party
+ * request from a marketing page that sells the product on privacy.
+ *
+ * The family is 'Figtree Variable': the fontsource variable packages register
+ * their own name.
+ */
+@import "@fontsource-variable/figtree";
 @import "tailwindcss";
 
 @custom-variant dark (&:is(.dark *));
@@ -78,7 +91,7 @@
   --radius-xl: calc(var(--radius) + 4px);
   --radius-2xl: calc(var(--radius) + 8px);
   --radius-pill: var(--radius-pill);
-  --font-sans: "Figtree", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Figtree Variable", "Figtree", ui-sans-serif, system-ui, sans-serif;
 }
 
 @layer base {
@@ -89,13 +102,12 @@
   html {
     font-size: var(--font-size);
     scroll-behavior: smooth;
-    font-family: "Figtree", ui-sans-serif, system-ui, sans-serif;
+    font-family: var(--font-sans);
   }
 
   body {
     @apply bg-background text-foreground antialiased;
-    font-family: "Figtree", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
-      "Segoe UI", sans-serif;
+    font-family: var(--font-sans);
     font-feature-settings: "rlig" 1, "calt" 1;
   }
 
