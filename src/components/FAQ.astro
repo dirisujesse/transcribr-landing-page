@@ -108,18 +108,19 @@ const { page = false, groups = defaultGroups } = Astro.props;
 
     <div class="mx-auto max-w-3xl space-y-10">
       {
-        groups.map((group) => (
+        groups.map((group, groupIndex) => (
           <div data-animate>
             <h2 class="mb-4 text-sm font-semibold uppercase tracking-wider text-primary">
               {group.title}
             </h2>
             <div class="space-y-3">
-              {group.items.map((item) => (
+              {group.items.map((item, itemIndex) => (
                 <div class="overflow-hidden rounded-2xl border border-border bg-white shadow-sm">
                   <button
                     type="button"
                     class="faq-button flex w-full items-center justify-between gap-4 px-5 py-4 text-left md:px-6 md:py-5"
                     aria-expanded="false"
+                    data-faq-id={`${groupIndex + 1}-${itemIndex + 1}`}
                   >
                     <span class="text-base font-semibold text-foreground md:text-lg">
                       {item.question}
@@ -166,7 +167,7 @@ const { page = false, groups = defaultGroups } = Astro.props;
             >
               {m.faq_contact_support()}
             </a>
-            <a href="https://app.transcribr.org/auth" class="btn-primary">
+            <a href="https://app.transcribr.org/auth" data-analytics-placement="faq" class="btn-primary">
               {m.faq_get_started()}
             </a>
           </div>
@@ -177,6 +178,8 @@ const { page = false, groups = defaultGroups } = Astro.props;
 </section>
 
 <script>
+  import { track, Events } from "../lib/analytics";
+
   (() => {
     const buttons = document.querySelectorAll(".faq-button");
 
@@ -204,6 +207,10 @@ const { page = false, groups = defaultGroups } = Astro.props;
           content.classList.remove("hidden");
           icon.classList.add("rotate-180");
           button.setAttribute("aria-expanded", "true");
+
+          // Only on open. Closing is how you open the next one, and counting it
+          // would double every interaction.
+          track(Events.FAQ_OPENED, { question_id: button.dataset.faqId });
         }
       });
     });

@@ -165,6 +165,88 @@ const ogLocales: Record<string, string> = {
     <Footer />
 
     <script>
+      import { initAnalytics, track, Events } from "../lib/analytics";
+
+      /**
+       * Analytics bootstrap and the site-wide click instrumentation.
+       *
+       * `initAnalytics` starts Firebase only if consent already exists; a first
+       * visit records nothing until the banner is answered, at which point the
+       * buffered page view is sent along with it.
+       *
+       * Clicks are handled by one delegated listener rather than by a listener
+       * per element. The CTAs are spread over eight components and rendered
+       * twice on some pages (desktop and mobile), so per-element wiring would
+       * mean eight places to forget.
+       */
+      initAnalytics();
+
+      // No manual page_view here. Firebase Analytics sends one automatically on
+      // initialisation, and every page on this site is a full document load, so
+      // a second call produced two hits for one visit — verified against the
+      // network log rather than assumed. Path, referrer and language are all
+      // dimensions GA4 already collects by itself; `surface` and `locale` are
+      // attached as user properties in analytics.ts and therefore ride along on
+      // the automatic event too.
+
+      document.addEventListener("click", (event) => {
+        const target = event.target as HTMLElement | null;
+        const link = target?.closest?.("a");
+        if (!link) return;
+
+        const href = link.getAttribute("href") ?? "";
+        const placement = link.dataset.analyticsPlacement ?? "unknown";
+
+        // The app itself — the only conversion this site has.
+        if (href.includes("app.transcribr.org")) {
+          track(Events.CTA_CLICKED, {
+            destination: href.includes("/auth") ? "signup" : "app",
+            placement,
+            plan: link.dataset.analyticsPlan,
+          });
+          return;
+        }
+
+        if (href.includes("apps.apple.com")) {
+          track(Events.APP_STORE_CLICKED, { store: "app_store", placement });
+          return;
+        }
+
+        if (href.startsWith("mailto:")) {
+          track(Events.OUTBOUND_CLICKED, { kind: "email", placement });
+          return;
+        }
+
+        // Anchors to the pricing block, wherever on the site they are.
+        if (href.includes("#pricing")) {
+          track(Events.PRICING_VIEWED, { placement });
+        }
+      });
+
+      // The language switcher renders twice per page and its options are plain
+      // links, so this is delegated too.
+      document.addEventListener("click", (event) => {
+        const option = (event.target as HTMLElement | null)?.closest?.(
+          "[data-lang-option]",
+        ) as HTMLElement | null;
+        if (!option) return;
+        track(Events.LANGUAGE_CHANGED, {
+          to: option.dataset.langOption,
+          from: document.documentElement.lang || "en",
+        });
+      });
+
+      // Uncaught errors on a marketing page are usually a broken bundle on some
+      // browser we do not test — worth knowing about, and invisible otherwise.
+      window.addEventListener("error", (event) => {
+        track(Events.CLIENT_ERROR, {
+          error_message: String(event.message ?? "").slice(0, 90),
+          page_path: window.location.pathname,
+        });
+      });
+    </script>
+
+    <script>
       const observerOptions = {
         threshold: 0.1,
         rootMargin: "0px 0px -50px 0px",

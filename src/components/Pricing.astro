@@ -176,7 +176,9 @@ const plans = [
                     ? "bg-primary-soft text-primary hover:bg-primary/15"
                     : "bg-surface text-foreground hover:bg-border/60",
               ]}
-            >
+            
+            data-analytics-placement="pricing"
+            data-analytics-plan={plan.name}>
               {plan.cta}
             </a>
           </div>

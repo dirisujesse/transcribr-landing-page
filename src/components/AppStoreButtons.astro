@@ -5,9 +5,21 @@ interface Props {
   align?: "center" | "start";
   theme?: "default" | "on-primary";
   showNote?: boolean;
+  /**
+   * Where on the page this instance is rendered. The component appears twice —
+   * in the hero and in the closing band — and without this the two are
+   * indistinguishable in the analytics, which is precisely the comparison worth
+   * making.
+   */
+  placement?: string;
 }
 
-const { align = "center", theme = "default", showNote = true } = Astro.props;
+const {
+  align = "center",
+  theme = "default",
+  showNote = true,
+  placement = "unknown",
+} = Astro.props;
 
 const onPrimary = theme === "on-primary";
 ---
@@ -23,6 +35,7 @@ const onPrimary = theme === "on-primary";
   >
     <a
       href="https://apps.apple.com/ng/app/transcribr-mobile/id6753605154"
+      data-analytics-placement={placement}
       target="_blank"
       rel="noopener noreferrer"
       class:list={[
@@ -56,7 +69,7 @@ const onPrimary = theme === "on-primary";
     </a>
 
     <a
-      href="https://app.transcribr.org/auth"
+      href="https://app.transcribr.org/auth" data-analytics-placement={placement}
       target="_blank"
       rel="noopener noreferrer"
       class:list={[

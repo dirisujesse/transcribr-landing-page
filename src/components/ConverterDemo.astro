@@ -124,6 +124,8 @@ import { m } from "../paraglide/messages.js";
 </section>
 
 <script>
+  import { track, Events, sizeBucket } from "../lib/analytics";
+
   type Target = {
     id: string;
     label: string;
@@ -392,6 +394,7 @@ import { m } from "../paraglide/messages.js";
             : "border-border text-muted-foreground hover:border-primary/50");
         button.addEventListener("click", () => {
           chosen = target;
+          track(Events.DEMO_FORMAT_SELECTED, { format: target.id });
           renderFormats();
         });
         formatsEl.appendChild(button);
@@ -400,6 +403,9 @@ import { m } from "../paraglide/messages.js";
 
     async function detect() {
       if (typeof (window as any).AudioEncoder === "undefined") {
+        // Worth counting: this is the share of visitors for whom the page's
+        // main interaction does not exist at all.
+        track(Events.DEMO_UNSUPPORTED, { reason: "no_audio_encoder" });
         unsupported.hidden = false;
         ui.hidden = true;
         return;
@@ -515,6 +521,13 @@ import { m } from "../paraglide/messages.js";
     input.addEventListener("change", () => {
       const picked = input.files?.[0];
       if (!picked) return;
+      // The bucket and the type, never the name. This demo's whole promise is
+      // that the file does not leave the browser, and a file name is the one
+      // value that would quietly break that promise.
+      track(Events.DEMO_FILE_SELECTED, {
+        size_bucket: sizeBucket(picked.size),
+        input_type: picked.type || "unknown",
+      });
       accept(picked, picked.name);
     });
 
@@ -533,6 +546,7 @@ import { m } from "../paraglide/messages.js";
         const blob = await response.blob();
         const name = root.dataset.sampleName ?? "sample.wav";
 
+        track(Events.DEMO_SAMPLE_LOADED);
         accept(new File([blob], name, { type: "audio/wav" }), name);
       } catch {
         sizeEl.textContent = strings.hint;
@@ -548,11 +562,18 @@ import { m } from "../paraglide/messages.js";
       // during them would be a lie.
       canceled = true;
       cancelBtn.disabled = true;
+      track(Events.DEMO_CONVERSION_CANCELLED, { format: chosen?.id });
       void running?.cancel();
     });
 
     goBtn.addEventListener("click", async () => {
       if (!file) return;
+
+      const startedAt = Date.now();
+      track(Events.DEMO_CONVERSION_STARTED, {
+        format: chosen?.id,
+        size_bucket: sizeBucket(file.size),
+      });
 
       goBtn.disabled = true;
       canceled = false;
@@ -607,6 +628,17 @@ import { m } from "../paraglide/messages.js";
         const base = file.name.replace(/\.[^.]+$/, "") || "converted";
         output = { blob: new Blob([buffer], { type: chosen.mime }), name: `${base}.${chosen.ext}` };
 
+        // The moment the demo actually delivers something. `surface`
+        // distinguishes it from the same event name in the web app, so the two
+        // remain comparable while staying separable.
+        track(Events.DEMO_CONVERSION_COMPLETED, {
+          surface: "landing_demo",
+          format: chosen.id,
+          size_bucket: sizeBucket(file.size),
+          size_ratio: file.size > 0 ? buffer.byteLength / file.size : undefined,
+          elapsed_ms: Date.now() - startedAt,
+        });
+
         resultText.textContent = `${humanSize(file.size)} → ${humanSize(buffer.byteLength)}`;
         resultEl.classList.remove("hidden");
       } catch (e) {
@@ -615,6 +647,12 @@ import { m } from "../paraglide/messages.js";
         // again is all it takes.
         if (!canceled) {
           const reason = (e as Error)?.message;
+          track(Events.DEMO_CONVERSION_FAILED, {
+            surface: "landing_demo",
+            format: chosen?.id,
+            reason: (reason ?? "failed").slice(0, 40),
+            size_bucket: file ? sizeBucket(file.size) : undefined,
+          });
           showError(
             reason === "no-audio"
               ? strings.noAudio
@@ -633,6 +671,12 @@ import { m } from "../paraglide/messages.js";
 
     downloadBtn.addEventListener("click", () => {
       if (!output) return;
+      // GA4 reserves `file_download` and expects `file_extension`, so its
+      // built-in report works without any custom configuration.
+      track(Events.DEMO_DOWNLOADED, {
+        file_extension: chosen?.ext,
+        surface: "landing_demo",
+      });
       const url = URL.createObjectURL(output.blob);
       const a = document.createElement("a");
       a.href = url;

@@ -1,7 +1,13 @@
-# Left as pnpm's fill-in-the-blank prompt, which made every build fail on
-# ERR_PNPM_IGNORED_BUILDS. Both are the same packages the web app already
-# allows, and both need their install scripts: oxide compiles Tailwind's native
-# binary and esbuild fetches its platform binary.
+# Install scripts pnpm will run.
+#
+# pnpm writes new dependencies in here as "set this to true or false", and a
+# leftover placeholder fails every build with ERR_PNPM_IGNORED_BUILDS — which is
+# how adding firebase broke the build. Each entry below needs its script:
+# oxide compiles Tailwind's native binary, esbuild fetches its platform binary,
+# and the two firebase packages generate sources their CommonJS builds import.
+# These match what the web app already allows for the same packages.
 allowBuilds:
+  '@firebase/util': true
   '@tailwindcss/oxide': true
   esbuild: true
+  protobufjs: true
