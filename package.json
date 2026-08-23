@@ -9,11 +9,14 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@astrojs/markdoc": "^2.0.8",
     "@astrojs/react": "^6.0.0",
     "@astrojs/sitemap": "^3.7.3",
     "@breezystack/lamejs": "^1.2.7",
     "@fontsource-variable/figtree": "^5.3.0",
     "@inlang/paraglide-js": "^2.22.0",
+    "@keystatic/astro": "^6.0.0",
+    "@keystatic/core": "^0.6.8",
     "@tailwindcss/vite": "^4.1.13",
     "@types/react": "^18.0.0",
     "@types/react-dom": "^18.0.0",

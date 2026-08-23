@@ -65,6 +65,13 @@ const year = new Date().getFullYear();
               >
             </li>
             <li>
+              {/* Not localised: posts are written in English and live at /blog
+                  rather than under a locale prefix, so the link is absolute. */}
+              <a href="/blog" class="transition-colors hover:text-background"
+                >{m.footer_blog()}</a
+              >
+            </li>
+            <li>
               <a
                 href={localizeHref("/faq", { locale: undefined })}
                 class="transition-colors hover:text-background"

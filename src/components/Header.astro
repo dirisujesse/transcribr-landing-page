@@ -31,6 +31,8 @@ const nav = [
     label: m.nav_about(),
   },
   { href: localizeHref("/faq", { locale: currentLocale }), label: m.nav_faq() },
+  // Absolute: the blog is English-only and sits outside the locale prefixes.
+  { href: "/blog", label: m.nav_blog() },
 ];
 
 function isActive(href: string) {

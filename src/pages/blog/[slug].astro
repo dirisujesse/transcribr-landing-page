@@ -1,0 +1,153 @@
+---
+import { getCollection, render } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+
+export async function getStaticPaths() {
+  // Drafts are excluded from the build entirely rather than hidden with CSS or
+  // noindex — an unpublished post should not exist at a URL at all.
+  const posts = await getCollection("blog", ({ data }) => !data.draft);
+  return posts.map((post) => ({ params: { slug: post.id }, props: { post } }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+
+const dateFormat = new Intl.DateTimeFormat("en-GB", {
+  day: "numeric",
+  month: "long",
+  year: "numeric",
+});
+
+const url = new URL(`/blog/${post.id}`, Astro.site).href;
+
+const schema = {
+  "@type": "BlogPosting",
+  headline: post.data.title,
+  description: post.data.description,
+  datePublished: post.data.publishDate.toISOString(),
+  ...(post.data.updatedDate && {
+    dateModified: post.data.updatedDate.toISOString(),
+  }),
+  author: { "@type": "Organization", name: post.data.author },
+  publisher: { "@type": "Organization", name: "Transcribr" },
+  mainEntityOfPage: url,
+  url,
+};
+---
+
+<Layout
+  title={`${post.data.title} — Transcribr`}
+  description={post.data.description}
+  locale="en"
+  canonicalPath={`/blog/${post.id}`}
+  schema={schema}
+>
+  <main class="pt-28 pb-20 md:pt-32">
+    <article class="mx-auto max-w-3xl px-6">
+      <header class="mb-10">
+        <a href="/blog" class="text-sm font-medium text-primary hover:underline">
+          &larr; All posts
+        </a>
+        <h1
+          class="mt-6 text-4xl font-bold tracking-tight text-foreground md:text-5xl"
+        >
+          {post.data.title}
+        </h1>
+        <div class="mt-5 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-muted-foreground">
+          <time datetime={post.data.publishDate.toISOString()}>
+            {dateFormat.format(post.data.publishDate)}
+          </time>
+          <span aria-hidden="true">&middot;</span>
+          <span>{post.data.author}</span>
+          {
+            post.data.updatedDate && (
+              <>
+                <span aria-hidden="true">&middot;</span>
+                <span>Updated {dateFormat.format(post.data.updatedDate)}</span>
+              </>
+            )
+          }
+        </div>
+      </header>
+
+      <div class="post-body">
+        <Content />
+      </div>
+    </article>
+  </main>
+</Layout>
+
+<style>
+  /*
+   * Markdown arrives as bare tags, so the article styles its own descendants
+   * rather than every post carrying classes. Scoped to .post-body so it cannot
+   * reach the rest of the site.
+   */
+  .post-body :global(h2) {
+    margin-top: 2.5rem;
+    margin-bottom: 0.75rem;
+    font-size: 1.6rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    color: var(--foreground);
+  }
+
+  .post-body :global(h3) {
+    margin-top: 2rem;
+    margin-bottom: 0.5rem;
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--foreground);
+  }
+
+  .post-body :global(p),
+  .post-body :global(ul),
+  .post-body :global(ol) {
+    margin-bottom: 1.15rem;
+    line-height: 1.75;
+    color: var(--muted-foreground);
+  }
+
+  .post-body :global(ul),
+  .post-body :global(ol) {
+    padding-left: 1.4rem;
+  }
+
+  .post-body :global(ul) { list-style: disc; }
+  .post-body :global(ol) { list-style: decimal; }
+  .post-body :global(li) { margin-bottom: 0.4rem; }
+
+  .post-body :global(strong) { color: var(--foreground); font-weight: 650; }
+
+  .post-body :global(a) {
+    color: var(--primary);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .post-body :global(blockquote) {
+    margin: 1.5rem 0;
+    padding-left: 1.1rem;
+    border-left: 3px solid var(--primary-soft);
+    color: var(--muted-foreground);
+    font-style: italic;
+  }
+
+  .post-body :global(code) {
+    background: var(--surface);
+    border-radius: 4px;
+    padding: 0.1em 0.35em;
+    font-size: 0.9em;
+  }
+
+  .post-body :global(img) {
+    border-radius: 12px;
+    margin: 1.75rem 0;
+  }
+
+  .post-body :global(hr) {
+    margin: 2.5rem 0;
+    border: 0;
+    border-top: 1px solid var(--border);
+  }
+</style>
