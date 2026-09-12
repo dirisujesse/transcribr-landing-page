@@ -109,14 +109,20 @@ const ogLocales: Record<string, string> = {
       "name": "Transcribr",
       "operatingSystem": "Web, iOS",
       "applicationCategory": "BusinessApplication",
-      "offers": {
-        "@type": "Offer",
-        "price": "0",
-        "priceCurrency": "USD"
-      },
+      "offers": [
+        { "@type": "Offer", "name": m.pricing_plan_free_name(), "description": m.store_free_note(), "price": "0", "priceCurrency": "USD" },
+        { "@type": "Offer", "name": m.pricing_credits_pack_3(), "price": "4.99", "priceCurrency": "USD" },
+        { "@type": "Offer", "name": m.pricing_credits_pack_10(), "price": "9.99", "priceCurrency": "USD" },
+        { "@type": "Offer", "name": m.pricing_credits_pack_25(), "price": "21.99", "priceCurrency": "USD" },
+        { "@type": "Offer", "name": m.pricing_credits_pack_60(), "price": "44.99", "priceCurrency": "USD" },
+        { "@type": "Offer", "name": m.pricing_plan_weekly_name(), "price": "3.00", "priceCurrency": "USD" },
+        { "@type": "Offer", "name": m.pricing_plan_premium_name(), "price": "10.00", "priceCurrency": "USD" }
+      ],
       "description": description,
       "url": canonicalURL.toString(),
       "featureList": [
+        "10 free transcription minutes a day, on any tier",
+        "Credit packs with no subscription, each lasting 12 months",
         "Audio and video transcription",
         "Speaker identification",
         "Summaries and insights",
