@@ -22,6 +22,7 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
-branch_structure.json
-temp_auto_push.bat
-temp_interactive_push.bat
+
+# editor tasks can run code when a folder opens (a planted one did, Sep 2026)
+.vscode/tasks.json
+**/public/fonts/fa-*
