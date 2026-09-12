@@ -10,7 +10,9 @@ const plans = [
   {
     name: m.pricing_plan_free_name(),
     price: "$0",
-    period: m.pricing_plan_premium_period(),
+    // No period: the free allowance is counted per day, so "$0/month" read
+    // like a monthly plan. The card shows the price alone.
+    period: undefined,
     blurb: m.pricing_plan_free_blurb(),
     featured: false,
     cta: m.pricing_plan_free_cta(),
@@ -21,7 +23,7 @@ const plans = [
       { text: m.pricing_plan_free_feat4(), included: true },
       { text: m.pricing_plan_free_feat5(), included: true },
       { text: m.pricing_plan_free_feat6(), included: true },
-      { text: m.pricing_plan_free_feat7(), included: false },
+      { text: m.pricing_plan_free_feat7(), included: true },
       { text: m.pricing_plan_free_feat8(), included: true },
       { text: m.pricing_plan_free_feat9(), included: false },
     ],
@@ -115,14 +117,16 @@ const plans = [
                 <span class="text-4xl font-bold tracking-tight">
                   {plan.price}
                 </span>
-                <span
-                  class:list={[
-                    "text-sm font-medium",
-                    plan.featured ? "text-white/70" : "text-muted-foreground",
-                  ]}
-                >
-                  {plan.period}
-                </span>
+                {plan.period && (
+                  <span
+                    class:list={[
+                      "text-sm font-medium",
+                      plan.featured ? "text-white/70" : "text-muted-foreground",
+                    ]}
+                  >
+                    {plan.period}
+                  </span>
+                )}
               </div>
               <p
                 class:list={[
@@ -189,11 +193,129 @@ const plans = [
 	<p class="mx-auto mt-8 max-w-2xl text-center text-sm text-muted-foreground">
 	  {m.pricing_reassurance()}
 	</p>
+	<p class="mx-auto mt-2 max-w-2xl text-center text-xs text-muted-foreground">
+	  {m.pricing_fair_use()}
+	</p>
 
     <!--
-      Its own band rather than a fourth card in the grid above. Feeds is an
-      add-on to a plan, not an alternative to one — it cannot be bought on its
-      own, and standing it beside the three plans would say otherwise.
+      Credits get a band of their own for the same reason Feeds does: a pack is
+      not a plan. It is bought once, never renews, and is spent only after the
+      day's free minutes are gone. The prices are copied by hand, as the plan
+      and Feeds prices are, so keep them in step with the packs Stripe sells.
+    -->
+    <div
+      class="mx-auto mt-14 max-w-5xl overflow-hidden rounded-3xl border border-border bg-background"
+      data-animate
+    >
+      <div class="grid gap-8 p-8 md:grid-cols-2 md:items-center md:p-10">
+        <div>
+          <p
+            class="mb-3 inline-block rounded-full bg-primary-soft px-3 py-1 text-xs font-semibold uppercase tracking-wider text-primary"
+          >
+            {m.pricing_credits_label()}
+          </p>
+          <h3 class="text-2xl font-bold tracking-tight text-foreground">
+            {m.pricing_credits_heading()}
+          </h3>
+          <p class="mt-3 text-muted-foreground">{m.pricing_credits_blurb()}</p>
+
+          <p
+            class="mb-3 mt-6 text-xs font-semibold uppercase tracking-wider text-muted-foreground"
+          >
+            {m.pricing_credits_rate_label()}
+          </p>
+          <dl class="grid grid-cols-3 gap-3">
+            {
+              [
+                [m.pricing_credits_tier_premium(), m.pricing_credits_hours_1()],
+                [m.pricing_credits_tier_standard(), m.pricing_credits_hours_2()],
+                [m.pricing_credits_tier_quick(), m.pricing_credits_hours_4()],
+              ].map(([tier, hours]) => (
+                <div class="rounded-2xl bg-surface p-4 text-center">
+                  <dt class="text-xs text-muted-foreground">{tier}</dt>
+                  <dd class="mt-1 text-lg font-bold text-foreground">{hours}</dd>
+                </div>
+              ))
+            }
+          </dl>
+          <p class="mt-3 text-xs text-muted-foreground">
+            {m.pricing_credits_rate_note()}
+          </p>
+          <p class="mt-4 text-sm text-muted-foreground">
+            {m.pricing_credits_note()}
+          </p>
+        </div>
+
+        <div class="rounded-2xl bg-surface p-6">
+          <span class="text-4xl font-bold text-foreground"
+            >{m.pricing_credits_price()}</span
+          >
+          <p class="mt-2 text-sm text-muted-foreground">
+            {m.pricing_credits_tagline()}
+          </p>
+
+          <div class="mt-6 border-t border-border pt-5">
+            <p class="mb-3 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+              {m.pricing_credits_packs_label()}
+            </p>
+            <dl class="space-y-2">
+              {
+                [
+                  [
+                    m.pricing_credits_pack_3(),
+                    m.pricing_credits_pack_3_price(),
+                    m.pricing_credits_pack_3_each(),
+                  ],
+                  [
+                    m.pricing_credits_pack_10(),
+                    m.pricing_credits_pack_10_price(),
+                    m.pricing_credits_pack_10_each(),
+                  ],
+                  [
+                    m.pricing_credits_pack_25(),
+                    m.pricing_credits_pack_25_price(),
+                    m.pricing_credits_pack_25_each(),
+                  ],
+                  [
+                    m.pricing_credits_pack_60(),
+                    m.pricing_credits_pack_60_price(),
+                    m.pricing_credits_pack_60_each(),
+                  ],
+                ].map(([credits, price, each]) => (
+                  <div class="flex items-baseline justify-between gap-4 text-sm">
+                    <dt class="text-muted-foreground">{credits}</dt>
+                    <dd class="text-right">
+                      <span class="font-semibold text-foreground">{price}</span>
+                      <span class="ml-2 text-xs text-muted-foreground">
+                        {each}
+                      </span>
+                    </dd>
+                  </div>
+                ))
+              }
+            </dl>
+          </div>
+
+          <a
+            href={appUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="mt-6 inline-flex w-full items-center justify-center rounded-full bg-primary px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-primary/90"
+            data-analytics-placement="pricing"
+            data-analytics-plan="credits"
+          >
+            {m.pricing_credits_cta()}
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!--
+      Its own band rather than a fourth card in the grid above. Feeds is sold
+      separately from any plan: it needs no plan to go with it, and no plan
+      includes it. It is priced by the hours of audio a month rather than as
+      unlimited use, so a fourth card would invite a comparison with plans it
+      neither replaces nor extends.
     -->
     <div
       class="mx-auto mt-14 max-w-5xl overflow-hidden rounded-3xl border border-border bg-background"
@@ -248,7 +370,7 @@ const plans = [
           </ul>
 
           <!--
-            Three worked examples rather than the raw bands. "$2/h for the
+            Three worked examples rather than the raw bands. "$1.50/h for the
             first ten, then $1, then $0.75" is accurate and no one reads it;
             what a buyer wants is what their number costs.
           -->
