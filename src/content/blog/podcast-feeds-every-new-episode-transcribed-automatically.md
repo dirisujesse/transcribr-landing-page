@@ -57,7 +57,7 @@ If a transcript fails, the same episode can be tried again. Nothing is stuck.
 
 The episode list is the full record, not just the successes. Each item is
 transcribed, queued, transcribing, or skipped with a reason: your hours for the
-period are used up, the episode is longer than the pipeline accepts, the feed
+period are used up, the episode is over the limit of 6 hours or 200 MB, the feed
 carried no audio, the transcript failed. An episode skipped because the hours
 ran out stays skipped, and the Transcribe button is how you pick it up later.
 

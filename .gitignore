@@ -26,3 +26,6 @@ pnpm-debug.log*
 # editor tasks can run code when a folder opens (a planted one did, Sep 2026)
 .vscode/tasks.json
 **/public/fonts/fa-*
+branch_structure.json
+temp_auto_push.bat
+temp_interactive_push.bat
