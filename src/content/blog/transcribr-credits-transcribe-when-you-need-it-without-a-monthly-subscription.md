@@ -20,11 +20,11 @@ For light users, credits can last for months and potentially up to a year, depen
 ## How Much Do Transcribr Credits Cost?
 
 | Credits | Price | Cost per Credit | Premium | Standard | Quick |
-
-| **3 Credits**  | **$4.99** | $1.66 | 3 hrs  | 6 hrs | 12 hrs |
-| **10 Credits** | **$9.99** | $1.00 | 10 hrs | 20 hrs | 40 hrs |
-| **25 Credits** | **$21.99** | $0.88 | 25 hrs | 50 hrs | 100 hrs |
-| **60 Credits** | **$44.99** | $0.75 | 60 hrs | 120 hrs | 240 hrs |
+| --- | --- | --- | --- | --- | --- |
+| 3 Credits | $4.99 | $1.66 | 3 hrs | 6 hrs | 12 hrs |
+| 10 Credits | $9.99 | $1.00 | 10 hrs | 20 hrs | 40 hrs |
+| 25 Credits | $21.99 | $0.88 | 25 hrs | 50 hrs | 100 hrs |
+| 60 Credits | $44.99 | $0.75 | 60 hrs | 120 hrs | 240 hrs |
 
 The larger the package, the lower your cost per credit.
 
