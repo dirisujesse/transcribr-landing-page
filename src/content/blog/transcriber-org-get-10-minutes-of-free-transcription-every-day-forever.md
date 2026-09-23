@@ -10,8 +10,6 @@ author: "Transcribr team"
 
 But Transcriber.org is more than an audio-to-text tool. It combines transcription, transcript regeneration, summarization, file conversion, and compression in one platform.
 
-![Transcriber.org transcription dashboard](b66a3f0c-cc38-4847-8f40-2b22e29f9804.jpeg)
-
 ## 10 Minutes of Free Transcription Every Day
 
 One of the key features of Transcriber.org is its **10 free minutes of transcription every day, forever**.
