@@ -1,5 +1,5 @@
 ---
-title: "[Transcribr.org](https://transcribr.org): Get 10 Minutes of Free Transcription Every Day, Forever"
+title: "Transcribr.org: Get 10 Minutes of Free Transcription Every Day, Forever"
 description: "What if you could transcribe audio and video every day without paying for every minute?"
 publishDate: 2026-09-23
 draft: false
