@@ -3,7 +3,7 @@ title: "Transcriber.org: Get 10 Minutes of Free Transcription Every Day, Forever
 description: "What if you could transcribe audio and video every day without paying for every minute?"
 publishDate: 2026-09-23
 draft: false
-tags: ["Transcriber.org", "transcription tool", "free transcription", "free transcription software", "audio transcription", "video transcription", "audio to text", "video to text", "speech to text", "online transcription", "automatic transcription", "AI transcription", "transcription app", "free audio transcription", "free video transcription", "daily free transcription"]
+tags: ["Transcriber.org", "transcription", "AI transcription", "transcription app", "free audio transcription", "free video transcription", "daily free transcription"]
 author: "Transcribr team"
 ---
 **Transcriber.org gives every user 10 minutes of free transcription every day, forever.** There is no short-lived free trial that disappears after a few days. Your free daily transcription allowance keeps coming back.
