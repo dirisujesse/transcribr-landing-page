@@ -253,6 +253,33 @@ const schema = {
     margin: 1.75rem 0;
   }
 
+  /*
+   * Tables scroll sideways inside the column on a phone rather than pushing
+   * the page wider. display: block on the table is what lets overflow apply.
+   */
+  .post-body :global(table) {
+    display: block;
+    max-width: 100%;
+    overflow-x: auto;
+    margin: 1.75rem 0;
+    border-collapse: collapse;
+    font-size: 0.95rem;
+  }
+
+  .post-body :global(th),
+  .post-body :global(td) {
+    padding: 0.6rem 0.9rem;
+    border-bottom: 1px solid var(--border);
+    white-space: nowrap;
+    color: var(--muted-foreground);
+  }
+
+  .post-body :global(th) {
+    color: var(--foreground);
+    font-weight: 650;
+    border-bottom-width: 2px;
+  }
+
   .post-body :global(hr) {
     margin: 2.5rem 0;
     border: 0;
