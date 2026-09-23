@@ -17,6 +17,8 @@ interface ImportMetaEnv {
   readonly PUBLIC_FIREBASE_MESSAGING_ID: string;
   readonly PUBLIC_FIREBASE_APP_ID: string;
   readonly PUBLIC_FIREBASE_MEASUREMENT_ID: string;
+  /** Optional; blog metrics go to https://api.transcribr.org/api without it. */
+  readonly PUBLIC_API_URL?: string;
 }
 
 interface ImportMeta {

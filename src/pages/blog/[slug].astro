@@ -73,9 +73,117 @@ const schema = {
       <div class="post-body">
         <Content />
       </div>
+
+      <div id="post-end" aria-hidden="true"></div>
+
+      <section
+        class="post-helpful mt-14 rounded-2xl border border-border bg-muted/30 p-6"
+        data-slug={post.id}
+        aria-labelledby="post-helpful-title"
+      >
+        <div class="post-helpful__ask flex flex-wrap items-center justify-between gap-4">
+          <p id="post-helpful-title" class="font-semibold text-foreground">
+            Was this helpful?
+          </p>
+          <div class="flex gap-2">
+            <button
+              type="button"
+              data-vote="yes"
+              class="rounded-full border border-border bg-background px-5 py-2 text-sm font-medium text-foreground transition-colors hover:border-primary hover:text-primary"
+            >
+              Yes
+            </button>
+            <button
+              type="button"
+              data-vote="no"
+              class="rounded-full border border-border bg-background px-5 py-2 text-sm font-medium text-foreground transition-colors hover:border-primary hover:text-primary"
+            >
+              No
+            </button>
+          </div>
+        </div>
+        <p class="post-helpful__thanks hidden text-muted-foreground" role="status">
+          Thanks for letting us know.
+        </p>
+      </section>
     </article>
   </main>
 </Layout>
+
+<script>
+  /**
+   * Post metrics: views, readers and "Was this helpful?", counted by the API.
+   *
+   * GA4 cannot report these: the site runs it cookieless, and GA4 keeps
+   * cookieless pings out of its reports. Each event goes out with sendBeacon
+   * as text/plain, which needs no CORS preflight and survives the page closing.
+   * Nothing identifying is sent; the API recognises a visitor for one day from
+   * the request itself and stores only a hash.
+   */
+  const API = import.meta.env.PUBLIC_API_URL ?? "https://api.transcribr.org/api";
+
+  (() => {
+    const box = document.querySelector<HTMLElement>(".post-helpful");
+    const slug = box?.dataset.slug;
+    if (!box || !slug) return;
+
+    const send = (event: { type: "view" | "read" | "helpful"; helpful?: boolean }) => {
+      try {
+        navigator.sendBeacon(`${API}/blog/events`, JSON.stringify({ slug, ...event }));
+      } catch {
+        // Metrics failing must never affect the page.
+      }
+    };
+
+    send({ type: "view" });
+
+    // Counted once per page load, when the end of the article comes into view
+    // and the visitor has been here at least ten seconds. Without the wait a
+    // short post, whose end is on screen at load, would count every view as a
+    // read.
+    const MIN_MS = 10_000;
+    const loaded = performance.now();
+    const end = document.getElementById("post-end");
+    if (end && "IntersectionObserver" in window) {
+      const observer = new IntersectionObserver((entries) => {
+        if (entries.some((entry) => entry.isIntersecting)) {
+          observer.disconnect();
+          const wait = Math.max(0, MIN_MS - (performance.now() - loaded));
+          setTimeout(() => send({ type: "read" }), wait);
+        }
+      });
+      observer.observe(end);
+    }
+
+    // Remembers that this browser already answered, so a reload does not ask
+    // again. It holds no identifier and is never sent anywhere; it is the
+    // same functionality storage analytics.ts already relies on, not tracking.
+    const key = `transcribr_blog_vote:${slug}`;
+    const thank = () => {
+      box.querySelector(".post-helpful__ask")?.classList.add("hidden");
+      box.querySelector(".post-helpful__thanks")?.classList.remove("hidden");
+    };
+
+    try {
+      if (localStorage.getItem(key)) thank();
+    } catch {
+      /* storage blocked: ask every time */
+    }
+
+    box.querySelectorAll<HTMLButtonElement>("[data-vote]").forEach((button) => {
+      button.addEventListener("click", () => {
+        const yes = button.dataset.vote === "yes";
+        send({ type: "helpful", helpful: yes });
+        try {
+          localStorage.setItem(key, yes ? "yes" : "no");
+        } catch {
+          /* the thanks still shows for this visit */
+        }
+        thank();
+      });
+    });
+  })();
+</script>
 
 <style>
   /*
