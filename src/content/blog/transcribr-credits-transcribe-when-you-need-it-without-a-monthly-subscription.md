@@ -11,7 +11,7 @@ Why pay for a monthly transcription subscription when you only transcribe occasi
 
 Not everyone uses transcription services every day. Some people transcribe once in a while, while others need transcription regularly for work, research, or business.
 
-That's why **[Transcribr.org](https://transcribr.org)** offers **Transcribr Credits**.
+That's why [Transcribr.org](https://transcribr.org) offers **Transcribr Credits**.
 
 Starting from just **$4.99**, credits let you pay for transcription when you need it, without committing to a monthly subscription.
 
