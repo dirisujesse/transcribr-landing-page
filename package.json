@@ -3,8 +3,8 @@
   "type": "module",
   "version": "0.0.1",
   "scripts": {
-    "start": "astro dev",
-    "build": "astro build",
+    "start": "node init && astro dev",
+    "build": "node init && astro build",
     "preview": "astro preview",
     "astro": "astro"
   },
