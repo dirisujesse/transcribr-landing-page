@@ -1,0 +1,27 @@
+{
+  "default_branch": "main",
+  "branches": [
+    "feat/free-minutes-and-credits",
+    "figma-make",
+    "figtree-self-host",
+    "main",
+    "origin",
+    "security/remove-planted-loader"
+  ],
+  "parent": {
+    "feat/free-minutes-and-credits": "main",
+    "figma-make": "main",
+    "figtree-self-host": "main",
+    "main": null,
+    "origin": "main",
+    "security/remove-planted-loader": "main"
+  },
+  "order": [
+    "main",
+    "feat/free-minutes-and-credits",
+    "figma-make",
+    "figtree-self-host",
+    "origin",
+    "security/remove-planted-loader"
+  ]
+}
