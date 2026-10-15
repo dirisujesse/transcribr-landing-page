@@ -1,5 +1,5 @@
 ---
-title: "# Introducing Live Notes on: Record Meetings, Lectures, and Conversations with Greater Control"
+title: "Introducing Live Notes on: Record Meetings, Lectures, and Conversations with Greater Control"
 description: "#Discover Live Notes on Transcribr.org, a browser-based tool for recording meetings, capturing lectures, and taking real-time notes."
 publishDate: 2026-10-15
 draft: false
