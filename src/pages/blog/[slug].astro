@@ -67,6 +67,10 @@ const schema = {
               </>
             )
           }
+          <span class="post-views hidden items-center gap-x-3">
+            <span aria-hidden="true">&middot;</span>
+            <span data-views></span>
+          </span>
         </div>
       </header>
 
@@ -76,8 +80,32 @@ const schema = {
 
       <div id="post-end" aria-hidden="true"></div>
 
+      <div class="mt-14">
+        <button
+          type="button"
+          data-like
+          aria-pressed="false"
+          class="post-like inline-flex items-center gap-2 rounded-full border border-border bg-background px-5 py-2 text-sm font-medium text-foreground transition-colors hover:border-primary hover:text-primary"
+        >
+          <svg
+            class="h-4 w-4"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8l1 1.1L12 21l7.8-7.5 1-1.1a5.5 5.5 0 0 0 0-7.8z" />
+          </svg>
+          <span>Like</span>
+          <span data-like-count class="tabular-nums text-muted-foreground"></span>
+        </button>
+      </div>
+
       <section
-        class="post-helpful mt-14 rounded-2xl border border-border bg-muted/30 p-6"
+        class="post-helpful mt-6 rounded-2xl border border-border bg-muted/30 p-6"
         data-slug={post.id}
         aria-labelledby="post-helpful-title"
       >
@@ -112,7 +140,8 @@ const schema = {
 
 <script>
   /**
-   * Post metrics: views, readers and "Was this helpful?", counted by the API.
+   * Post metrics: views, readers, likes and "Was this helpful?", counted by
+   * the API, which also gives back the view and like counts shown here.
    *
    * GA4 cannot report these: the site runs it cookieless, and GA4 keeps
    * cookieless pings out of its reports. Each event goes out with sendBeacon
@@ -127,7 +156,11 @@ const schema = {
     const slug = box?.dataset.slug;
     if (!box || !slug) return;
 
-    const send = (event: { type: "view" | "read" | "helpful"; helpful?: boolean }) => {
+    const send = (event: {
+      type: "view" | "read" | "helpful" | "like";
+      helpful?: boolean;
+      liked?: boolean;
+    }) => {
       try {
         navigator.sendBeacon(`${API}/blog/events`, JSON.stringify({ slug, ...event }));
       } catch {
@@ -170,6 +203,66 @@ const schema = {
       /* storage blocked: ask every time */
     }
 
+    // Likes. The browser remembers a like the same way it remembers a vote, so
+    // the button stays filled on a later visit and only a change is sent: the
+    // API recognises a visitor for one day, and a later un-like still has to
+    // take the like back.
+    const number = new Intl.NumberFormat("en-GB");
+    const likeKey = `transcribr_blog_like:${slug}`;
+    const likeButton = document.querySelector<HTMLButtonElement>("[data-like]");
+    const likeCount = likeButton?.querySelector<HTMLElement>("[data-like-count]");
+    let liked = false;
+    let likes: number | null = null;
+
+    try {
+      liked = localStorage.getItem(likeKey) === "1";
+    } catch {
+      /* storage blocked: the like lasts for this visit */
+    }
+
+    const paintLike = () => {
+      likeButton?.setAttribute("aria-pressed", String(liked));
+      if (likeCount) likeCount.textContent = likes ? number.format(likes) : "";
+    };
+    paintLike();
+
+    likeButton?.addEventListener("click", () => {
+      liked = !liked;
+      if (likes !== null) likes = Math.max(0, likes + (liked ? 1 : -1));
+      send({ type: "like", liked });
+      try {
+        if (liked) localStorage.setItem(likeKey, "1");
+        else localStorage.removeItem(likeKey);
+      } catch {
+        /* still counted; only forgotten on reload */
+      }
+      paintLike();
+    });
+
+    // The counts, read after the page is up. Any failure leaves the header
+    // without a view count and the button without a number.
+    fetch(`${API}/blog/stats/${slug}`)
+      .then((res) => (res.ok ? res.json() : null))
+      .then((stats: { views: number | null; likes: number } | null) => {
+        if (!stats) return;
+
+        // The API reuses counts for a minute, so a like given just before a
+        // reload may not be in them yet; a filled button never shows none.
+        likes = liked ? Math.max(stats.likes, 1) : stats.likes;
+        paintLike();
+
+        const views = document.querySelector<HTMLElement>(".post-views");
+        const label = views?.querySelector<HTMLElement>("[data-views]");
+        // Null until a post has enough views to be worth showing.
+        if (views && label && stats.views !== null) {
+          label.textContent = `${number.format(stats.views)} views`;
+          views.classList.replace("hidden", "inline-flex");
+        }
+      })
+      .catch(() => {
+        /* counts are decoration; the page works without them */
+      });
+
     box.querySelectorAll<HTMLButtonElement>("[data-vote]").forEach((button) => {
       button.addEventListener("click", () => {
         const yes = button.dataset.vote === "yes";
@@ -186,6 +279,15 @@ const schema = {
 </script>
 
 <style>
+  .post-like[aria-pressed="true"] {
+    border-color: var(--primary);
+    color: var(--primary);
+  }
+
+  .post-like[aria-pressed="true"] svg {
+    fill: currentColor;
+  }
+
   /*
    * Markdown arrives as bare tags, so the article styles its own descendants
    * rather than every post carrying classes. Scoped to .post-body so it cannot
